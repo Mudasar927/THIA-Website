@@ -1,0 +1,2189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hope International Academy (THIA) · Premium Academic Hub</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+<style>
+.leadership-section {
+  padding: 4rem 5%;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+}
+
+.leadership-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+}
+
+.leader-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  background: white;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s;
+}
+
+.leader-card.reverse {
+  direction: rtl;
+}
+
+.leader-card.reverse .leader-content {
+  direction: ltr;
+}
+
+.leader-card:hover {
+  transform: translateY(-5px);
+  border-color: #2563eb;
+  box-shadow: 0 30px 60px rgba(37,99,235,0.1);
+}
+
+.leader-image-wrapper {
+  width: 100%;
+  height: 300px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.leader-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.leader-card:hover .leader-image {
+  transform: scale(1.05);
+}
+
+.leader-initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, #2563eb, #1e3c72);
+}
+
+.leader-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.leader-badge {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background: #eef2ff;
+  color: #2563eb;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+
+.leader-content h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.credentials span {
+  background: #f8fafc;
+  padding: 0.3rem 1rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.credentials i {
+  color: #2563eb;
+  margin-right: 0.3rem;
+}
+
+.leader-message {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.quote-icon {
+  color: #2563eb;
+  font-size: 2rem;
+  opacity: 0.3;
+  margin-bottom: 0.5rem;
+}
+
+.leader-message p {
+  color: #334155;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.leader-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.leader-social a {
+  width: 40px;
+  height: 40px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.leader-social a:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .leader-card,
+  .leader-card.reverse {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    direction: ltr;
+  }
+  
+  .leader-image-wrapper {
+    height: 250px;
+  }
+  
+  .leader-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .credentials {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+</style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    :root {
+      --primary-gradient: linear-gradient(135deg, #2563eb, #7c3aed);
+      --primary-color: #2563eb;
+      --secondary-color: #7c3aed;
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-light: #ffffff;
+      --text-dark: #0f172a;
+      --card-shadow: 0 20px 40px -15px rgba(0,0,0,0.2);
+    }
+
+    body {
+      background: #f8fafc;
+      color: #0f172a;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #2563eb, #7c3aed, #2563eb);
+      background-size: 200% 200%;
+      animation: gradientShift 8s ease infinite;
+      z-index: 1000;
+      transition: width 0.1s;
+      box-shadow: 0 0 20px #2563eb;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Animated Gradient Background for Nav and Hero */
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #7c3aed, #1e3c72, #0f2b54, #2563eb, #7c3aed);
+      background-size: 50% 100%;
+      animation: slideBackground 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes slideBackground {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Navbar with Animated Background */
+    .navbar {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: -1;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 2rem;
+      background: linear-gradient(135deg, #ffffff, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: white;
+      transition: 0.3s;
+      font-size: 1.05rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .enroll-nav {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: white !important;
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      backdrop-filter: blur(5px);
+      animation: pulse 2s infinite;
+    }
+
+    .enroll-nav:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Hero with Animated Background */
+    .hero {
+      position: relative;
+      padding: 4rem 5% 6rem;
+      overflow: hidden;
+      border-bottom-left-radius: 4rem;
+      border-bottom-right-radius: 4rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+      animation: float 8s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0) translateX(0); 
+        opacity: 0.3;
+      }
+      25% { 
+        transform: translateY(-30px) translateX(15px); 
+        opacity: 0.6;
+      }
+      50% { 
+        transform: translateY(-50px) translateX(-15px); 
+        opacity: 0.8;
+      }
+      75% { 
+        transform: translateY(-30px) translateX(25px); 
+        opacity: 0.6;
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      color: white;
+      text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Glassmorphism Stats */
+    .stats {
+      display: flex;
+      gap: 4rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 80px;
+      padding: 2rem 4rem;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-item h3 {
+      font-size: 3rem;
+      color: white;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      font-weight: 700;
+    }
+
+    .stat-item p {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 4rem 0 1rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradientText 5s ease infinite;
+    }
+
+    @keyframes gradientText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 3rem;
+    }
+
+    /* Programmes Drift Cards */
+    .programmes-drift-wrapper {
+      width: 100%;
+      overflow: hidden;
+      margin: 3rem 0;
+      padding: 1rem 0;
+    }
+
+    .programmes-drift {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      animation: driftLeft 40s linear infinite;
+      padding: 1rem 2rem;
+    }
+
+    .programme-card {
+      width: 350px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .programme-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #2563eb;
+      box-shadow: 0 30px 60px -15px rgba(37,99,235,0.3);
+    }
+
+    .programme-card h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .programme-card p {
+      color: #334155;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .programme-btn {
+      background: transparent;
+      border: 2px solid #2563eb;
+      color: #2563eb;
+      border-radius: 40px;
+      padding: 0.6rem 1.8rem;
+      font-weight: 600;
+      transition: 0.3s;
+      cursor: pointer;
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .programme-btn:hover {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: white;
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(37,99,235,0.3);
+    }
+
+    /* Subjects Grid */
+    .subjects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      padding: 2rem 5%;
+    }
+
+    .subject-item {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 3rem;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #1e293b;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subject-item i {
+      color: #2563eb;
+      font-size: 1.2rem;
+    }
+
+    .subject-item:hover {
+      transform: translateY(-3px);
+      border-color: #2563eb;
+      box-shadow: 0 15px 30px rgba(37,99,235,0.15);
+    }
+
+    /* Why Choose Us - Rectangular Glass Cards */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .why-rect-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .why-rect-card:hover {
+      transform: translateY(-5px);
+      border-color: #2563eb;
+      box-shadow: 0 30px 60px -15px rgba(37,99,235,0.3);
+    }
+
+    .why-rect-card i {
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-rect-card h3 {
+      font-size: 1.5rem;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-rect-card p {
+      color: #475569;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    /* Team Drift Sections */
+    .team-section {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      padding: 2rem 0 4rem;
+      overflow: hidden;
+    }
+
+    .drift-row {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      padding: 1rem 2rem;
+    }
+
+    .row1 .drift-row {
+      animation: driftLeft 50s linear infinite;
+    }
+
+    .row2 .drift-row {
+      animation: driftRight 50s linear infinite;
+    }
+
+    @keyframes driftLeft {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes driftRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0%); }
+    }
+
+    .team-card {
+      width: 260px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 2rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #2563eb;
+      box-shadow: 0 30px 60px -15px rgba(37,99,235,0.3);
+    }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      overflow: hidden;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 15px 30px rgba(37,99,235,0.3);
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-card h4 {
+      font-size: 1.3rem;
+      color: #1e293b;
+    }
+
+    .team-card p {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin: 0.3rem 0;
+    }
+
+    .stars {
+      color: #fbbf24;
+      margin: 0.8rem 0;
+      letter-spacing: 2px;
+      font-size: 1.1rem;
+    }
+
+    /* Testimonials Drift */
+    .testimonials {
+      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+      padding: 3rem 0;
+      overflow: hidden;
+    }
+
+    .testi-row {
+      width: 100%;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .testi-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      padding: 1rem 2rem;
+    }
+
+    .rowA .testi-track {
+      animation: driftLeft 60s linear infinite;
+    }
+
+    .rowB .testi-track {
+      animation: driftRight 60s linear infinite;
+    }
+
+    .testi-track:hover {
+      animation-play-state: paused;
+    }
+
+    .testi-card {
+      width: 350px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .testi-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: #2563eb;
+    }
+
+    .quote-icon {
+      font-size: 2rem;
+      color: #2563eb;
+      opacity: 0.5;
+      margin-bottom: 1rem;
+    }
+
+    .testi-card p {
+      color: #334155;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .author-info strong {
+      color: #1e293b;
+    }
+
+    .author-info span {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* About Section */
+    .about-section {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      padding: 4rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-content {
+      flex: 2;
+    }
+
+    .about-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-content p {
+      font-size: 1.1rem;
+      color: #334155;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .about-stat-item {
+      text-align: center;
+    }
+
+    .about-stat-item h4 {
+      font-size: 2rem;
+      color: #2563eb;
+      margin-bottom: 0.3rem;
+    }
+
+    .about-stat-item p {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .contact-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+    }
+
+    .contact-card h3 {
+      font-size: 1.8rem;
+      color: #1e293b;
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+    }
+
+    .contact-details h4 {
+      font-size: 1.1rem;
+      color: #1e293b;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-details p {
+      color: #2563eb;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .whatsapp-large {
+      background: #25D366;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      border: none;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .whatsapp-large:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(37,211,102,0.3);
+    }
+
+    /* Footer */
+    .footer {
+      background: #0f172a;
+      color: #cbd5e1;
+      padding: 3rem 5% 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer a {
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+      transition: 0.3s;
+    }
+
+    .footer a:hover {
+      color: #2563eb;
+      transform: translateX(5px);
+    }
+
+    .socials i {
+      font-size: 1.8rem;
+      margin-right: 1.5rem;
+      color: #94a3b8;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .socials i:hover {
+      color: #2563eb;
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 99;
+      box-shadow: 0 10px 30px rgba(37,99,235,0.3);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: 1s;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(37,99,235,0.3);
+      border-top-color: #2563eb;
+      border-radius: 50%;
+      animation: spin 1s infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Pulse Animation */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+    }
+
+    /* ---------- POPUP FORM STYLES ---------- */
+    .popup-trigger {
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .open-form-btn {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 1.2rem 3rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 0 10px 30px rgba(37,99,235,0.4);
+      animation: pulse 2s infinite;
+    }
+    .open-form-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(37,99,235,0.6);
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .popup-content {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 2.5rem;
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+    }
+    .close-popup {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #64748b;
+      transition: 0.2s;
+    }
+    .close-popup:hover {
+      color: #2563eb;
+      transform: scale(1.1);
+    }
+    .popup-content h3 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Form Styles inside popup */
+    .popup-content .form-row {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .popup-content .form-group {
+      flex: 1 1 200px;
+    }
+    .popup-content .form-group.full {
+      flex: 1 1 100%;
+    }
+    .popup-content .form-group label {
+      display: block;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .popup-content .form-group input, 
+    .popup-content .form-group select {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 2rem;
+      font-size: 1rem;
+      background: white;
+      transition: 0.2s;
+    }
+    .popup-content .form-group input:focus, 
+    .popup-content .form-group select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.2);
+    }
+    .popup-content .radio-group {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      background: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid #e2e8f0;
+    }
+    .popup-content .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      color: #1e293b;
+      cursor: pointer;
+    }
+    .popup-content .radio-group input[type="radio"] {
+      accent-color: #2563eb;
+      width: 18px;
+      height: 18px;
+    }
+    .popup-content .checklist {
+      background: white;
+      padding: 1.2rem 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid #e2e8f0;
+      margin: 1.2rem 0;
+    }
+    .popup-content .checklist p {
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: #0f172a;
+    }
+    .popup-content .checklist label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      color: #334155;
+      cursor: pointer;
+    }
+    .popup-content .checklist input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #2563eb;
+    }
+    .popup-content .cta-button {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .popup-content .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(37,99,235,0.4);
+    }
+    .popup-content .privacy-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 1rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2.5rem; }
+      .stats { padding: 1.5rem; gap: 1.5rem; }
+      .stat-item h3 { font-size: 2rem; }
+      .nav-links { gap: 1rem; }
+      .about-container { flex-direction: column; }
+      .why-grid { grid-template-columns: 1fr; }
+      .popup-content { padding: 1.8rem; }
+      .popup-content .radio-group { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      border-radius: 20px;
+      border: 3px solid #f1f5f9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Back to Top -->
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Navbar with Animated Background -->
+  <nav class="navbar">
+    <div class="animated-bg"></div>
+    <span class="logo"><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i>THIA</span>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">Professional Course</a>
+      <a href="#">Academic Course</a>
+      <a href="#">Test Preparations</a>
+      <a href="#">Other Services</a>
+      <a href="#" class="enroll-nav">Enroll Now</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="animated-bg"></div>
+    
+    <div class="hero-content">
+      <h1>Welcome to The Hope International Academy</h1>
+      <p>Excellence in Academic & Professional Education</p>
+      
+      <!-- Stats -->
+      <div class="stats">
+        <div class="stat-item">
+          <h3 class="count-up" data-target="40">0</h3>
+          <p>Expert Staff</p>
+        </div>
+        <div class="stat-item">
+          <h3 class="count-up" data-target="2500">0</h3>
+          <p>Happy Students</p>
+        </div>
+        <div class="stat-item">
+          <h3 class="count-up" data-target="70">0</h3>
+          <p>Courses & Programmes</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programmes Drift Cards -->
+  <h2 class="section-title">Our Programs</h2>
+  <p class="section-sub">Comprehensive curriculum for all academic levels</p>
+  
+  <div class="programmes-drift-wrapper">
+    <div class="programmes-drift">
+      <!-- GCSE Card -->
+      <div class="programme-card">
+        <h3>GCSE Tutoring</h3>
+        <p>We have the best teachers for GCSE. Our GCSE experts help students achieve exceptional grades through personalized attention and comprehensive exam preparation.</p>
+        <button class="programme-btn" onclick="alert('Enrollment for GCSE opening soon!')">Enroll Now →</button>
+      </div>
+      
+      <!-- AS/A-Level Card -->
+      <div class="programme-card">
+        <h3>AS/A-Level Tutoring</h3>
+        <p>Comprehensive A-Level tutoring across all major subjects. Our track record shows 90% A*-B grades with our expert guidance and mock exam system.</p>
+        <button class="programme-btn" onclick="alert('Enrollment for A-Levels opening soon!')">Enroll Now →</button>
+      </div>
+      
+      <!-- IB Diploma Card -->
+      <div class="programme-card">
+        <h3>IB Diploma Tutoring</h3>
+        <p>International Baccalaureate program with specialized tutors. We guide students through theory of knowledge, extended essay, and all IB subjects.</p>
+        <button class="programme-btn" onclick="alert('Enrollment for IB opening soon!')">Enroll Now →</button>
+      </div>
+      
+      <!-- VG and UG Card -->
+      <div class="programme-card">
+        <h3>VG and UG Tutors</h3>
+        <p>Specialized tutoring for Norwegian students following the local curriculum. Native Norwegian-speaking and English Speaking international teachers available for Math and Science Subjects.</p>
+        <button class="programme-btn" onclick="alert('Enrollment for Norwegian Curriculum opening soon!')">Enroll Now →</button>
+      </div>
+      
+      <!-- University Card -->
+      <div class="programme-card">
+        <h3>University Tutors</h3>
+        <p>We offer MS and PhD level instructors for subject-specific tutoring for undergraduate programs worldwide.</p>
+        <button class="programme-btn university-btn" onclick="window.open('#', '_blank')">Click Here to See Details <i class="fas fa-external-link-alt"></i></button>
+      </div>
+      
+      <!-- K5-K12 Card -->
+      <div class="programme-card">
+        <h3>K5-K12 Tutors</h3>
+        <p>Foundation building for young learners. We make learning fun and engaging while building strong academic foundations.</p>
+        <button class="programme-btn" onclick="alert('Enrollment for K5-K12 opening soon!')">Enroll Now →</button>
+      </div>
+      
+      <!-- Duplicates for seamless loop -->
+      <div class="programme-card">
+        <h3>GCSE Tutoring</h3>
+        <p>We have the best teachers for GCSE. Our GCSE experts help students achieve exceptional grades through personalized attention.</p>
+        <button class="programme-btn" onclick="alert('Enrollment for GCSE opening soon!')">Enroll Now →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subjects Grid -->
+  <h2 class="section-title">Subjects We Cover</h2>
+  <p class="section-sub">Expert tuition in all major subjects</p>
+  
+  <div class="subjects-grid">
+    <span class="subject-item"><i class="fas fa-flask"></i> Chemistry</span>
+    <span class="subject-item"><i class="fas fa-atom"></i> Physics</span>
+    <span class="subject-item"><i class="fas fa-calculator"></i> Mathematics</span>
+    <span class="subject-item"><i class="fas fa-dna"></i> Biology</span>
+    <span class="subject-item"><i class="fas fa-laptop-code"></i> Computer Science</span>
+    <span class="subject-item"><i class="fas fa-chart-bar"></i> Business</span>
+    <span class="subject-item"><i class="fas fa-chart-line"></i> Economics</span>
+    <span class="subject-item"><i class="fas fa-calculator"></i> Accounting</span>
+    <span class="subject-item"><i class="fas fa-brain"></i> Psychology</span>
+    <span class="subject-item"><i class="fas fa-book"></i> English Literature</span>
+    <span class="subject-item"><i class="fas fa-pen"></i> English Composition</span>
+    <span class="subject-item"><i class="fas fa-landmark"></i> History</span>
+  </div>
+
+  <!-- Why Choose Us - Rectangular Glass Cards -->
+  <h2 class="section-title">Why Choose Us for Academic Tuitions</h2>
+  <p class="section-sub">What makes The Hope International Academy different</p>
+  
+  <div class="why-grid">
+    <div class="why-rect-card">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <h3>Expert Tutors</h3>
+      <p>Learn from the best educators with years of experience in their respective subjects. Our teachers are passionate about helping students succeed.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-calendar-alt"></i>
+      <h3>Flexibility</h3>
+      <p>Choose your own schedule with our flexible timing options. Morning, evening, or weekend classes available to suit your routine.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-universal-access"></i>
+      <h3>Accessibility</h3>
+      <p>Accessible from anywhere in the world with our best tutors. Improve your academic journey through seamless online learning platforms.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-vial"></i>
+      <h3>Mock Tests</h3>
+      <p>Regular mock tests designed to simulate real exam conditions. Build confidence and identify areas for improvement.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-pencil-alt"></i>
+      <h3>Mock Exams</h3>
+      <p>Comprehensive mock exams with detailed feedback. Our examiners provide personalized guidance for better performance.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-home"></i>
+      <h3>Homework Help</h3>
+      <p>24/7 homework support from our dedicated tutors. Never get stuck on difficult problems again.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-chart-line"></i>
+      <h3>Monthly Progress</h3>
+      <p>Detailed monthly progress reports for parents and students. Track improvement and identify areas needing attention.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-globe"></i>
+      <h3>Global Reach</h3>
+      <p>Connect with students and teachers from around the world. Experience diverse perspectives in learning.</p>
+    </div>
+
+    <div class="why-rect-card">
+      <i class="fas fa-wallet"></i>
+      <h3>Affordability</h3>
+      <p>Our tutor programs are very affordable and are 50% to 70% cheaper than international rates, making our programs affordable for middle class and poor students.</p>
+    </div>
+  </div>
+  <!-- Founder & Chairperson Section - Before Team -->
+<section class="leadership-section">
+  <h2 class="section-title">Our Leadership</h2>
+  <p class="section-sub">Meet the people behind THIA Academy's success</p>
+  
+  <div class="leadership-grid">
+    <!-- Founder Card -->
+    <div class="leader-card">
+      <div class="leader-image-wrapper">
+        <!-- Option A: If you have a good photo -->
+        <img src="team/founder.jpg" 
+             alt="Mudasar Ahmad - Founder" 
+             class="leader-image"
+             loading="lazy">
+        
+        <!-- Option B: If no photo, use styled initials (FAST) -->
+        <div class="leader-initials" style="background: linear-gradient(135deg, #2563eb, #1e3c72);">
+          MA
+        </div>
+      </div>
+      
+      <div class="leader-content">
+        <span class="leader-badge">Founder & CEO</span>
+        <h3>Mudasar Ahmad</h3>
+        
+        <!-- Credentials -->
+        <div class="credentials">
+          <span><i class="fas fa-certificate"></i> 9+ Years Experience</span>
+          <span><i class="fas fa-briefcase"></i> Chemistry Educator</span>
+        </div>
+        
+        <!-- Personal Message -->
+        <div class="leader-message">
+          <i class="fas fa-quote-left quote-icon"></i>
+          <p>"At THIA Academy, we don't just teach skills – we transform careers. My journey from developer to educator taught me that quality education should be accessible to everyone. Every student who walks through our doors leaves with not just knowledge, but confidence."</p>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="leader-social">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>  
+</section>
+
+  <!-- Meet Our Expert Team -->
+  <section class="team-section">
+    <h2 class="section-title">Meet Our Expert Team</h2>
+    <p class="section-sub">Our dedicated teachers across all subjects</p>
+    
+    <!-- First Row -->
+    <div class="row1">
+      <div class="drift-row">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Ayesha Khan.jpg" alt="Dr. Ayesha Khan">
+          </div>
+          <h4>Dr. Ayesha Khan</h4>
+          <p>Chemistry · PhD</p>
+          <p>12+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/M. Ali Raza.jpg" alt="M. Ali Raza">
+          </div>
+          <h4>M. Ali Raza</h4>
+          <p>Physics · MPhil</p>
+          <p>9+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Mudasar Ahmad.jpg" alt="Mudasar Ahmad">
+          </div>
+          <h4>Mudasar Ahmad</h4>
+          <p>Mathematics · BSc</p>
+          <p>3+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Bakhtawar Rana.jpg" alt="Dr. Bakhtawar Rana">
+          </div>
+          <h4>Dr. Bakhtawar Rana</h4>
+          <p>English · PhD</p>
+          <p>10+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Sara Nadeem.jpg" alt="Sara Nadeem">
+          </div>
+          <h4>Sara Nadeem</h4>
+          <p>Computer Science</p>
+          <p>7+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Huma Javed.jpg" alt="Huma Javed">
+          </div>
+          <h4>Huma Javed</h4>
+          <p>Business · MBA</p>
+          <p>12+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Fatima Akhtar.jpg" alt="Fatima Akhtar">
+          </div>
+          <h4>Fatima Akhtar</h4>
+          <p>Economics · MPhil</p>
+          <p>8+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Usman Chaudhry.jpg" alt="Usman Chaudhry">
+          </div>
+          <h4>Usman Chaudhry</h4>
+          <p>Accounting · ACA</p>
+          <p>4+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Sana.jpg" alt="Dr. Sana">
+          </div>
+          <h4>Dr. Sana</h4>
+          <p>Physiology · D-Pharmacy</p>
+          <p>6+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate of first for seamless loop -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Ayesha Khan.jpg" alt="Dr. Ayesha Khan">
+          </div>
+          <h4>Dr. Ayesha Khan</h4>
+          <p>Chemistry · PhD</p>
+          <p>12+ years</p>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row2">
+      <div class="drift-row">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Arooba Javed.jpg" alt="Arooba Javed">
+          </div>
+          <h4>Arooba Javed</h4>
+          <p>Biology · MPhil</p>
+          <p>4+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Mrs. Aqsa.jpg" alt="Mrs. Aqsa">
+          </div>
+          <h4>Mrs. Aqsa</h4>
+          <p>Chemistry · MSc</p>
+          <p>6+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dawood I.jpg" alt="Dawood I">
+          </div>
+          <h4>Dawood I</h4>
+          <p>CS · BS</p>
+          <p>3+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Haleema Haris.jpg" alt="Haleema Haris">
+          </div>
+          <h4>Haleema Haris</h4>
+          <p>English/IELTS · MPhil</p>
+          <p>6+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Uzma Azhar.jpg" alt="Uzma Azhar">
+          </div>
+          <h4>Uzma Azhar</h4>
+          <p>English · UAE, UK Certified</p>
+          <p>4+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Sadia Iqbal.jpg" alt="Sadia Iqbal">
+          </div>
+          <h4>Sadia Iqbal</h4>
+          <p>Computer Science</p>
+          <p>5+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Zeeshan Ali.jpg" alt="Zeeshan Ali">
+          </div>
+          <h4>Zeeshan Ali</h4>
+          <p>Economics · MBA</p>
+          <p>10+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Abdul Ghafar.jpg" alt="Abdul Ghafar">
+          </div>
+          <h4>Abdul Ghafar</h4>
+          <p>Front End · BS IT</p>
+          <p>7+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate of first for seamless loop -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Arooba Javed.jpg" alt="Arooba Javed">
+          </div>
+          <h4>Arooba Javed</h4>
+          <p>Biology · MPhil</p>
+          <p>4+ years</p>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2 class="section-title">Success Stories</h2>
+    <p class="section-sub">What our national & international students say</p>
+    
+    <!-- First Row - Left to Right -->
+    <div class="testi-row rowA">
+      <div class="testi-track">
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"THIA's A-level maths tutoring improved my grades from C to A*. The teachers are exceptional!"</p>
+          <div class="testi-author">
+            <span class="author-icon">OM</span>
+            <div class="author-info">
+              <strong>Omar Malik</strong>
+              <span>UK · A-Level Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Amazing IB biology support. Dr. Bilal made complex topics easy to understand. Got a 7 in my exams!"</p>
+          <div class="testi-author">
+            <span class="author-icon">LC</span>
+            <div class="author-info">
+              <strong>Lina Chen</strong>
+              <span>Dubai · IB Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"My daughter loves her Norwegian tutor. The curriculum is perfectly adapted to local requirements."</p>
+          <div class="testi-author">
+            <span class="author-icon">EH</span>
+            <div class="author-info">
+              <strong>Erik Hansen</strong>
+              <span>Norway · Parent</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Accounting made simple! Usman's teaching style is fantastic. Now I'm pursuing ACCA."</p>
+          <div class="testi-author">
+            <span class="author-icon">RK</span>
+            <div class="author-info">
+              <strong>Rohan Kumar</strong>
+              <span>Karachi · ACCA Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"THIA Academy transformed my career. Highly recommended!"</p>
+          <div class="testi-author">
+            <span class="author-icon">OM</span>
+            <div class="author-info">
+              <strong>Omar Malik</strong>
+              <span>UK</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row - Right to Left -->
+    <div class="testi-row rowB">
+      <div class="testi-track">
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"The mock exams were spot-on. Prepared me perfectly for my final exams. Excellent resource!"</p>
+          <div class="testi-author">
+            <span class="author-icon">ZC</span>
+            <div class="author-info">
+              <strong>Zara Chaudhry</strong>
+              <span>Canada · University</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Psychology lessons are so insightful. Amna Sheikh makes the subject come alive."</p>
+          <div class="testi-author">
+            <span class="author-icon">MN</span>
+            <div class="author-info">
+              <strong>Musa Ndlovu</strong>
+              <span>South Africa · Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Homework help saved my grades. The 24/7 support is a game-changer for international students."</p>
+          <div class="testi-author">
+            <span class="author-icon">EB</span>
+            <div class="author-info">
+              <strong>Emma Brown</strong>
+              <span>Australia · A-Level</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Great for K5 curriculum. My son's reading skills improved dramatically in just 3 months."</p>
+          <div class="testi-author">
+            <span class="author-icon">SA</span>
+            <div class="author-info">
+              <strong>Sarah Ahmed</strong>
+              <span>UAE · Parent</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Absolutely professional academy. Highly recommended!"</p>
+          <div class="testi-author">
+            <span class="author-icon">ZC</span>
+            <div class="author-info">
+              <strong>Zara Chaudhry</strong>
+              <span>Canada</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section with WhatsApp Number -->
+  <section class="about-section">
+    <div class="animated-bg" style="opacity: 0.1;"></div>
+    <div class="about-container">
+      <div class="about-content">
+        <h2>About The Hope International Academy</h2>
+        <p>The Hope International Academy (THIA) is a premier educational institution dedicated to providing world-class academic and professional tutoring. Founded with the vision of bringing hope through education, we have helped thousands of students achieve their academic goals through personalized learning experiences and expert guidance.</p>
+        <p>Our team of 40+ qualified teachers specializes in international curricula including GCSE, IB, A-Levels, Norwegian curriculum, and K5-K12 education. We believe in nurturing curiosity, building confidence, and fostering academic excellence in every student, regardless of their location.</p>
+        <div class="about-stats">
+          <div class="about-stat-item">
+            <h4>98%</h4>
+            <p>Success Rate</p>
+          </div>
+          <div class="about-stat-item">
+            <h4>15+</h4>
+            <p>Countries</p>
+          </div>
+          <div class="about-stat-item">
+            <h4>24/7</h4>
+            <p>Support</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Contact Us Directly</h3>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="contact-details">
+            <h4>WhatsApp</h4>
+            <p>+92 313 5198927</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Phone</h4>
+            <p>+92 313 5198927</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Email</h4>
+            <p>info@thia.edu.pk</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Address</h4>
+            <p>Islamabad, Pakistan</p>
+          </div>
+        </div>
+        <button class="whatsapp-large" onclick="window.open('https://wa.me/923135198927?text=Hi%20THIA%20-%20The%20Hope%20International%20Academy%2C%20I%27m%20interested%20in%20your%20academic%20programs', '_blank')">
+          <i class="fab fa-whatsapp"></i> +92 313 5198927
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== POPUP TRIGGER BUTTON ========== -->
+  <div class="popup-trigger">
+    <button class="open-form-btn" onclick="document.getElementById('popupOverlay').style.display='flex'">
+      <i class="fas fa-paper-plane"></i> Quick Inquiry Form
+    </button>
+  </div>
+
+  <!-- ========== POPUP FORM (QUICK INQUIRY) ========== -->
+  <div class="popup-overlay" id="popupOverlay" onclick="if(event.target===this) this.style.display='none'">
+    <div class="popup-content">
+      <span class="close-popup" onclick="document.getElementById('popupOverlay').style.display='none'">&times;</span>
+      <h3><i class="fas fa-paper-plane"></i> Quick Inquiry</h3>
+      
+      <!-- IMPORTANT: Replace YOUR_FORM_ID_HERE with your actual Formspree ID -->
+      <form action="https://formspree.io/f/mnjgnger" method="POST">
+        <!-- These fields help with spam prevention -->
+        <input type="text" name="_gotcha" style="display:none">
+        <input type="hidden" name="_subject" value="New Quick Inquiry from THIA Website">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" name="Name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Contact Number *</label>
+            <input type="tel" name="Contact" required placeholder="+92 300 0000000">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="Email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label>Country *</label>
+            <select name="Country" required>
+              <option value="">-- Select --</option>
+              <option>Pakistan</option>
+              <option>UAE</option>
+              <option>UK</option>
+              <option>USA</option>
+              <option>Norway</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group full">
+          <label>You are a *</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Role" value="Student" required> 👨‍🎓 Student</label>
+            <label><input type="radio" name="Role" value="Guardian/Parent" required> 👪 Guardian</label>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Programme *</label>
+            <select name="Programme" required>
+              <option value="">-- Select --</option>
+              <option>GCSE / IGCSE</option>
+              <option>AS/A-Level</option>
+              <option>IB Diploma</option>
+              <option>Norwegian VG/UG</option>
+              <option>K5–K12</option>
+              <option>University level</option>
+              <option>Test prep (IELTS/SAT)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Subject *</label>
+            <select name="Subject" required>
+              <option value="">-- Select --</option>
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+              <option>Biology</option>
+              <option>English</option>
+              <option>Computer Science</option>
+              <option>Economics</option>
+              <option>Business</option>
+              <option>Accounting</option>
+              <option>Psychology</option>
+              <option>History</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="checklist">
+          <p>✔️ Please check all that apply:</p>
+          <label><input type="checkbox" name="Free Trial" value="Yes"> I want <strong>free trial</strong></label>
+          <label><input type="checkbox" name="Fee Structure" value="Yes"> I want <strong>fee structure</strong></label>
+          <label><input type="checkbox" name="Contact Consent" value="Yes"> I love to be contacted by academy on provided contacts about updates etc</label>
+        </div>
+        
+        <button type="submit" class="cta-button"><i class="fas fa-paper-plane"></i> Send Inquiry</button>
+        <p class="privacy-note"><i class="fas fa-lock"></i> Your information is secure and will never be shared</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3><i class="fas fa-graduation-cap"></i> THIA</h3>
+        <p>The Hope International Academy</p>
+        <p>Empowering careers through quality education since 2020.</p>
+        <div style="margin-top: 1rem;">
+          <p><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</p>
+          <p><i class="fab fa-whatsapp"></i> +92 313 5198927</p>
+          <p><i class="fas fa-envelope"></i> info@thia.edu.pk</p>
+        </div>
+      </div>
+      <div>
+        <h4>Courses</h4>
+        <a href="#">GCSE / IGCSE</a>
+        <a href="#">IB Diploma</a>
+        <a href="#">A/AS Levels</a>
+        <a href="#">Norwegian Curriculum</a>
+        <a href="#">K5-K12 Programs</a>
+        <a href="#">University Prep</a>
+      </div>
+      <div>
+        <h4>Subjects</h4>
+        <a href="#">Mathematics</a>
+        <a href="#">Physics</a>
+        <a href="#">Chemistry</a>
+        <a href="#">Biology</a>
+        <a href="#">Computer Science</a>
+        <a href="#">Economics</a>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#">About Us</a>
+        <a href="#">Our Team</a>
+        <a href="#">Testimonials</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+        <a href="#">FAQs</a>
+      </div>
+      <div>
+        <h4>Connect With Us</h4>
+        <div class="socials">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+          <i class="fab fa-whatsapp" onclick="window.open('https://wa.me/923135198927', '_blank')"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2024 The Hope International Academy (THIA). All rights reserved. | Bringing Hope Through Education</p>
+    </div>
+  </footer>
+
+  <script>
+    // Loading Animation
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').classList.add('hidden');
+      }, 500);
+    });
+
+    // Progress Bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      if (winScroll > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Back to Top Click
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Slow Count-up Animation
+    const counters = document.querySelectorAll('.count-up');
+    const speed = 200;
+
+    const countUp = () => {
+      counters.forEach(counter => {
+        const updateCount = () => {
+          const target = parseInt(counter.getAttribute('data-target'));
+          const count = parseInt(counter.innerText);
+          const increment = Math.ceil(target / speed);
+          
+          if (count < target) {
+            counter.innerText = Math.min(count + increment, target);
+            setTimeout(updateCount, 30);
+          } else {
+            counter.innerText = target + '+';
+          }
+        };
+        updateCount();
+      });
+    };
+
+    // Trigger count-up when stats come into view
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          countUp();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(document.querySelector('.stats'));
+
+    // Create floating particles in hero
+    const hero = document.getElementById('hero');
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      const size = Math.random() * 20 + 5;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 10 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      particle.style.opacity = Math.random() * 0.5 + 0.2;
+      
+      hero.appendChild(particle);
+    }
+
+    // Hover pause for drift sections
+    document.querySelectorAll('.programmes-drift, .drift-row, .testi-track').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        el.style.animationPlayState = 'paused';
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.animationPlayState = 'running';
+      });
+    });
+
+    // WhatsApp button functionality
+    document.querySelectorAll('.whatsapp-large, .socials .fa-whatsapp').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        window.open('https://wa.me/923135198927?text=Hi%20THIA%20-%20The%20Hope%20International%20Academy%2C%20I%27m%20interested%20in%20your%20academic%20programs', '_blank');
+      });
+    });
+
+    // Close popup when clicking outside
+    window.onclick = function(event) {
+      const popup = document.getElementById('popupOverlay');
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    };
+  </script>
+</body>
+</html>
