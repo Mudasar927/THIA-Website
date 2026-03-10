@@ -1,0 +1,3610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Hope International Academy (THIA) · Premium Educational Hub</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Swiper JS for carousels -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+<!-- Sample Lesson Snippets Section with Sliding Carousel -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<style>
+/* Sample Lesson Snippets Styles */
+.sample-lessons-section {
+  padding: 4rem 5%;
+  background: linear-gradient(135deg, #ffffff, #f8fafc);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #C5A028, #D4AF37, #E4B138);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-header p {
+  color: #64748b;
+  font-size: 1.1rem;
+}
+
+.lessons-swiper {
+  padding: 2rem 0 4rem;
+  overflow: hidden;
+}
+
+.lesson-slide {
+  height: auto;
+}
+
+.lesson-card {
+  background: white;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -15px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  border: 1px solid #e2e8f0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.lesson-card:hover {
+  transform: translateY(-10px);
+  border-color: #C5A028;
+  box-shadow: 0 20px 40px -10px rgba(197, 160, 40, 0.3);
+}
+
+.lesson-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #C5A028, #D4AF37);
+  color: #0A1929;
+  padding: 0.3rem 1rem;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  z-index: 2;
+  box-shadow: 0 5px 15px rgba(197, 160, 40, 0.3);
+}
+
+.lesson-thumbnail {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.lesson-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.lesson-card:hover .lesson-thumbnail img {
+  transform: scale(1.1);
+}
+
+.lesson-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(10, 25, 41, 0.8), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lesson-card:hover .lesson-overlay {
+  opacity: 1;
+}
+
+.play-button {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #C5A028, #D4AF37);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0A1929;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(197, 160, 40, 0.4);
+}
+
+.lesson-card:hover .play-button {
+  transform: scale(1);
+}
+
+.play-button:hover {
+  transform: scale(1.1) !important;
+}
+
+.lesson-info {
+  padding: 1.8rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.lesson-info h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.8rem;
+  color: #0A1929;
+  font-weight: 700;
+}
+
+.lesson-teacher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  color: #64748b;
+  font-size: 0.95rem;
+}
+
+.lesson-teacher i {
+  color: #C5A028;
+  width: 20px;
+}
+
+.lesson-meta {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.meta-item i {
+  color: #C5A028;
+}
+
+.lesson-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.stars {
+  color: #C5A028;
+  letter-spacing: 2px;
+}
+
+.rating-count {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.lesson-preview-btn {
+  margin-top: auto;
+  background: transparent;
+  border: 2px solid #C5A028;
+  color: #C5A028;
+  padding: 0.8rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.lesson-preview-btn:hover {
+  background: linear-gradient(135deg, #C5A028, #D4AF37);
+  color: #0A1929;
+  border-color: transparent;
+  transform: translateY(-2px);
+}
+
+/* Swiper Navigation */
+.swiper-button-next,
+.swiper-button-prev {
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  color: #C5A028;
+  transition: all 0.3s ease;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: linear-gradient(135deg, #C5A028, #D4AF37);
+  color: white;
+  transform: scale(1.1);
+}
+
+.swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #cbd5e1;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  width: 30px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #C5A028, #D4AF37);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 2rem;
+  }
+  
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+}
+</style>  
+<style>
+.leadership-section {
+  padding: 4rem 5%;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+}
+
+.leadership-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-width: 1200px;
+  margin: 3rem auto 0;
+}
+
+.leader-card {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  background: white;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s;
+}
+
+.leader-card.reverse {
+  direction: rtl;
+}
+
+.leader-card.reverse .leader-content {
+  direction: ltr;
+}
+
+.leader-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold-rich);
+  box-shadow: var(--gold-shadow);
+}
+
+.leader-image-wrapper {
+  width: 100%;
+  height: 300px;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.leader-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.leader-card:hover .leader-image {
+  transform: scale(1.05);
+}
+
+.leader-initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  font-weight: 700;
+  color: white;
+  background: linear-gradient(135deg, var(--gold-rich), var(--navy-deep));
+}
+
+.leader-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.leader-badge {
+  display: inline-block;
+  padding: 0.3rem 1rem;
+  background: #eef2ff;
+  color: var(--gold-rich);
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+
+.leader-content h3 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--navy-deep);
+}
+
+.credentials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.credentials span {
+  background: #f8fafc;
+  padding: 0.3rem 1rem;
+  border-radius: 30px;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.credentials i {
+  color: var(--gold-rich);
+  margin-right: 0.3rem;
+}
+
+.leader-message {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.quote-icon {
+  color: var(--gold-rich);
+  font-size: 2rem;
+  opacity: 0.3;
+  margin-bottom: 0.5rem;
+}
+
+.leader-message p {
+  color: #334155;
+  line-height: 1.6;
+  font-style: italic;
+}
+
+.leader-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.leader-social a {
+  width: 40px;
+  height: 40px;
+  background: #f1f5f9;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.leader-social a:hover {
+  background: var(--gold-rich);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .leader-card,
+  .leader-card.reverse {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    direction: ltr;
+  }
+  
+  .leader-image-wrapper {
+    height: 250px;
+  }
+  
+  .leader-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .credentials {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+</style>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    :root {
+      /* Black - Gold - Navy Blue Theme */
+      --black: #000000;
+      --black-light: #1a1a1a;
+      --gold-rich: #C5A028;
+      --gold-warm: #D4AF37;
+      --gold-soft: #E4B138;
+      --gold-light: #F3C74D;
+      --navy-deep: #0A1929;
+      --navy-rich: #0B1E33;
+      --navy-medium: #13294B;
+      --navy-light: #1E3A6F;
+      
+      /* Neutrals */
+      --white: #FFFFFF;
+      --off-white: #F8F9FA;
+      --gray-light: #E9ECEF;
+      --gray-medium: #CED4DA;
+      
+      /* Gradients */
+      --gradient-premium: linear-gradient(135deg, var(--navy-deep), var(--navy-medium), var(--gold-rich));
+      --gradient-gold: linear-gradient(135deg, var(--gold-rich), var(--gold-warm), var(--gold-soft));
+      --gradient-navy: linear-gradient(135deg, var(--navy-deep), var(--navy-rich), var(--navy-medium));
+      --gradient-dark: linear-gradient(135deg, var(--black), var(--navy-deep));
+      
+      /* Effects */
+      --gold-glow: 0 10px 30px rgba(197, 160, 40, 0.2);
+      --gold-shadow: 0 20px 40px -10px rgba(197, 160, 40, 0.3);
+      --navy-shadow: 0 20px 40px -10px rgba(10, 25, 41, 0.3);
+      --gold-border: 1px solid rgba(197, 160, 40, 0.3);
+      
+      /* Keep existing variables for compatibility */
+      --primary-gradient: var(--gradient-premium);
+      --primary-color: var(--gold-rich);
+      --secondary-color: var(--navy-medium);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --text-light: var(--white);
+      --text-dark: var(--navy-deep);
+      --card-shadow: 0 20px 40px -15px rgba(0,0,0,0.2);
+    }
+
+    body {
+      background: var(--off-white);
+      color: var(--navy-deep);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold-rich), var(--gold-warm), var(--gold-soft), var(--gold-rich));
+      background-size: 300% 100%;
+      animation: gradientShift 8s ease infinite;
+      z-index: 1000;
+      transition: width 0.1s;
+      box-shadow: var(--gold-glow);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Animated Gradient Background for Nav and Hero */
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--navy-deep), var(--navy-medium), var(--gold-rich), var(--navy-deep), var(--navy-medium), var(--gold-soft));
+      background-size: 50% 100%;
+      animation: slideBackground 20s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes slideBackground {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Navbar with Animated Background */
+    .navbar {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 5%;
+      overflow: hidden;
+      border-bottom: 2px solid var(--gold-rich);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--gradient-dark);
+    }
+
+    .navbar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      z-index: -1;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--gold-rich), var(--gold-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 20px rgba(197, 160, 40, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--white);
+      transition: 0.3s;
+      font-size: 1.05rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-gold);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .enroll-nav {
+      background: var(--gradient-gold);
+      border: none;
+      color: var(--navy-deep) !important;
+      padding: 0.7rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      animation: pulse 2s infinite;
+    }
+
+    .enroll-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--gold-glow);
+    }
+
+    .enroll-nav::after {
+      display: none;
+    }
+
+    /* Hero with Animated Background */
+    .hero {
+      position: relative;
+      padding: 4rem 5% 6rem;
+      overflow: hidden;
+      border-bottom-left-radius: 4rem;
+      border-bottom-right-radius: 4rem;
+      background: var(--gradient-premium);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 1;
+    }
+
+    /* Floating Particles - Gold tint */
+    .particle {
+      position: absolute;
+      background: rgba(197, 160, 40, 0.2);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 2;
+      animation: float 8s infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { 
+        transform: translateY(0) translateX(0); 
+        opacity: 0.2;
+      }
+      25% { 
+        transform: translateY(-30px) translateX(15px); 
+        opacity: 0.4;
+      }
+      50% { 
+        transform: translateY(-50px) translateX(-15px); 
+        opacity: 0.6;
+      }
+      75% { 
+        transform: translateY(-30px) translateX(25px); 
+        opacity: 0.4;
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--white);
+      text-shadow: 2px 2px 20px rgba(0,0,0,0.3);
+      margin-bottom: 1rem;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Counter Boxes Grid */
+    .counter-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .counter-box {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-border);
+      border-radius: 2rem;
+      padding: 2rem 1rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: var(--gold-glow);
+      animation: fadeInUp 1s ease 0.4s both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .counter-box:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+
+    .counter-box::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(197, 160, 40, 0.1) 0%, transparent 70%);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+      z-index: -1;
+    }
+
+    .counter-box:hover::before {
+      transform: rotate(45deg) scale(1.2);
+    }
+
+    .counter-icon {
+      font-size: 2.5rem;
+      color: var(--gold-rich);
+      margin-bottom: 1rem;
+    }
+
+    .counter-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: var(--gold-soft);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .counter-label {
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .counter-sub {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, #ff3366, #ff6b6b);
+      color: white;
+      padding: 0.2rem 1rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+    }
+
+    /* Calculator Button - Floating on Right Side */
+    .calculator-float-btn {
+      position: fixed;
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 999;
+      background: var(--gradient-gold);
+      color: var(--navy-deep);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--gold-shadow);
+      transition: all 0.3s ease;
+      border: 2px solid var(--gold-rich);
+      animation: pulse 2s infinite;
+    }
+
+    .calculator-float-btn:hover {
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 0 30px rgba(197, 160, 40, 0.5);
+    }
+
+    .calculator-float-btn i {
+      font-size: 2rem;
+    }
+
+    .calculator-tooltip {
+      position: absolute;
+      right: 70px;
+      background: var(--navy-deep);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      border: 1px solid var(--gold-rich);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .calculator-float-btn:hover .calculator-tooltip {
+      opacity: 1;
+      visibility: visible;
+      right: 80px;
+    }
+
+    /* Floating CTA Buttons (Appear on Scroll) */
+    .floating-cta {
+      position: fixed;
+      left: 30px;
+      bottom: 30px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .floating-cta.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .cta-float-btn {
+      width: 120px;
+      padding: 1rem 0;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: var(--gold-shadow);
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .cta-float-btn.inquiry {
+      background: var(--gradient-gold);
+      color: var(--navy-deep);
+    }
+
+    .cta-float-btn.whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .cta-float-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .cta-float-btn i {
+      font-size: 1.2rem;
+    }
+
+    /* Responsive counter grid */
+    @media (max-width: 768px) {
+      .counter-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      
+      .counter-number {
+        font-size: 2.5rem;
+      }
+      
+      .calculator-float-btn {
+        width: 50px;
+        height: 50px;
+        right: 15px;
+      }
+      
+      .calculator-float-btn i {
+        font-size: 1.5rem;
+      }
+      
+      .floating-cta {
+        left: 15px;
+        bottom: 15px;
+      }
+      
+      .cta-float-btn {
+        width: 100px;
+        padding: 0.8rem 0;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .counter-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .floating-cta {
+        flex-direction: row;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 15px;
+        width: 90%;
+        justify-content: center;
+      }
+      
+      .floating-cta.visible {
+        transform: translateX(-50%) translateY(0);
+      }
+      
+      .cta-float-btn {
+        width: 45%;
+      }
+    }
+
+    /* Section Titles - Gold gradient */
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 4rem 0 1rem;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradientText 5s ease infinite;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--gold-rich), var(--gold-soft), var(--gold-rich), transparent);
+    }
+
+    @keyframes gradientText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .section-sub {
+      text-align: center;
+      color: #64748b;
+      margin-bottom: 3rem;
+    }
+
+    /* Programmes Drift Cards */
+    .programmes-drift-wrapper {
+      width: 100%;
+      overflow: hidden;
+      margin: 3rem 0;
+      padding: 1rem 0;
+    }
+
+    .programmes-drift {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      animation: driftLeft 40s linear infinite;
+      padding: 1rem 2rem;
+    }
+
+    .programme-card {
+      width: 350px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-border);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .programme-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+
+    .programme-card h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .programme-card p {
+      color: #334155;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .programme-btn {
+      background: transparent;
+      border: 2px solid var(--gold-rich);
+      color: var(--gold-rich);
+      border-radius: 40px;
+      padding: 0.6rem 1.8rem;
+      font-weight: 600;
+      transition: 0.3s;
+      cursor: pointer;
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .programme-btn:hover {
+      background: var(--gradient-gold);
+      color: var(--navy-deep);
+      border-color: transparent;
+      transform: translateY(-2px);
+      box-shadow: var(--gold-glow);
+    }
+
+    /* Subjects Grid */
+    .subjects-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      justify-content: center;
+      padding: 2rem 5%;
+    }
+
+    .subject-item {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-border);
+      border-radius: 3rem;
+      padding: 0.8rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--navy-deep);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subject-item i {
+      color: var(--gold-rich);
+      font-size: 1.2rem;
+    }
+
+    .subject-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-glow);
+    }
+
+    /* Why Choose Us - Rectangular Glass Cards */
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 5%;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .why-rect-card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-border);
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .why-rect-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+
+    .why-rect-card i {
+      font-size: 2.5rem;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .why-rect-card h3 {
+      font-size: 1.5rem;
+      color: var(--navy-deep);
+      margin-bottom: 0.5rem;
+    }
+
+    .why-rect-card p {
+      color: #475569;
+      line-height: 1.6;
+      font-size: 1rem;
+    }
+
+    /* Team Drift Sections */
+    .team-section {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      padding: 2rem 0 4rem;
+      overflow: hidden;
+    }
+
+    .drift-row {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      padding: 1rem 2rem;
+    }
+
+    .row1 .drift-row {
+      animation: driftLeft 50s linear infinite;
+    }
+
+    .row2 .drift-row {
+      animation: driftRight 50s linear infinite;
+    }
+
+    @keyframes driftLeft {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes driftRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0%); }
+    }
+
+    .team-card {
+      width: 260px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-border);
+      border-radius: 2rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+
+    .team-avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      overflow: hidden;
+      border: 3px solid var(--gold-rich);
+      box-shadow: 0 15px 30px rgba(197, 160, 40, 0.3);
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .team-card h4 {
+      font-size: 1.3rem;
+      color: var(--navy-deep);
+    }
+
+    .team-card p {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin: 0.3rem 0;
+    }
+
+    .stars {
+      color: var(--gold-rich);
+      margin: 0.8rem 0;
+      letter-spacing: 2px;
+      font-size: 1.1rem;
+    }
+
+    /* Testimonials Drift */
+    .testimonials {
+      background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+      padding: 3rem 0;
+      overflow: hidden;
+    }
+
+    .testi-row {
+      width: 100%;
+      overflow: hidden;
+      margin: 1rem 0;
+    }
+
+    .testi-track {
+      display: flex;
+      gap: 2rem;
+      width: max-content;
+      padding: 1rem 2rem;
+    }
+
+    .rowA .testi-track {
+      animation: driftLeft 60s linear infinite;
+    }
+
+    .rowB .testi-track {
+      animation: driftRight 60s linear infinite;
+    }
+
+    .testi-track:hover {
+      animation-play-state: paused;
+    }
+
+    .testi-card {
+      width: 350px;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-border);
+      border-radius: 2rem;
+      padding: 2rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .testi-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--gold-rich);
+    }
+
+    .quote-icon {
+      font-size: 2rem;
+      color: var(--gold-rich);
+      opacity: 0.5;
+      margin-bottom: 1rem;
+    }
+
+    .testi-card p {
+      color: #334155;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+
+    .testi-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-gold);
+      border-radius: 50%;
+      color: var(--navy-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .author-info strong {
+      color: var(--navy-deep);
+    }
+
+    .author-info span {
+      color: #64748b;
+      font-size: 0.9rem;
+    }
+
+    /* About Section */
+    .about-section {
+      background: linear-gradient(135deg, #ffffff, #f8fafc);
+      padding: 4rem 5%;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .about-content {
+      flex: 2;
+    }
+
+    .about-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-content p {
+      font-size: 1.1rem;
+      color: #334155;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .about-stats {
+      display: flex;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .about-stat-item {
+      text-align: center;
+    }
+
+    .about-stat-item h4 {
+      font-size: 2rem;
+      color: var(--gold-rich);
+      margin-bottom: 0.3rem;
+    }
+
+    .about-stat-item p {
+      color: #64748b;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .contact-card {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-border);
+      border-radius: 2rem;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.1);
+    }
+
+    .contact-card h3 {
+      font-size: 1.8rem;
+      color: var(--navy-deep);
+      margin-bottom: 2rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy-deep);
+      font-size: 1.3rem;
+    }
+
+    .contact-details h4 {
+      font-size: 1.1rem;
+      color: var(--navy-deep);
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-details p {
+      color: var(--gold-rich);
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    .whatsapp-large {
+      background: #25D366;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      border: none;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .whatsapp-large:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 20px 40px rgba(37,211,102,0.3);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--navy-deep);
+      color: #cbd5e1;
+      padding: 3rem 5% 2rem;
+      border-top: 3px solid var(--gold-rich);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer a {
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+      transition: 0.3s;
+    }
+
+    .footer a:hover {
+      color: var(--gold-rich);
+      transform: translateX(5px);
+    }
+
+    .socials i {
+      font-size: 1.8rem;
+      margin-right: 1.5rem;
+      color: #94a3b8;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .socials i:hover {
+      color: var(--gold-rich);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--navy-deep);
+      cursor: pointer;
+      opacity: 0;
+      transition: 0.3s;
+      z-index: 99;
+      box-shadow: var(--gold-glow);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--gold-shadow);
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--navy-deep);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: 1s;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(197, 160, 40, 0.3);
+      border-top-color: var(--gold-rich);
+      border-radius: 50%;
+      animation: spin 1s infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Pulse Animation - Gold */
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(197, 160, 40, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(197, 160, 40, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(197, 160, 40, 0); }
+    }
+
+    /* ---------- POPUP FORM STYLES ---------- */
+    .popup-trigger {
+      text-align: center;
+      margin: 3rem 0;
+    }
+    .open-form-btn {
+      background: var(--gradient-gold);
+      border: none;
+      color: var(--navy-deep);
+      font-size: 1.5rem;
+      font-weight: 700;
+      padding: 1.2rem 3rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: var(--gold-glow);
+      animation: pulse 2s infinite;
+    }
+    .open-form-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--gold-shadow);
+    }
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    .popup-content {
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(10px);
+      border-radius: 2.5rem;
+      padding: 2.5rem;
+      max-width: 600px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+      border: 2px solid var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+    .close-popup {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #64748b;
+      transition: 0.2s;
+    }
+    .close-popup:hover {
+      color: var(--gold-rich);
+      transform: scale(1.1);
+    }
+    .popup-content h3 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      background: var(--gradient-gold);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Form Styles inside popup */
+    .popup-content .form-row {
+      margin-bottom: 1.2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .popup-content .form-group {
+      flex: 1 1 200px;
+    }
+    .popup-content .form-group.full {
+      flex: 1 1 100%;
+    }
+    .popup-content .form-group label {
+      display: block;
+      font-weight: 600;
+      color: var(--navy-deep);
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .popup-content .form-group input, 
+    .popup-content .form-group select {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 2rem;
+      font-size: 1rem;
+      background: white;
+      transition: 0.2s;
+    }
+    .popup-content .form-group input:focus, 
+    .popup-content .form-group select:focus {
+      outline: none;
+      border-color: var(--gold-rich);
+      box-shadow: 0 0 0 3px rgba(197, 160, 40, 0.2);
+    }
+    .popup-content .radio-group {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      background: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid #e2e8f0;
+    }
+    .popup-content .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 500;
+      color: var(--navy-deep);
+      cursor: pointer;
+    }
+    .popup-content .radio-group input[type="radio"] {
+      accent-color: var(--gold-rich);
+      width: 18px;
+      height: 18px;
+    }
+    .popup-content .checklist {
+      background: white;
+      padding: 1.2rem 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid #e2e8f0;
+      margin: 1.2rem 0;
+    }
+    .popup-content .checklist p {
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+      color: var(--navy-deep);
+    }
+    .popup-content .checklist label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      color: #334155;
+      cursor: pointer;
+    }
+    .popup-content .checklist input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--gold-rich);
+    }
+    .popup-content .cta-button {
+      background: var(--gradient-gold);
+      border: none;
+      color: var(--navy-deep);
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .popup-content .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--gold-shadow);
+    }
+    .popup-content .privacy-note {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+      margin-top: 1rem;
+    }
+
+    /* Scholarship Section */
+    .scholarship-section {
+      padding: 4rem 5%;
+      background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+    }
+
+    .scholarship-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+
+    .scholarship-card {
+      background: white;
+      border-radius: 2rem;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scholarship-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(197,160,40,0.1) 0%, transparent 70%);
+      transform: rotate(45deg);
+      transition: all 0.5s ease;
+    }
+
+    .scholarship-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+
+    .scholarship-card:hover::before {
+      transform: rotate(45deg) scale(1.2);
+    }
+
+    .scholarship-icon {
+      font-size: 3rem;
+      color: var(--gold-rich);
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scholarship-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: var(--navy-deep);
+    }
+
+    .scholarship-amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--gold-rich);
+      margin: 1rem 0;
+    }
+
+    .scholarship-card p {
+      color: #64748b;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .scholarship-btn {
+      background: transparent;
+      border: 2px solid var(--gold-rich);
+      color: var(--gold-rich);
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scholarship-btn:hover {
+      background: var(--gradient-gold);
+      color: var(--navy-deep);
+      border-color: transparent;
+      transform: scale(1.05);
+    }
+
+    /* Events Calendar */
+    .events-section {
+      padding: 4rem 5%;
+      background: white;
+    }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+
+    .event-card {
+      display: flex;
+      gap: 2rem;
+      background: #f8fafc;
+      border-radius: 2rem;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+    }
+
+    .event-card:hover {
+      transform: translateX(10px);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+
+    .event-date {
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .event-date .day {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--gold-rich);
+      line-height: 1;
+    }
+
+    .event-date .month {
+      font-size: 1.1rem;
+      color: #64748b;
+      text-transform: uppercase;
+    }
+
+    .event-details h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--navy-deep);
+    }
+
+    .event-details p {
+      color: #64748b;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .event-details i {
+      color: var(--gold-rich);
+    }
+
+    .event-tag {
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      background: rgba(197, 160, 40, 0.1);
+      border-radius: 20px;
+      color: var(--gold-rich);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 4rem 5%;
+      background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+    }
+
+    .faq-container {
+      max-width: 800px;
+      margin: 3rem auto 0;
+    }
+
+    .faq-item {
+      background: white;
+      border-radius: 1.5rem;
+      margin-bottom: 1rem;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+    }
+
+    .faq-item:hover {
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-question h3 {
+      font-size: 1.2rem;
+      color: var(--navy-deep);
+    }
+
+    .faq-question i {
+      color: var(--gold-rich);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-question i {
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      margin-top: 0;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      margin-top: 1rem;
+    }
+
+    /* Partners Section */
+    .partners-section {
+      padding: 4rem 5%;
+      background: white;
+    }
+
+    .partners-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 3rem;
+      max-width: 1200px;
+      margin: 3rem auto 0;
+    }
+
+    .partner-item {
+      padding: 1rem 2rem;
+      background: #f8fafc;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--navy-deep);
+      transition: all 0.3s ease;
+      border: 1px solid #e2e8f0;
+    }
+
+    .partner-item:hover {
+      transform: translateY(-5px);
+      border-color: var(--gold-rich);
+      box-shadow: var(--gold-shadow);
+      background: white;
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      padding: 4rem 5%;
+      background: linear-gradient(135deg, var(--navy-deep), var(--navy-medium));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .newsletter-container h2 {
+      font-size: 2.5rem;
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .newsletter-container p {
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      padding: 0.5rem;
+      border-radius: 60px;
+      border: 1px solid rgba(197, 160, 40, 0.3);
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: white;
+      font-size: 1rem;
+    }
+
+    .newsletter-form input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+    }
+
+    .newsletter-form button {
+      padding: 1rem 2rem;
+      background: var(--gradient-gold);
+      border: none;
+      border-radius: 60px;
+      color: var(--navy-deep);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      transform: scale(1.05);
+      box-shadow: var(--gold-glow);
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .hero h1 { font-size: 2.5rem; }
+      .nav-links { gap: 1rem; }
+      .about-container { flex-direction: column; }
+      .why-grid { grid-template-columns: 1fr; }
+      .popup-content { padding: 1.8rem; }
+      .popup-content .radio-group { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+      .scholarship-grid { grid-template-columns: 1fr; }
+      .events-grid { grid-template-columns: 1fr; }
+      .newsletter-form { flex-direction: column; background: transparent; gap: 1rem; }
+      .newsletter-form input { background: rgba(255,255,255,0.1); border-radius: 60px; }
+    }
+
+    /* Custom Scrollbar - Gold theme */
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(135deg, var(--gold-rich), var(--gold-soft));
+      border-radius: 20px;
+      border: 3px solid #f1f5f9;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Back to Top -->
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Floating Calculator Button (Right Side) -->
+  <div class="calculator-float-btn" onclick="window.location.href='calculator.html'">
+    <i class="fas fa-calculator"></i>
+    <span class="calculator-tooltip">Open Fee Calculator</span>
+  </div>
+
+  <!-- Floating CTA Buttons (Appear on Scroll) -->
+  <div class="floating-cta" id="floatingCTA">
+    <button class="cta-float-btn inquiry" onclick="document.getElementById('popupOverlay').style.display='flex'">
+      <i class="fas fa-paper-plane"></i> Inquiry
+    </button>
+    <button class="cta-float-btn whatsapp" onclick="window.open('https://wa.me/923135198927?text=Hi%20THIA%20-%20The%20Hope%20International%20Academy%2C%20I%27m%20interested%20in%20your%20academic%20programs', '_blank')">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </button>
+  </div>
+
+  <!-- Navbar with Animated Background -->
+  <nav class="navbar">
+    <div class="animated-bg"></div>
+    <span class="logo"><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i>THIA</span>
+    <div class="nav-links">
+      <a href="#">Home</a>
+      <a href="professional course.html">Professional Course</a>
+      <a href="#">Academic Course</a>
+      <a href="#">Test Preparations</a>
+      <a href="#">Other Services</a>
+      <!-- Changed from Enroll Now to Get Inquiry and linked to popup -->
+      <a href="#" class="enroll-nav" onclick="document.getElementById('popupOverlay').style.display='flex'; return false;">Get Inquiry</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="animated-bg"></div>
+    
+    <div class="hero-content">
+      <h1>Welcome to The Hope International Academy</h1>
+      <p>Excellence in Academic & Professional Education</p>
+      
+      <!-- Counter Boxes Grid - 4 separate boxes -->
+      <div class="counter-grid">
+        <!-- Box 1: Live Visitor Counter -->
+        <div class="counter-box">
+          <div class="live-badge">LIVE</div>
+          <div class="counter-icon">
+            <i class="fas fa-eye"></i>
+          </div>
+          <div class="counter-number" id="visitorCounter">0</div>
+          <div class="counter-label">Website Visitors</div>
+          <div class="counter-sub">and counting</div>
+        </div>
+        
+        <!-- Box 2: Student Counter -->
+        <div class="counter-box">
+          <div class="counter-icon">
+            <i class="fas fa-user-graduate"></i>
+          </div>
+          <div class="counter-number" id="studentCounter">0</div>
+          <div class="counter-label">Happy Students</div>
+          <div class="counter-sub">worldwide</div>
+        </div>
+        
+        <!-- Box 3: Tutor Counter -->
+        <div class="counter-box">
+          <div class="counter-icon">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="counter-number" id="tutorCounter">0</div>
+          <div class="counter-label">Expert Tutors</div>
+          <div class="counter-sub">qualified educators</div>
+        </div>
+        
+        <!-- Box 4: Course Counter -->
+        <div class="counter-box">
+          <div class="counter-icon">
+            <i class="fas fa-book-open"></i>
+          </div>
+          <div class="counter-number" id="courseCounter">0</div>
+          <div class="counter-label">Courses</div>
+          <div class="counter-sub">and programmes</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programmes Drift Cards -->
+  <h2 class="section-title">Our Programs</h2>
+  <p class="section-sub">Comprehensive curriculum for all academic levels</p>
+  
+  <div class="programmes-drift-wrapper">
+    <div class="programmes-drift">
+      <!-- GCSE Card -->
+      <div class="programme-card">
+        <h3>GCSE Tutoring</h3>
+        <p>We have the best teachers for GCSE. Our GCSE experts help students achieve exceptional grades through personalized attention and comprehensive exam preparation.</p>
+        <button class="programme-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Get Inquiry →</button>
+      </div>
+      
+      <!-- AS/A-Level Card -->
+      <div class="programme-card">
+        <h3>AS/A-Level Tutoring</h3>
+        <p>Comprehensive A-Level tutoring across all major subjects. Our track record shows 90% A*-B grades with our expert guidance and mock exam system.</p>
+        <button class="programme-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Get Inquiry →</button>
+      </div>
+      
+      <!-- IB Diploma Card -->
+      <div class="programme-card">
+        <h3>IB Diploma Tutoring</h3>
+        <p>International Baccalaureate program with specialized tutors. We guide students through theory of knowledge, extended essay, and all IB subjects.</p>
+        <button class="programme-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Get Inquiry →</button>
+      </div>
+      
+      <!-- VG and UG Card -->
+      <div class="programme-card">
+        <h3>VG and UG Tutors</h3>
+        <p>Specialized tutoring for Norwegian students following the local curriculum. Native Norwegian-speaking and English Speaking international teachers available for Math and Science Subjects.</p>
+        <button class="programme-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Get Inquiry →</button>
+      </div>
+      
+      <!-- University Card -->
+      <div class="programme-card">
+        <h3>University Tutors</h3>
+        <p>We offer MS and PhD level instructors for subject-specific tutoring for undergraduate programs worldwide.</p>
+        <button class="programme-btn university-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Get Inquiry <i class="fas fa-external-link-alt"></i></button>
+      </div>
+      
+      <!-- K5-K12 Card -->
+      <div class="programme-card">
+        <h3>K5-K12 Tutors</h3>
+        <p>Foundation building for young learners. We make learning fun and engaging while building strong academic foundations.</p>
+        <button class="programme-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Get Inquiry →</button>
+      </div>
+      
+      <!-- Duplicates for seamless loop -->
+      <div class="programme-card">
+        <h3>GCSE Tutoring</h3>
+        <p>We have the best teachers for GCSE. Our GCSE experts help students achieve exceptional grades through personalized attention.</p>
+        <button class="programme-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Get Inquiry →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Subjects Grid -->
+  <h2 class="section-title">Subjects We Cover</h2>
+  <p class="section-sub">Expert tuition in all major subjects</p>
+  
+  <div class="subjects-grid">
+    <span class="subject-item"><i class="fas fa-flask"></i> Chemistry</span>
+    <span class="subject-item"><i class="fas fa-atom"></i> Physics</span>
+    <span class="subject-item"><i class="fas fa-calculator"></i> Mathematics</span>
+    <span class="subject-item"><i class="fas fa-dna"></i> Biology</span>
+    <span class="subject-item"><i class="fas fa-laptop-code"></i> Computer Science</span>
+    <span class="subject-item"><i class="fas fa-chart-bar"></i> Business</span>
+    <span class="subject-item"><i class="fas fa-chart-line"></i> Economics</span>
+    <span class="subject-item"><i class="fas fa-calculator"></i> Accounting</span>
+    <span class="subject-item"><i class="fas fa-brain"></i> Psychology</span>
+    <span class="subject-item"><i class="fas fa-book"></i> English Literature</span>
+    <span class="subject-item"><i class="fas fa-pen"></i> English Composition</span>
+    <span class="subject-item"><i class="fas fa-landmark"></i> History</span>
+  </div>
+
+  <!-- Why Choose Us - Rectangular Glass Cards -->
+  <h2 class="section-title">Why Choose Us for Academic Tuitions</h2>
+  <p class="section-sub">What makes The Hope International Academy different</p>
+  
+  <div class="why-grid">
+    <div class="why-rect-card">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <h3>Expert Tutors</h3>
+      <p>Learn from the best educators with years of experience in their respective subjects. Our teachers are passionate about helping students succeed.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-calendar-alt"></i>
+      <h3>Flexibility</h3>
+      <p>Choose your own schedule with our flexible timing options. Morning, evening, or weekend classes available to suit your routine.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-universal-access"></i>
+      <h3>Accessibility</h3>
+      <p>Accessible from anywhere in the world with our best tutors. Improve your academic journey through seamless online learning platforms.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-vial"></i>
+      <h3>Mock Tests</h3>
+      <p>Regular mock tests designed to simulate real exam conditions. Build confidence and identify areas for improvement.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-pencil-alt"></i>
+      <h3>Mock Exams</h3>
+      <p>Comprehensive mock exams with detailed feedback. Our examiners provide personalized guidance for better performance.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-home"></i>
+      <h3>Homework Help</h3>
+      <p>24/7 homework support from our dedicated tutors. Never get stuck on difficult problems again.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-chart-line"></i>
+      <h3>Monthly Progress</h3>
+      <p>Detailed monthly progress reports for parents and students. Track improvement and identify areas needing attention.</p>
+    </div>
+    
+    <div class="why-rect-card">
+      <i class="fas fa-globe"></i>
+      <h3>Global Reach</h3>
+      <p>Connect with students and teachers from around the world. Experience diverse perspectives in learning.</p>
+    </div>
+
+    <div class="why-rect-card">
+      <i class="fas fa-wallet"></i>
+      <h3>Affordability</h3>
+      <p>Our tutor programs are very affordable and are 50% to 70% cheaper than international rates, making our programs affordable for middle class and poor students.</p>
+    </div>
+  </div>
+
+  <!-- Scholarship Section -->
+  <section class="scholarship-section" data-aos="fade-up">
+    <h2 class="section-title">Scholarship Opportunities</h2>
+    <p class="section-sub">Making quality education accessible for everyone</p>
+    
+    <div class="scholarship-grid">
+      <div class="scholarship-card" data-aos="zoom-in" data-aos-delay="100">
+        <div class="scholarship-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3>Merit Scholarship</h3>
+        <div class="scholarship-amount">50%</div>
+        <p>For students with outstanding academic records and exceptional achievements in their previous studies.</p>
+        <button class="scholarship-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Apply Now</button>
+      </div>
+      
+      <div class="scholarship-card" data-aos="zoom-in" data-aos-delay="200">
+        <div class="scholarship-icon">
+          <i class="fas fa-trophy"></i>
+        </div>
+        <h3>Sports Excellence</h3>
+        <div class="scholarship-amount">40%</div>
+        <p>Recognizing young athletes who have represented at district, national, or international levels.</p>
+        <button class="scholarship-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Apply Now</button>
+      </div>
+      
+      <div class="scholarship-card" data-aos="zoom-in" data-aos-delay="300">
+        <div class="scholarship-icon">
+          <i class="fas fa-hand-holding-heart"></i>
+        </div>
+        <h3>Need-Based Aid</h3>
+        <div class="scholarship-amount">70%</div>
+        <p>Financial assistance for talented students from low-income families to ensure education for all.</p>
+        <button class="scholarship-btn" onclick="document.getElementById('popupOverlay').style.display='flex';">Apply Now</button>
+      </div>
+    </div>
+  </section>
+
+<section class="sample-lessons-section">
+  <div class="section-header" data-aos="fade-up">
+    <h2>Sample Lesson Snippets</h2>
+    <p>Preview real teaching moments from our expert teachers</p>
+  </div>
+
+  <div class="lessons-swiper">
+    <div class="swiper" id="lessonsSwiper">
+      <div class="swiper-wrapper">
+        <!-- GCSE Mathematics -->
+        <div class="swiper-slide lesson-slide">
+          <div class="lesson-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="lesson-badge">Free Preview</div>
+            <div class="lesson-thumbnail">
+              <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="GCSE Mathematics">
+              <div class="lesson-overlay">
+                <div class="play-button" onclick="alert('Playing GCSE Mathematics preview...')">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="lesson-info">
+              <h3>GCSE Mathematics</h3>
+              <div class="lesson-teacher">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>M. Ali Raza · 12 min preview</span>
+              </div>
+              <div class="lesson-meta">
+                <span class="meta-item"><i class="fas fa-book-open"></i> Algebra</span>
+                <span class="meta-item"><i class="fas fa-clock"></i> Grade 9-10</span>
+              </div>
+              <div class="lesson-rating">
+                <div class="stars">★★★★★</div>
+                <span class="rating-count">(156 reviews)</span>
+              </div>
+              <p style="color: #475569; margin-bottom: 1rem; font-size: 0.95rem;">Master quadratic equations, simultaneous equations, and graph transformations with step-by-step guidance.</p>
+              <button class="lesson-preview-btn" onclick="alert('Playing GCSE Mathematics preview...')">
+                <i class="fas fa-play-circle"></i> Watch Preview
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- IB Chemistry -->
+        <div class="swiper-slide lesson-slide">
+          <div class="lesson-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="lesson-badge" style="background: linear-gradient(135deg, #D4AF37, #C5A028);">Most Watched</div>
+            <div class="lesson-thumbnail">
+              <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="IB Chemistry">
+              <div class="lesson-overlay">
+                <div class="play-button" onclick="alert('Playing IB Chemistry preview...')">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="lesson-info">
+              <h3>IB Chemistry HL</h3>
+              <div class="lesson-teacher">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Dr. Ayesha Khan · 15 min preview</span>
+              </div>
+              <div class="lesson-meta">
+                <span class="meta-item"><i class="fas fa-flask"></i> Organic Chem</span>
+                <span class="meta-item"><i class="fas fa-clock"></i> IB Year 1-2</span>
+              </div>
+              <div class="lesson-rating">
+                <div class="stars">★★★★★</div>
+                <span class="rating-count">(203 reviews)</span>
+              </div>
+              <p style="color: #475569; margin-bottom: 1rem; font-size: 0.95rem;">Understand complex organic chemistry mechanisms, reaction pathways, and lab techniques with visual demonstrations.</p>
+              <button class="lesson-preview-btn" onclick="alert('Playing IB Chemistry preview...')">
+                <i class="fas fa-play-circle"></i> Watch Preview
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- A-Level Biology -->
+        <div class="swiper-slide lesson-slide">
+          <div class="lesson-card" data-aos="fade-up" data-aos-delay="300">
+            <div class="lesson-thumbnail">
+              <img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="A-Level Biology">
+              <div class="lesson-overlay">
+                <div class="play-button" onclick="alert('Playing A-Level Biology preview...')">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="lesson-info">
+              <h3>A-Level Biology</h3>
+              <div class="lesson-teacher">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Arooba Javed · 10 min preview</span>
+              </div>
+              <div class="lesson-meta">
+                <span class="meta-item"><i class="fas fa-dna"></i> Cell Biology</span>
+                <span class="meta-item"><i class="fas fa-clock"></i> A-Level Year 1</span>
+              </div>
+              <div class="lesson-rating">
+                <div class="stars">★★★★★</div>
+                <span class="rating-count">(167 reviews)</span>
+              </div>
+              <p style="color: #475569; margin-bottom: 1rem; font-size: 0.95rem;">Explore cell structure, transport mechanisms, and biological molecules through detailed animations and real examples.</p>
+              <button class="lesson-preview-btn" onclick="alert('Playing A-Level Biology preview...')">
+                <i class="fas fa-play-circle"></i> Watch Preview
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- GCSE Physics -->
+        <div class="swiper-slide lesson-slide">
+          <div class="lesson-card" data-aos="fade-up" data-aos-delay="400">
+            <div class="lesson-thumbnail">
+              <img src="https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="GCSE Physics">
+              <div class="lesson-overlay">
+                <div class="play-button" onclick="alert('Playing GCSE Physics preview...')">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="lesson-info">
+              <h3>GCSE Physics</h3>
+              <div class="lesson-teacher">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>M. Ali Raza · 8 min preview</span>
+              </div>
+              <div class="lesson-meta">
+                <span class="meta-item"><i class="fas fa-bolt"></i> Electricity</span>
+                <span class="meta-item"><i class="fas fa-clock"></i> Grade 9-11</span>
+              </div>
+              <div class="lesson-rating">
+                <div class="stars">★★★★★</div>
+                <span class="rating-count">(134 reviews)</span>
+              </div>
+              <p style="color: #475569; margin-bottom: 1rem; font-size: 0.95rem;">Learn circuit analysis, Ohm's law, and electrical power through practical examples and problem-solving.</p>
+              <button class="lesson-preview-btn" onclick="alert('Playing GCSE Physics preview...')">
+                <i class="fas fa-play-circle"></i> Watch Preview
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- IB Economics -->
+        <div class="swiper-slide lesson-slide">
+          <div class="lesson-card" data-aos="fade-up" data-aos-delay="500">
+            <div class="lesson-thumbnail">
+              <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="IB Economics">
+              <div class="lesson-overlay">
+                <div class="play-button" onclick="alert('Playing IB Economics preview...')">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="lesson-info">
+              <h3>IB Economics</h3>
+              <div class="lesson-teacher">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Fatima Akhtar · 12 min preview</span>
+              </div>
+              <div class="lesson-meta">
+                <span class="meta-item"><i class="fas fa-chart-line"></i> Microeconomics</span>
+                <span class="meta-item"><i class="fas fa-clock"></i> IB Year 1-2</span>
+              </div>
+              <div class="lesson-rating">
+                <div class="stars">★★★★★</div>
+                <span class="rating-count">(98 reviews)</span>
+              </div>
+              <p style="color: #475569; margin-bottom: 1rem; font-size: 0.95rem;">Master supply and demand, market structures, and elasticity with real-world case studies and graphs.</p>
+              <button class="lesson-preview-btn" onclick="alert('Playing IB Economics preview...')">
+                <i class="fas fa-play-circle"></i> Watch Preview
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- English Literature -->
+        <div class="swiper-slide lesson-slide">
+          <div class="lesson-card" data-aos="fade-up" data-aos-delay="600">
+            <div class="lesson-thumbnail">
+              <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="English Literature">
+              <div class="lesson-overlay">
+                <div class="play-button" onclick="alert('Playing English Literature preview...')">
+                  <i class="fas fa-play"></i>
+                </div>
+              </div>
+            </div>
+            <div class="lesson-info">
+              <h3>A-Level English Literature</h3>
+              <div class="lesson-teacher">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Dr. Bakhtawar Rana · 10 min preview</span>
+              </div>
+              <div class="lesson-meta">
+                <span class="meta-item"><i class="fas fa-book"></i> Poetry</span>
+                <span class="meta-item"><i class="fas fa-clock"></i> A-Level</span>
+              </div>
+              <div class="lesson-rating">
+                <div class="stars">★★★★★</div>
+                <span class="rating-count">(112 reviews)</span>
+              </div>
+              <p style="color: #475569; margin-bottom: 1rem; font-size: 0.95rem;">Analyze classic poetry, learn essay structure, and develop critical analysis skills for top grades.</p>
+              <button class="lesson-preview-btn" onclick="alert('Playing English Literature preview...')">
+                <i class="fas fa-play-circle"></i> Watch Preview
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      
+      <!-- Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+</section>  
+  <!-- Founder & Chairperson Section -->
+<section class="leadership-section">
+  <h2 class="section-title">Our Leadership</h2>
+  <p class="section-sub">Meet the people behind THIA Academy's success</p>
+  
+  <div class="leadership-grid">
+    <!-- Founder Card -->
+    <div class="leader-card">
+      <div class="leader-image-wrapper">
+        <!-- Option A: If you have a good photo -->
+        <img src="team/founder.jpg" 
+             alt="Mudasar Ahmad - Founder" 
+             class="leader-image"
+             loading="lazy">
+        
+        <!-- Option B: If no photo, use styled initials -->
+        <div class="leader-initials" style="background: linear-gradient(135deg, var(--gold-rich), var(--navy-deep));">
+          MA
+        </div>
+      </div>
+      
+      <div class="leader-content">
+        <span class="leader-badge">Founder & CEO</span>
+        <h3>Mudasar Ahmad</h3>
+        
+        <!-- Credentials -->
+        <div class="credentials">
+          <span><i class="fas fa-certificate"></i> 9+ Years Experience</span>
+          <span><i class="fas fa-briefcase"></i> Chemistry Educator</span>
+        </div>
+        
+        <!-- Personal Message -->
+        <div class="leader-message">
+          <i class="fas fa-quote-left quote-icon"></i>
+          <p>"At THIA Academy, we don't just teach skills – we transform careers. My journey from developer to educator taught me that quality education should be accessible to everyone. Every student who walks through our doors leaves with not just knowledge, but confidence."</p>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="leader-social">
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>  
+</section>
+
+  <!-- Meet Our Expert Team -->
+  <section class="team-section">
+    <h2 class="section-title">Meet Our Expert Team</h2>
+    <p class="section-sub">Our dedicated teachers across all subjects</p>
+    
+    <!-- First Row -->
+    <div class="row1">
+      <div class="drift-row">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Ayesha Khan.jpg" alt="Dr. Ayesha Khan">
+          </div>
+          <h4>Dr. Ayesha Khan</h4>
+          <p>Chemistry · PhD</p>
+          <p>12+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/M. Ali Raza.jpg" alt="M. Ali Raza">
+          </div>
+          <h4>M. Ali Raza</h4>
+          <p>Physics · MPhil</p>
+          <p>9+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Mudasar Ahmad.jpg" alt="Mudasar Ahmad">
+          </div>
+          <h4>Mudasar Ahmad</h4>
+          <p>Mathematics · BSc</p>
+          <p>3+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Bakhtawar Rana.jpg" alt="Dr. Bakhtawar Rana">
+          </div>
+          <h4>Dr. Bakhtawar Rana</h4>
+          <p>English · PhD</p>
+          <p>10+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Sara Nadeem.jpg" alt="Sara Nadeem">
+          </div>
+          <h4>Sara Nadeem</h4>
+          <p>Computer Science</p>
+          <p>7+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Huma Javed.jpg" alt="Huma Javed">
+          </div>
+          <h4>Huma Javed</h4>
+          <p>Business · MBA</p>
+          <p>12+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Fatima Akhtar.jpg" alt="Fatima Akhtar">
+          </div>
+          <h4>Fatima Akhtar</h4>
+          <p>Economics · MPhil</p>
+          <p>8+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Usman Chaudhry.jpg" alt="Usman Chaudhry">
+          </div>
+          <h4>Usman Chaudhry</h4>
+          <p>Accounting · ACA</p>
+          <p>4+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Sana.jpg" alt="Dr. Sana">
+          </div>
+          <h4>Dr. Sana</h4>
+          <p>Physiology · D-Pharmacy</p>
+          <p>6+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate of first for seamless loop -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dr. Ayesha Khan.jpg" alt="Dr. Ayesha Khan">
+          </div>
+          <h4>Dr. Ayesha Khan</h4>
+          <p>Chemistry · PhD</p>
+          <p>12+ years</p>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row -->
+    <div class="row2">
+      <div class="drift-row">
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Arooba Javed.jpg" alt="Arooba Javed">
+          </div>
+          <h4>Arooba Javed</h4>
+          <p>Biology · MPhil</p>
+          <p>4+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Mrs. Aqsa.jpg" alt="Mrs. Aqsa">
+          </div>
+          <h4>Mrs. Aqsa</h4>
+          <p>Chemistry · MSc</p>
+          <p>6+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Dawood I.jpg" alt="Dawood I">
+          </div>
+          <h4>Dawood I</h4>
+          <p>CS · BS</p>
+          <p>3+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Haleema Haris.jpg" alt="Haleema Haris">
+          </div>
+          <h4>Haleema Haris</h4>
+          <p>English/IELTS · MPhil</p>
+          <p>6+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Uzma Azhar.jpg" alt="Uzma Azhar">
+          </div>
+          <h4>Uzma Azhar</h4>
+          <p>English · UAE, UK Certified</p>
+          <p>4+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Sadia Iqbal.jpg" alt="Sadia Iqbal">
+          </div>
+          <h4>Sadia Iqbal</h4>
+          <p>Computer Science</p>
+          <p>5+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Zeeshan Ali.jpg" alt="Zeeshan Ali">
+          </div>
+          <h4>Zeeshan Ali</h4>
+          <p>Economics · MBA</p>
+          <p>10+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Abdul Ghafar.jpg" alt="Abdul Ghafar">
+          </div>
+          <h4>Abdul Ghafar</h4>
+          <p>Front End · BS IT</p>
+          <p>7+ years experience</p>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate of first for seamless loop -->
+        <div class="team-card">
+          <div class="team-avatar">
+            <img src="team/Arooba Javed.jpg" alt="Arooba Javed">
+          </div>
+          <h4>Arooba Javed</h4>
+          <p>Biology · MPhil</p>
+          <p>4+ years</p>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials">
+    <h2 class="section-title">Success Stories</h2>
+    <p class="section-sub">What our national & international students say</p>
+    
+    <!-- First Row - Left to Right -->
+    <div class="testi-row rowA">
+      <div class="testi-track">
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"THIA's A-level maths tutoring improved my grades from C to A*. The teachers are exceptional!"</p>
+          <div class="testi-author">
+            <span class="author-icon">OM</span>
+            <div class="author-info">
+              <strong>Omar Malik</strong>
+              <span>UK · A-Level Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Amazing IB biology support. Dr. Bilal made complex topics easy to understand. Got a 7 in my exams!"</p>
+          <div class="testi-author">
+            <span class="author-icon">LC</span>
+            <div class="author-info">
+              <strong>Lina Chen</strong>
+              <span>Dubai · IB Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"My daughter loves her Norwegian tutor. The curriculum is perfectly adapted to local requirements."</p>
+          <div class="testi-author">
+            <span class="author-icon">EH</span>
+            <div class="author-info">
+              <strong>Erik Hansen</strong>
+              <span>Norway · Parent</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Accounting made simple! Usman's teaching style is fantastic. Now I'm pursuing ACCA."</p>
+          <div class="testi-author">
+            <span class="author-icon">RK</span>
+            <div class="author-info">
+              <strong>Rohan Kumar</strong>
+              <span>Karachi · ACCA Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"THIA Academy transformed my career. Highly recommended!"</p>
+          <div class="testi-author">
+            <span class="author-icon">OM</span>
+            <div class="author-info">
+              <strong>Omar Malik</strong>
+              <span>UK</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Second Row - Right to Left -->
+    <div class="testi-row rowB">
+      <div class="testi-track">
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"The mock exams were spot-on. Prepared me perfectly for my final exams. Excellent resource!"</p>
+          <div class="testi-author">
+            <span class="author-icon">ZC</span>
+            <div class="author-info">
+              <strong>Zara Chaudhry</strong>
+              <span>Canada · University</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Psychology lessons are so insightful. Amna Sheikh makes the subject come alive."</p>
+          <div class="testi-author">
+            <span class="author-icon">MN</span>
+            <div class="author-info">
+              <strong>Musa Ndlovu</strong>
+              <span>South Africa · Student</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Homework help saved my grades. The 24/7 support is a game-changer for international students."</p>
+          <div class="testi-author">
+            <span class="author-icon">EB</span>
+            <div class="author-info">
+              <strong>Emma Brown</strong>
+              <span>Australia · A-Level</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Great for K5 curriculum. My son's reading skills improved dramatically in just 3 months."</p>
+          <div class="testi-author">
+            <span class="author-icon">SA</span>
+            <div class="author-info">
+              <strong>Sarah Ahmed</strong>
+              <span>UAE · Parent</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="testi-card">
+          <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+          <p>"Absolutely professional academy. Highly recommended!"</p>
+          <div class="testi-author">
+            <span class="author-icon">ZC</span>
+            <div class="author-info">
+              <strong>Zara Chaudhry</strong>
+              <span>Canada</span>
+            </div>
+          </div>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events Calendar -->
+  <section class="events-section" data-aos="fade-up">
+    <h2 class="section-title">Upcoming Events</h2>
+    <p class="section-sub">Join us in our learning journey</p>
+    
+    <div class="events-grid">
+      <div class="event-card" data-aos="fade-right" data-aos-delay="100">
+        <div class="event-date">
+          <div class="day">15</div>
+          <div class="month">MAR</div>
+        </div>
+        <div class="event-details">
+          <h3>Open House - Virtual Campus Tour</h3>
+          <p><i class="fas fa-clock"></i> 3:00 PM - 5:00 PM (GMT+5)</p>
+          <p><i class="fas fa-video"></i> Live on Zoom</p>
+          <span class="event-tag">Free Entry</span>
+        </div>
+      </div>
+      
+      <div class="event-card" data-aos="fade-right" data-aos-delay="200">
+        <div class="event-date">
+          <div class="day">22</div>
+          <div class="month">MAR</div>
+        </div>
+        <div class="event-details">
+          <h3>Study Abroad Webinar</h3>
+          <p><i class="fas fa-clock"></i> 6:00 PM - 8:00 PM (GMT+5)</p>
+          <p><i class="fas fa-globe"></i> International Speakers</p>
+          <span class="event-tag">Registration Required</span>
+        </div>
+      </div>
+      
+      <div class="event-card" data-aos="fade-right" data-aos-delay="300">
+        <div class="event-date">
+          <div class="day">05</div>
+          <div class="month">APR</div>
+        </div>
+        <div class="event-details">
+          <h3>Parent-Teacher Conference</h3>
+          <p><i class="fas fa-clock"></i> 10:00 AM - 4:00 PM (GMT+5)</p>
+          <p><i class="fas fa-users"></i> One-on-One Sessions</p>
+          <span class="event-tag">By Appointment</span>
+        </div>
+      </div>
+      
+      <div class="event-card" data-aos="fade-right" data-aos-delay="400">
+        <div class="event-date">
+          <div class="day">12</div>
+          <div class="month">APR</div>
+        </div>
+        <div class="event-details">
+          <h3>Scholarship Test</h3>
+          <p><i class="fas fa-clock"></i> 11:00 AM - 1:00 PM (GMT+5)</p>
+          <p><i class="fas fa-trophy"></i> Merit-based Awards</p>
+          <span class="event-tag">Register Now</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" data-aos="fade-up">
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <p class="section-sub">Everything you need to know about THIA</p>
+    
+    <div class="faq-container">
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <h3>How do online classes work at THIA?</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="faq-answer">
+          Our online classes are conducted via Zoom/Google Meet with interactive whiteboards, screen sharing, and real-time collaboration. Students receive recordings, study materials, and homework assignments through our learning management system.
+        </div>
+      </div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <h3>What is the fee structure?</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="faq-answer">
+          Fees vary by program, subject, and number of sessions per week. Click the calculator button on the right to use our interactive fee calculator!
+        </div>
+      </div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <h3>Do you offer free trial classes?</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="faq-answer">
+          Yes! We offer a free 30-minute trial session with one of our expert teachers. This helps you assess teaching quality and compatibility before committing to a full program.
+        </div>
+      </div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <h3>Are your teachers qualified?</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="faq-answer">
+          All our teachers hold advanced degrees (Masters/PhD) in their respective subjects with minimum 3+ years of teaching experience. Many have international teaching certifications and experience with various curricula.
+        </div>
+      </div>
+      
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <h3>Can I change my teacher if needed?</h3>
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="faq-answer">
+          Absolutely! Student-teacher compatibility is crucial for effective learning. If you're not satisfied, we'll arrange a different teacher at no additional cost.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Partners Section -->
+  <section class="partners-section" data-aos="fade-up">
+    <h2 class="section-title">Our Partners & Affiliations</h2>
+    <p class="section-sub">Trusted by leading educational institutions worldwide</p>
+    
+    <div class="partners-grid">
+      <span class="partner-item">Cambridge International</span>
+      <span class="partner-item">IB Organization</span>
+      <span class="partner-item">Pearson Edexcel</span>
+      <span class="partner-item">British Council</span>
+      <span class="partner-item">Oxford University Press</span>
+      <span class="partner-item">Microsoft Education</span>
+      <span class="partner-item">Google for Education</span>
+      <span class="partner-item">UNESCO</span>
+    </div>
+  </section>
+
+  <!-- About Section with WhatsApp Number -->
+  <section class="about-section">
+    <div class="animated-bg" style="opacity: 0.1;"></div>
+    <div class="about-container">
+      <div class="about-content">
+        <h2>About The Hope International Academy</h2>
+        <p>The Hope International Academy (THIA) is a premier educational institution dedicated to providing world-class academic and professional tutoring. Founded with the vision of bringing hope through education, we have helped thousands of students achieve their academic goals through personalized learning experiences and expert guidance.</p>
+        <p>Our team of 40+ qualified teachers specializes in international curricula including GCSE, IB, A-Levels, Norwegian curriculum, and K5-K12 education. We believe in nurturing curiosity, building confidence, and fostering academic excellence in every student, regardless of their location.</p>
+        <div class="about-stats">
+          <div class="about-stat-item">
+            <h4>98%</h4>
+            <p>Success Rate</p>
+          </div>
+          <div class="about-stat-item">
+            <h4>15+</h4>
+            <p>Countries</p>
+          </div>
+          <div class="about-stat-item">
+            <h4>24/7</h4>
+            <p>Support</p>
+          </div>
+        </div>
+      </div>
+      <div class="contact-card">
+        <h3>Contact Us Directly</h3>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <div class="contact-details">
+            <h4>WhatsApp</h4>
+            <p>+92 313 5198927</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Phone</h4>
+            <p>+92 313 5198927</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Email</h4>
+            <p>info@thia.edu.pk</p>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Address</h4>
+            <p>Islamabad, Pakistan</p>
+          </div>
+        </div>
+        <button class="whatsapp-large" onclick="window.open('https://wa.me/923135198927?text=Hi%20THIA%20-%20The%20Hope%20International%20Academy%2C%20I%27m%20interested%20in%20your%20academic%20programs', '_blank')">
+          <i class="fab fa-whatsapp"></i> +92 313 5198927
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="newsletter-section" data-aos="fade-up">
+    <div class="animated-bg" style="opacity: 0.1;"></div>
+    <div class="newsletter-container">
+      <h2>Stay Updated with THIA</h2>
+      <p>Subscribe to our newsletter for the latest courses, events, and educational resources</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== POPUP TRIGGER BUTTON ========== -->
+  <div class="popup-trigger">
+    <button class="open-form-btn" onclick="document.getElementById('popupOverlay').style.display='flex'">
+      <i class="fas fa-paper-plane"></i> Quick Inquiry Form
+    </button>
+  </div>
+
+  <!-- ========== POPUP FORM (QUICK INQUIRY) ========== -->
+  <div class="popup-overlay" id="popupOverlay" onclick="if(event.target===this) this.style.display='none'">
+    <div class="popup-content">
+      <span class="close-popup" onclick="document.getElementById('popupOverlay').style.display='none'">&times;</span>
+      <h3><i class="fas fa-paper-plane"></i> Quick Inquiry</h3>
+      
+      <!-- Formspree ID -->
+      <form action="https://formspree.io/f/mnjgnger" method="POST">
+        <input type="text" name="_gotcha" style="display:none">
+        <input type="hidden" name="_subject" value="New Quick Inquiry from THIA Website">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" name="Name" required placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Contact Number *</label>
+            <input type="tel" name="Contact" required placeholder="+92 300 0000000">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="Email" required placeholder="you@example.com">
+          </div>
+          <div class="form-group">
+            <label>Country *</label>
+            <select name="Country" required>
+              <option value="">-- Select --</option>
+              <option>Pakistan</option>
+              <option>UAE</option>
+              <option>UK</option>
+              <option>USA</option>
+              <option>Norway</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group full">
+          <label>You are a *</label>
+          <div class="radio-group">
+            <label><input type="radio" name="Role" value="Student" required> 👨‍🎓 Student</label>
+            <label><input type="radio" name="Role" value="Guardian/Parent" required> 👪 Guardian</label>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Programme *</label>
+            <select name="Programme" required>
+              <option value="">-- Select --</option>
+              <option>GCSE / IGCSE</option>
+              <option>AS/A-Level</option>
+              <option>IB Diploma</option>
+              <option>Norwegian VG/UG</option>
+              <option>K5–K12</option>
+              <option>University level</option>
+              <option>Test prep (IELTS/SAT)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Subject *</label>
+            <select name="Subject" required>
+              <option value="">-- Select --</option>
+              <option>Mathematics</option>
+              <option>Physics</option>
+              <option>Chemistry</option>
+              <option>Biology</option>
+              <option>English</option>
+              <option>Computer Science</option>
+              <option>Economics</option>
+              <option>Business</option>
+              <option>Accounting</option>
+              <option>Psychology</option>
+              <option>History</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="checklist">
+          <p>✔️ Please check all that apply:</p>
+          <label><input type="checkbox" name="Free Trial" value="Yes"> I want <strong>free trial</strong></label>
+          <label><input type="checkbox" name="Fee Structure" value="Yes"> I want <strong>fee structure</strong></label>
+          <label><input type="checkbox" name="Contact Consent" value="Yes"> I love to be contacted by academy on provided contacts about updates etc</label>
+        </div>
+        
+        <button type="submit" class="cta-button"><i class="fas fa-paper-plane"></i> Send Inquiry</button>
+        <p class="privacy-note"><i class="fas fa-lock"></i> Your information is secure and will never be shared</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3><i class="fas fa-graduation-cap"></i> THIA</h3>
+        <p>The Hope International Academy</p>
+        <p>Empowering careers through quality education since 2020.</p>
+        <div style="margin-top: 1rem;">
+          <p><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</p>
+          <p><i class="fab fa-whatsapp"></i> +92 313 5198927</p>
+          <p><i class="fas fa-envelope"></i> info@thia.edu.pk</p>
+        </div>
+      </div>
+      <div>
+        <h4>Courses</h4>
+        <a href="#">GCSE / IGCSE</a>
+        <a href="#">IB Diploma</a>
+        <a href="#">A/AS Levels</a>
+        <a href="#">Norwegian Curriculum</a>
+        <a href="#">K5-K12 Programs</a>
+        <a href="#">University Prep</a>
+      </div>
+      <div>
+        <h4>Subjects</h4>
+        <a href="#">Mathematics</a>
+        <a href="#">Physics</a>
+        <a href="#">Chemistry</a>
+        <a href="#">Biology</a>
+        <a href="#">Computer Science</a>
+        <a href="#">Economics</a>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="#">About Us</a>
+        <a href="#">Our Team</a>
+        <a href="#">Testimonials</a>
+        <a href="#">Blog</a>
+        <a href="#">Contact</a>
+        <a href="#">FAQs</a>
+      </div>
+      <div>
+        <h4>Connect With Us</h4>
+        <div class="socials">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+          <i class="fab fa-whatsapp" onclick="window.open('https://wa.me/923135198927', '_blank')"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2024 The Hope International Academy (THIA). All rights reserved. | Bringing Hope Through Education</p>
+    </div>
+  </footer>
+
+  <!-- AOS Animation Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Swiper JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  
+  <script>
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+
+    // Loading Animation
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loading').classList.add('hidden');
+      }, 500);
+      
+      // Start counters when page loads
+      animateCounters();
+    });
+
+    // Progress Bar and Floating CTA visibility
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+
+      // Show floating CTA after scrolling 300px
+      const floatingCTA = document.getElementById('floatingCTA');
+      if (winScroll > 300) {
+        floatingCTA.classList.add('visible');
+      } else {
+        floatingCTA.classList.remove('visible');
+      }
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      if (winScroll > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Back to Top Click
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Create floating particles in hero
+    const hero = document.getElementById('hero');
+    const particleCount = 50;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      
+      const size = Math.random() * 20 + 5;
+      particle.style.width = size + 'px';
+      particle.style.height = size + 'px';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 10 + 's';
+      particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+      particle.style.opacity = Math.random() * 0.3 + 0.1;
+      
+      hero.appendChild(particle);
+    }
+
+    // Hover pause for drift sections
+    document.querySelectorAll('.programmes-drift, .drift-row, .testi-track').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        el.style.animationPlayState = 'paused';
+      });
+      el.addEventListener('mouseleave', () => {
+        el.style.animationPlayState = 'running';
+      });
+    });
+
+    // WhatsApp button functionality
+    document.querySelectorAll('.whatsapp-large, .socials .fa-whatsapp').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        window.open('https://wa.me/923135198927?text=Hi%20THIA%20-%20The%20Hope%20International%20Academy%2C%20I%27m%20interested%20in%20your%20academic%20programs', '_blank');
+      });
+    });
+
+    // Close popup when clicking outside
+    window.onclick = function(event) {
+      const popup = document.getElementById('popupOverlay');
+      if (event.target === popup) {
+        popup.style.display = 'none';
+      }
+    };
+
+    // FAQ Toggle Function
+    window.toggleFAQ = function(element) {
+      element.classList.toggle('active');
+    };
+
+    // ===== ANIMATED COUNTERS =====
+    function animateCounters() {
+      // Student Counter (target: 2500)
+      animateCounter('studentCounter', 2500, 30);
+      
+      // Tutor Counter (target: 40)
+      animateCounter('tutorCounter', 40, 50);
+      
+      // Course Counter (target: 70)
+      animateCounter('courseCounter', 70, 40);
+      
+      // Visitor Counter (live from API)
+      fetchVisitorCount();
+    }
+    
+    function animateCounter(elementId, target, speed) {
+      let current = 0;
+      const element = document.getElementById(elementId);
+      const increment = Math.ceil(target / 50); // Divide into 50 steps
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          element.textContent = target.toLocaleString();
+          clearInterval(timer);
+        } else {
+          element.textContent = current.toLocaleString();
+        }
+      }, speed);
+    }
+    
+    function fetchVisitorCount() {
+      const visitorElement = document.getElementById('visitorCounter');
+      
+      // Try to get real visitor count from API
+      fetch('https://api.countapi.xyz/hit/thia-academy/visitors')
+        .then(response => response.json())
+        .then(data => {
+          // Animate to the real value
+          animateCounter('visitorCounter', data.value, 20);
+        })
+        .catch(() => {
+          // Fallback if API fails
+          animateCounter('visitorCounter', 15427, 20);
+        });
+    }
+
+    // Add smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+  </script>
+  <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+// Initialize Swiper when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  new Swiper('#lessonsSwiper', {
+    slidesPerView: 1,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: {
+      delay: 3000,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    breakpoints: {
+      640: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      },
+      1024: {
+        slidesPerView: 3,
+        spaceBetween: 30,
+      },
+    },
+  });
+});
+</script>
+</body>
+</html>
