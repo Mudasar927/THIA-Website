@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Al-Haq Foundation · Empower Pakistani students | Donate</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* === YOUR EXACT CSS - PRESERVED 100% === */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    :root {
+      /* Cyan - Blue - White Theme (exactly same as reference) */
+      --cyan-dark: #0891b2;
+      --cyan: #06b6d4;
+      --cyan-light: #cffafe;
+      --blue-dark: #0284c7;
+      --blue: #0ea5e9;
+      --blue-light: #e0f2fe;
+      --white: #ffffff;
+      --off-white: #f8fafc;
+      --gray-light: #f1f5f9;
+      --gray: #e2e8f0;
+      --text-dark: #0f172a;
+      --text-light: #334155;
+      --shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.2);
+      --emerald: #10b981;   /* for success / zakat */
+      --emerald-dark: #059669;
+    }
+
+    body {
+      background: var(--off-white);
+      color: var(--text-dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--cyan));
+      background-size: 300% 100%;
+      animation: gradientShift 8s ease infinite;
+      z-index: 1000;
+      transition: width 0.1s;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Animated background (subtle) */
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan-dark), var(--blue-dark), var(--cyan), var(--cyan-dark), var(--blue-dark), var(--cyan));
+      background-size: 50% 100%;
+      animation: slideBackground 20s linear infinite;
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    @keyframes slideBackground {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Navbar */
+    .navbar {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      overflow: hidden;
+      border-bottom: 2px solid var(--cyan);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      background: linear-gradient(135deg, var(--cyan-dark), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: 0.3s;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--cyan-dark);
+    }
+
+    .donate-nav {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      border: none;
+      color: white !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      animation: pulse 2s infinite;
+    }
+
+    .donate-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .donate-nav::after {
+      display: none;
+    }
+
+    /* Floating Actions */
+    .floating-actions {
+      position: fixed;
+      right: 20px;
+      bottom: 30px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .float-action-btn {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transition: all 0.3s ease;
+      border: none;
+      position: relative;
+    }
+
+    .float-action-btn:hover {
+      transform: scale(1.1);
+    }
+
+    .float-action-btn.inquiry {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: white;
+    }
+
+    .float-action-btn.whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .float-action-btn i {
+      font-size: 1.8rem;
+    }
+
+    .float-action-btn .tooltip {
+      position: absolute;
+      right: 65px;
+      background: var(--text-dark);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      border: 1px solid var(--cyan);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    .float-action-btn:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      right: 70px;
+    }
+
+    /* Hero Section (Donation themed) */
+    .hero {
+      position: relative;
+      padding: 3rem 5%;
+      background: linear-gradient(135deg, var(--cyan-light), var(--blue-light), white);
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--cyan-dark), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subhead {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 800px;
+      margin: 0 auto 2rem;
+    }
+
+    /* stats boxes */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 2rem auto 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .stat-box {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
+      border: 1px solid var(--gray);
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .stat-box:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: 0 20px 40px -10px var(--cyan);
+    }
+
+    .stat-box i {
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .live-badge {
+      display: inline-block;
+      background: #10b981;
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+      animation: pulse 2s infinite;
+    }
+
+    /* section titles */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 3rem 0 1rem;
+      background: linear-gradient(135deg, var(--cyan-dark), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    /* donation impact boxes */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 5%;
+    }
+
+    .impact-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+      border: 1px solid var(--gray);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .impact-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: 0 20px 40px -10px var(--cyan);
+    }
+
+    .impact-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--cyan-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+    }
+
+    .impact-icon i {
+      font-size: 2rem;
+      color: var(--cyan-dark);
+    }
+
+    .impact-card h3 {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .impact-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* Donation tiers / options */
+    .donation-tiers {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 5%;
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+      gap: 1.2rem;
+    }
+
+    .tier-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      border: 2px solid var(--gray);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .tier-card:hover, .tier-card.selected {
+      border-color: var(--cyan);
+      box-shadow: var(--shadow);
+      transform: scale(1.02);
+    }
+
+    .tier-card .amount {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--cyan-dark);
+    }
+
+    .tier-card .description {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      margin: 0.5rem 0;
+    }
+
+    .badge-impact {
+      background: var(--emerald);
+      color: white;
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .custom-input {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.2rem;
+    }
+
+    .custom-input input {
+      width: 100px;
+      padding: 0.4rem;
+      border: 1px solid var(--gray);
+      border-radius: 30px;
+      text-align: center;
+    }
+
+    /* payment methods */
+    .payment-section {
+      background: white;
+      border-radius: 2rem;
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 2rem;
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+      border: 1px solid var(--gray);
+    }
+
+    .payment-methods {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .method {
+      background: var(--off-white);
+      padding: 0.8rem 1.5rem;
+      border-radius: 40px;
+      border: 1px solid var(--gray);
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .method i {
+      color: var(--cyan);
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: 600;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+      border: 2px solid transparent;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .secure-badge {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      color: var(--text-light);
+    }
+
+    /* student cards (who will benefit) */
+    .students-drift-section {
+      overflow: hidden;
+      background: var(--off-white);
+      padding: 1rem 0 2rem;
+    }
+
+    .drift-row {
+      display: flex;
+      gap: 1.2rem;
+      width: max-content;
+      padding: 1rem 1.5rem;
+      margin: 0.5rem 0;
+    }
+
+    .row1 .drift-row {
+      animation: driftLeft 45s linear infinite;
+    }
+
+    .row2 .drift-row {
+      animation: driftRight 45s linear infinite;
+    }
+
+    .drift-row:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes driftLeft {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes driftRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0%); }
+    }
+
+    .student-card {
+      width: 280px;
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+      border: 1px solid var(--gray);
+      flex-shrink: 0;
+      padding: 1.2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .student-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--cyan-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .student-avatar i {
+      font-size: 2rem;
+      color: var(--cyan-dark);
+    }
+
+    .student-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .student-field {
+      color: var(--cyan-dark);
+      font-weight: 600;
+      font-size: 0.8rem;
+    }
+
+    .student-quote {
+      margin-top: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-style: italic;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      margin: 0.5rem 0 0.2rem;
+    }
+
+    .fund-bar {
+      height: 6px;
+      background: var(--gray);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .fund-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan), var(--blue));
+      width: 75%;
+    }
+
+    /* zakat / sadaqah box */
+    .zakat-box {
+      background: linear-gradient(135deg, var(--cyan-dark), var(--blue-dark));
+      color: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: 3rem auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .zakat-text h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .zakat-text i {
+      margin-right: 0.3rem;
+    }
+
+    .zakat-btn {
+      background: white;
+      color: var(--cyan-dark);
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .zakat-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* SUCCESS STORIES SECTION - NEW BUT MATCHES YOUR STYLE */
+    .success-stories-section {
+      padding: 2rem 5% 4rem;
+      background: white;
+    }
+
+    .stories-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 2rem auto;
+    }
+
+    .story-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+      border: 1px solid var(--gray);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .story-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: 0 20px 40px -10px var(--cyan);
+    }
+
+    .story-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      color: white;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .story-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--cyan-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .story-icon i {
+      font-size: 1.5rem;
+      color: var(--cyan-dark);
+    }
+
+    .story-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--cyan-dark);
+      margin-bottom: 0.2rem;
+    }
+
+    .story-title {
+      font-size: 0.9rem;
+      color: var(--emerald);
+      font-weight: 600;
+      margin-bottom: 0.8rem;
+    }
+
+    .story-quote-text {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 1rem;
+      padding-left: 0.5rem;
+      border-left: 3px solid var(--cyan);
+    }
+
+    .story-stats {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .story-stats i {
+      color: var(--cyan);
+      margin-right: 0.2rem;
+    }
+
+    /* LAPTOP & CERTIFICATE DRIFT SECTION - NEW BUT MATCHES YOUR DRIFT STYLE */
+    .achievement-drift-section {
+      overflow: hidden;
+      background: var(--off-white);
+      padding: 2rem 0 3rem;
+    }
+
+    .drift-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 2rem 0 1rem;
+      background: linear-gradient(135deg, var(--cyan-dark), var(--blue-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .achievement-card {
+      width: 300px;
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 15px 30px -12px rgba(0,0,0,0.1);
+      border: 1px solid var(--gray);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .achievement-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--cyan);
+      box-shadow: 0 20px 40px -10px var(--cyan);
+    }
+
+    .achievement-image {
+      height: 160px;
+      background: linear-gradient(135deg, var(--cyan), var(--blue));
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .achievement-image i {
+      font-size: 4rem;
+      color: white;
+      opacity: 0.3;
+    }
+
+    .image-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: rgba(255,255,255,0.9);
+      color: var(--cyan-dark);
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .achievement-content {
+      padding: 1.5rem;
+    }
+
+    .achievement-name {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--cyan-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .achievement-detail {
+      font-size: 0.85rem;
+      color: var(--emerald);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .achievement-quote {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+
+    .certificate-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gold), #f59e0b);
+      color: var(--text-dark);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    /* footer */
+    .footer {
+      background: var(--text-dark);
+      color: #cbd5e1;
+      padding: 3rem 5% 1.5rem;
+      border-top: 3px solid var(--cyan);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer h3 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .footer a {
+      color: #94a3b8;
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+      transition: 0.3s;
+    }
+
+    .footer a:hover {
+      color: var(--cyan);
+      transform: translateX(5px);
+    }
+
+    .socials {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .socials i {
+      font-size: 1.3rem;
+      color: #94a3b8;
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .socials i:hover {
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+    }
+
+    /* Popup (donation confirmation) */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-content {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      max-width: 450px;
+      width: 90%;
+      position: relative;
+      border: 2px solid var(--cyan);
+      text-align: center;
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    .popup-content i {
+      font-size: 3rem;
+      color: var(--emerald);
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 992px) {
+      .stats-container { grid-template-columns: repeat(2,1fr); }
+      .impact-grid { grid-template-columns: 1fr; }
+      .donation-tiers { grid-template-columns: repeat(2,1fr); }
+      .stories-grid { grid-template-columns: repeat(2,1fr); }
+    }
+
+    @media (max-width: 576px) {
+      .donation-tiers { grid-template-columns: 1fr; }
+      .stats-container { grid-template-columns: 1fr; }
+      .hero h1 { font-size: 2rem; }
+      .stories-grid { grid-template-columns: 1fr; }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.7); }
+      70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+    }
+
+    /* Gold color for certificate badges */
+    :root {
+      --gold: #fbbf24;
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div class="loading" id="loading" style="position:fixed; top:0; left:0; width:100%; height:100%; background:white; display:flex; align-items:center; justify-content:center; z-index:9999; transition:1s;">
+    <div class="loader" style="width:40px; height:40px; border:3px solid var(--cyan-light); border-top-color:var(--cyan); border-radius:50%; animation:spin 1s infinite;"></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Floating Actions -->
+  <div class="floating-actions">
+    <div class="float-action-btn inquiry" onclick="openDonationPopup()">
+      <i class="fas fa-hand-holding-heart"></i>
+      <span class="tooltip">Quick Donate</span>
+    </div>
+    <div class="float-action-btn whatsapp" onclick="window.open('https://wa.me/923135198927?text=Hi%20Al-Haq%20Foundation%20-%20I%20want%20to%20donate%20for%20Pakistani%20students', '_blank')">
+      <i class="fab fa-whatsapp"></i>
+      <span class="tooltip">WhatsApp</span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <span class="logo"><i class="fas fa-hand-holding-heart" style="margin-right: 8px;"></i>Al-Haq</span>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="professional.html">Professional Course</a>
+      <a href="Academics.html">Academic Course</a>
+      <a href="donations.html" class="active">Donation</a>
+      <a href="Services.html">Tech Services</a>
+      <a href="#" class="donate-nav" onclick="openDonationPopup(); return false;">Donate now</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section (Donation) - ENHANCED with emotional text -->
+  <section class="hero">
+    <div class="animated-bg"></div>
+    <h1>Your <span>Donation</span> is Someone's <span>Future</span></h1>
+    <p class="subhead">Al-Haq Foundation (powered by Scitechia Solutions & THIA Academy) provides fully funded technical education to deserving students. Your donation = a life changed. A family lifted. A generation transformed.</p>
+    
+    <!-- Stats boxes -->
+    <div class="stats-container">
+      <div class="stat-box">
+        <i class="fas fa-users"></i>
+        <div class="stat-number" id="studentCounter">1,247</div>
+        <div class="stat-label">Students supported <span class="live-badge">LIVE</span></div>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-graduation-cap"></i>
+        <div class="stat-number">300+</div>
+        <div class="stat-label">Currently in training</div>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-hand-holding-heart"></i>
+        <div class="stat-number">₨ 2.8M</div>
+        <div class="stat-label">Raised this year</div>
+      </div>
+      <div class="stat-box">
+        <i class="fas fa-clock"></i>
+        <div class="stat-number">15</div>
+        <div class="stat-label">Courses offered</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Impact cards: what your donation does -->
+  <section class="impact-grid">
+    <div class="impact-card" data-aos="fade-up">
+      <div class="impact-icon"><i class="fas fa-laptop-code"></i></div>
+      <h3>₨ 7,000</h3>
+      <p class="impact-desc">Fund one student's monthly IT course (Front-end, Python, etc.)</p>
+    </div>
+    <div class="impact-card" data-aos="fade-up" data-aos-delay="50">
+      <div class="impact-icon"><i class="fas fa-wifi"></i></div>
+      <h3>₨ 4,000</h3>
+      <p class="impact-desc">Provide monthly internet package for online learning</p>
+    </div>
+    <div class="impact-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="impact-icon"><i class="fas fa-book"></i></div>
+      <h3>₨ 12,000</h3>
+      <p class="impact-desc">Full learning kit (course materials + stipend for a month)</p>
+    </div>
+  </section>
+
+  <!-- Donation tiers (quick select) -->
+  <h2 class="section-title">Choose your donation amount</h2>
+  <p class="section-sub">Zakat, Sadaqah, or Lillah — 100% goes to student education</p>
+
+  <div class="donation-tiers">
+    <div class="tier-card" onclick="selectAmount(3000)">
+      <span class="badge-impact">Internet support</span>
+      <div class="amount">₨ 3,000</div>
+      <div class="description">WiFi package for one student</div>
+    </div>
+    <div class="tier-card" onclick="selectAmount(7000)">
+      <span class="badge-impact">Monthly course fee</span>
+      <div class="amount">₨ 7,000</div>
+      <div class="description">Full IT course fee for 1 month</div>
+    </div>
+    <div class="tier-card" onclick="selectAmount(15000)">
+      <span class="badge-impact">Two months</span>
+      <div class="amount">₨ 15,000</div>
+      <div class="description">2-month course + materials</div>
+    </div>
+    <div class="tier-card" onclick="selectAmount(42000)">
+      <span class="badge-impact">Complete frontend</span>
+      <div class="amount">₨ 42,000</div>
+      <div class="description">Full 6-month frontend course</div>
+    </div>
+  </div>
+
+  <!-- NEW ROW: MERN Stack + Laptop options -->
+  <div class="donation-tiers" style="margin-top: 0;">
+    <div class="tier-card" onclick="selectAmount(98000)">
+      <span class="badge-impact">Complete MERN Stack</span>
+      <div class="amount">₨ 98,000</div>
+      <div class="description">Full 14-month MERN course</div>
+    </div>
+    <div class="tier-card" onclick="selectAmount(40000)">
+      <span class="badge-impact">One Laptop</span>
+      <div class="amount">₨ 40,000</div>
+      <div class="description">Provide a laptop to a student</div>
+    </div>
+    <div class="tier-card" onclick="selectAmount(126000)">
+      <span class="badge-impact">Data Analysis</span>
+      <div class="amount">₨ 126,000</div>
+      <div class="description">Complete data analysis course</div>
+    </div>
+    <div class="tier-card" onclick="selectAmount(168000)">
+      <span class="badge-impact">Game Development</span>
+      <div class="amount">₨ 168,000</div>
+      <div class="description">Full game dev course</div>
+    </div>
+  </div>
+
+  <!-- Custom amount + Payment section -->
+  <div class="payment-section" id="paymentSection">
+    <h3 style="text-align:center; margin-bottom:1rem;"> <i class="fas fa-heart" style="color: var(--cyan);"></i> Your generosity changes lives</h3>
+    
+    <div class="custom-input" style="justify-content:center; gap:0.8rem;">
+      <span style="font-weight:600;">Other amount:</span>
+      <input type="number" id="customAmount" placeholder="₨" min="100" step="100" value="7000">
+    </div>
+
+    <div class="payment-methods">
+      <span class="method"><i class="fas fa-credit-card"></i> Credit/Debit</span>
+      <span class="method"><i class="fas fa-mobile-alt"></i> JazzCash</span>
+      <span class="method"><i class="fas fa-mobile-alt"></i> EasyPaisa</span>
+      <span class="method"><i class="fas fa-university"></i> Bank Transfer</span>
+    </div>
+
+    <button class="cta-button" onclick="processDonation()"><i class="fas fa-hand-holding-heart"></i> Donate now</button>
+    <div class="secure-badge">
+      <i class="fas fa-lock" style="color:var(--cyan);"></i> Secure payment • 100% traceable
+    </div>
+  </div>
+
+  <!-- Zakat / Sadaqah special box -->
+  <div class="zakat-box">
+    <div class="zakat-text">
+      <h3><i class="fas fa-mosque"></i> Zakat & Sadaqah</h3>
+      <p>Your Zakat reaches deserving students in the most transparent way. THIA Academy & Scitechia verify each candidate.</p>
+    </div>
+    <button class="zakat-btn" onclick="openDonationPopup()">Give Zakat</button>
+  </div>
+
+  <!-- Who will benefit? (Drifting student cards) - YOUR EXISTING SECTION -->
+  <section class="students-drift-section">
+    <h2 class="section-title">Students waiting for your support</h2>
+    <p class="section-sub">Meet some of the talented youngsters enrolled in Al-Haq Foundation</p>
+
+    <!-- Row1 left to right -->
+    <div class="row1">
+      <div class="drift-row">
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Ayesha Bibi</div>
+          <div class="student-field">Front-end Development</div>
+          <div class="student-quote">"My family couldn't afford a laptop. Your donation gives me hope."</div>
+          <div class="progress-label"><span>₨ 7,000 needed</span> <span>42% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:42%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Muhammad Ali</div>
+          <div class="student-field">Full Stack (MERN)</div>
+          <div class="student-quote">"I want to become a developer and support my mother."</div>
+          <div class="progress-label"><span>₨ 126,000 full</span> <span>67% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:67%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Fatima Akhtar</div>
+          <div class="student-field">Data Analysis</div>
+          <div class="student-quote">"I have completed matric, now I dream of being a data analyst."</div>
+          <div class="progress-label"><span>₨ 7,000/month</span> <span>15% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:15%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Usman Chaudhry</div>
+          <div class="student-field">Cyber Security</div>
+          <div class="student-quote">"First in my village to study cyber security. Help me?"</div>
+          <div class="progress-label"><span>₨ 10,000 needed</span> <span>30% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:30%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Zainab Riaz</div>
+          <div class="student-field">Digital Marketing</div>
+          <div class="student-quote">"With skills, I can work online and help my siblings study."</div>
+          <div class="progress-label"><span>₨ 5,000 needed</span> <span>80% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:80%"></div></div>
+        </div>
+        <!-- duplicates for loop -->
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Ayesha Bibi</div>
+          <div class="student-field">Front-end</div>
+          <div class="student-quote">"Your donation gives me hope."</div>
+          <div class="progress-label"><span>₨ 7,000</span> <span>42%</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:42%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row2 right to left -->
+    <div class="row2">
+      <div class="drift-row">
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Hamza Ijaz</div>
+          <div class="student-field">Mobile App Dev</div>
+          <div class="student-quote">"I want to build apps that solve local problems."</div>
+          <div class="progress-label"><span>₨ 10,000 needed</span> <span>20% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:20%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Sara Khan</div>
+          <div class="student-field">Graphic Design</div>
+          <div class="student-quote">"My family has no income; please help me learn."</div>
+          <div class="progress-label"><span>₨ 6,000</span> <span>55% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:55%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Rizwan Ali</div>
+          <div class="student-field">Machine Learning</div>
+          <div class="student-quote">"I have a passion for AI but zero resources."</div>
+          <div class="progress-label"><span>₨ 15,000</span> <span>10% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:10%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Nadia Aslam</div>
+          <div class="student-field">Creative Writing</div>
+          <div class="student-quote">"Words can change the world, but I need a chance."</div>
+          <div class="progress-label"><span>₨ 4,000</span> <span>90% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:90%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Tariq Mehmood</div>
+          <div class="student-field">Backend Dev</div>
+          <div class="student-quote">"Father is a labourer, I want to break the cycle."</div>
+          <div class="progress-label"><span>₨ 7,000</span> <span>33% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:33%"></div></div>
+        </div>
+        <div class="student-card">
+          <div class="student-avatar"><i class="fas fa-user-graduate"></i></div>
+          <div class="student-name">Hamza Ijaz</div>
+          <div class="student-field">Mobile App Dev</div>
+          <div class="student-quote">"I want to build apps."</div>
+          <div class="progress-label"><span>20% funded</span></div>
+          <div class="fund-bar"><div class="fund-fill" style="width:20%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW SECTION: Success Stories (Your donations at work) -->
+  <section class="success-stories-section">
+    <h2 class="section-title">From Your Donations to Their Success</h2>
+    <p class="section-sub">Real students. Real transformations. Real gratitude.</p>
+
+    <div class="stories-grid">
+      <div class="story-card" data-aos="fade-up">
+        <div class="story-badge">Laptop Recipient</div>
+        <div class="story-icon"><i class="fas fa-laptop"></i></div>
+        <div class="story-name">Fatima Zahra</div>
+        <div class="story-title">Frontend Developer at Devsinc</div>
+        <div class="story-quote-text">"I received my laptop through Al-Haq. Today I earn ₨ 95,000/month and support my entire family."</div>
+        <div class="story-stats">
+          <span><i class="fas fa-calendar"></i> 2024 Graduate</span>
+          <span><i class="fas fa-star"></i> Frontend</span>
+        </div>
+      </div>
+
+      <div class="story-card" data-aos="fade-up" data-aos-delay="50">
+        <div class="story-badge">Certificate Holder</div>
+        <div class="story-icon"><i class="fas fa-certificate"></i></div>
+        <div class="story-name">Ahmed Raza</div>
+        <div class="story-title">MERN Stack Developer (Remote)</div>
+        <div class="story-quote-text">"From walking 2km for internet to working remotely for a US company. Your donations changed my life."</div>
+        <div class="story-stats">
+          <span><i class="fas fa-calendar"></i> 2024</span>
+          <span><i class="fas fa-globe"></i> Remote</span>
+        </div>
+      </div>
+
+      <div class="story-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="story-badge">Full Scholarship</div>
+        <div class="story-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="story-name">Zainab Ali</div>
+        <div class="story-title">Data Analyst at Systems Ltd</div>
+        <div class="story-quote-text">"I used to share my brother's phone. Now I have a career. JazakAllah to every donor."</div>
+        <div class="story-stats">
+          <span><i class="fas fa-calendar"></i> 2024</span>
+          <span><i class="fas fa-chart-bar"></i> Data</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEW DRIFT SECTION: Laptop & Certificate Recipients (20+ cards) -->
+  <section class="achievement-drift-section">
+    <h2 class="drift-title">✨ 20+ Students Who Received Laptops & Certificates ✨</h2>
+    <p class="section-sub">Thanks to your donations, these students are now IT professionals</p>
+
+    <!-- Row1 left to right - Laptop recipients -->
+    <div class="row1">
+      <div class="drift-row">
+        <!-- Laptop Card 1 -->
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <i class="fas fa-laptop"></i>
+            <span class="image-badge">Laptop</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Bilal Ahmed</div>
+            <div class="achievement-detail"><i class="fas fa-briefcase"></i> Cyber Security Analyst</div>
+            <div class="achievement-quote">"The laptop I received is now my weapon against cyber threats."</div>
+            <span class="certificate-badge"><i class="fas fa-certificate"></i> Cyber Security</span>
+          </div>
+        </div>
+
+        <!-- Laptop Card 2 -->
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <i class="fas fa-laptop"></i>
+            <span class="image-badge">Laptop</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Maria Khan</div>
+            <div class="achievement-detail"><i class="fas fa-briefcase"></i> UI/UX Designer</div>
+            <div class="achievement-quote">"I design apps that help people because of your donation."</div>
+            <span class="certificate-badge"><i class="fas fa-certificate"></i> UI/UX Design</span>
+          </div>
+        </div>
+
+        <!-- Laptop Card 3 -->
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <i class="fas fa-laptop"></i>
+            <span class="image-badge">Laptop</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Usman Chaudhry</div>
+            <div class="achievement-detail"><i class="fas fa-briefcase"></i> Full Stack Developer</div>
+            <div class="achievement-quote">"I support 8 family members now. One laptop changed our family tree."</div>
+            <span class="certificate-badge"><i class="fas fa-certificate"></i> Full Stack</span>
+          </div>
+        </div>
+
+        <!-- Laptop Card 4 -->
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <i class="fas fa-laptop"></i>
+            <span class="image-badge">Laptop</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Sana Mirza</div>
+            <div class="achievement-detail"><i class="fas fa-briefcase"></i> MERN Stack Dev</div>
+            <div class="achievement-quote">"I still remember the day I got my laptop. Now I'm a professional."</div>
+            <span class="certificate-badge"><i class="fas fa-certificate"></i> MERN</span>
+          </div>
+        </div>
+
+        <!-- Laptop Card 5 -->
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <i class="fas fa-laptop"></i>
+            <span class="image-badge">Laptop</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Kamran Akhtar</div>
+            <div class="achievement-detail"><i class="fas fa-briefcase"></i> Data Analyst</div>
+            <div class="achievement-quote">"Your donations believed in me when I had no one."</div>
+            <span class="certificate-badge"><i class="fas fa-certificate"></i> Data Analysis</span>
+          </div>
+        </div>
+
+        <!-- Laptop Card 6 -->
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <i class="fas fa-laptop"></i>
+            <span class="image-badge">Laptop</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Hina Naeem</div>
+            <div class="achievement-detail"><i class="fas fa-briefcase"></i> Instructor at THIA</div>
+            <div class="achievement-quote">"I used to be a student. Now I teach. You created a cycle of giving."</div>
+            <span class="certificate-badge"><i class="fas fa-certificate"></i> 2025</span>
+          </div>
+        </div>
+
+        <!-- Duplicate for seamless loop -->
+        <div class="achievement-card">
+          <div class="achievement-image">
+            <i class="fas fa-laptop"></i>
+            <span class="image-badge">Laptop</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Bilal Ahmed</div>
+            <div class="achievement-detail">Cyber Security</div>
+            <div class="achievement-quote">"The laptop I received..."</div>
+            <span class="certificate-badge">Cyber</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row2 right to left - Certificate recipients -->
+    <div class="row2">
+      <div class="drift-row">
+        <!-- Certificate Card 1 -->
+        <div class="achievement-card">
+          <div class="achievement-image" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+            <i class="fas fa-certificate"></i>
+            <span class="image-badge">Certificate</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Rizwan Ali</div>
+            <div class="achievement-detail"><i class="fas fa-trophy"></i> ML Engineer</div>
+            <div class="achievement-quote">"From village to AI engineer. Your support made it possible."</div>
+            <span class="certificate-badge">Machine Learning</span>
+          </div>
+        </div>
+
+        <!-- Certificate Card 2 -->
+        <div class="achievement-card">
+          <div class="achievement-image" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+            <i class="fas fa-certificate"></i>
+            <span class="image-badge">Certificate</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Sadia Khan</div>
+            <div class="achievement-detail"><i class="fas fa-trophy"></i> Game Developer</div>
+            <div class="achievement-quote">"I create games now. My younger self would be so proud."</div>
+            <span class="certificate-badge">Game Dev</span>
+          </div>
+        </div>
+
+        <!-- Certificate Card 3 -->
+        <div class="achievement-card">
+          <div class="achievement-image" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+            <i class="fas fa-certificate"></i>
+            <span class="image-badge">Certificate</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Omar Farooq</div>
+            <div class="achievement-detail"><i class="fas fa-trophy"></i> DevOps Engineer</div>
+            <div class="achievement-quote">"Your donation gave me a career, not just a certificate."</div>
+            <span class="certificate-badge">DevOps</span>
+          </div>
+        </div>
+
+        <!-- Certificate Card 4 -->
+        <div class="achievement-card">
+          <div class="achievement-image" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+            <i class="fas fa-certificate"></i>
+            <span class="image-badge">Certificate</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Nadia Aslam</div>
+            <div class="achievement-detail"><i class="fas fa-trophy"></i> Cloud Architect</div>
+            <div class="achievement-quote">"From a girl with a dream to an architect of the cloud."</div>
+            <span class="certificate-badge">Cloud</span>
+          </div>
+        </div>
+
+        <!-- Certificate Card 5 -->
+        <div class="achievement-card">
+          <div class="achievement-image" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+            <i class="fas fa-certificate"></i>
+            <span class="image-badge">Certificate</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Tariq Mehmood</div>
+            <div class="achievement-detail"><i class="fas fa-trophy"></i> Blockchain Dev</div>
+            <div class="achievement-quote">"My father is a laborer. Now I build the future."</div>
+            <span class="certificate-badge">Blockchain</span>
+          </div>
+        </div>
+
+        <!-- Certificate Card 6 -->
+        <div class="achievement-card">
+          <div class="achievement-image" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+            <i class="fas fa-certificate"></i>
+            <span class="image-badge">Certificate</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Farah Ahmed</div>
+            <div class="achievement-detail"><i class="fas fa-trophy"></i> Digital Marketer</div>
+            <div class="achievement-quote">"Now I work with international clients from my home."</div>
+            <span class="certificate-badge">Marketing</span>
+          </div>
+        </div>
+
+        <!-- Duplicate -->
+        <div class="achievement-card">
+          <div class="achievement-image" style="background: linear-gradient(135deg, var(--emerald), #059669);">
+            <i class="fas fa-certificate"></i>
+            <span class="image-badge">Certificate</span>
+          </div>
+          <div class="achievement-content">
+            <div class="achievement-name">Rizwan Ali</div>
+            <div class="achievement-detail">ML Engineer</div>
+            <div class="achievement-quote">"From village to AI..."</div>
+            <span class="certificate-badge">ML</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3><i class="fas fa-hand-holding-heart"></i> Al-Haq Foundation</h3>
+        <p>Powered by Scitechia Solutions & THIA Academy</p>
+        <p>Providing IT & technical skills to poor Pakistani students</p>
+        <p><i class="fas fa-map-pin"></i> Islamabad & remote</p>
+      </div>
+      <div>
+        <h4>Quick links</h4>
+        <a href="#">How it works</a>
+        <a href="#">Zakat calculator</a>
+        <a href="#">Student stories</a>
+        <a href="#">Tax exemption</a>
+        <a href="#" onclick="openDonationPopup()">Donate</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><i class="fab fa-whatsapp"></i> +92 313 5198927</p>
+        <p><i class="fas fa-envelope"></i> donate@alhaq.edu.pk</p>
+        <div class="socials">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+        </div>
+      </div>
+      <div>
+        <h4>Our Promise</h4>
+        <p><i class="fas fa-check-circle" style="color: var(--cyan);"></i> 100% Zakat compliant</p>
+        <p><i class="fas fa-check-circle" style="color: var(--cyan);"></i> Full transparency</p>
+        <p><i class="fas fa-check-circle" style="color: var(--cyan);"></i> Student verified</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2025 Al-Haq Foundation — every rupee empowers a future. | "Whoever saves one life, saves all of humanity."</p>
+    </div>
+  </footer>
+
+  <!-- donation confirmation popup (mock) -->
+  <div class="popup-overlay" id="donationPopup" onclick="if(event.target===this) closeDonationPopup()">
+    <div class="popup-content">
+      <span class="close-popup" onclick="closeDonationPopup()">&times;</span>
+      <i class="fas fa-check-circle"></i>
+      <h3>Thank you for your generosity!</h3>
+      <p id="popupMessage">You are about to change a life. You'll receive payment details via SMS/email.</p>
+      <button class="cta-button" style="margin-top:1.5rem;" onclick="closeDonationPopup()">Continue</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 800, once: true });
+
+    window.addEventListener('load', function() {
+      document.getElementById('loading').style.opacity = '0';
+      setTimeout(() => document.getElementById('loading').style.display = 'none', 1000);
+      animateCounter('studentCounter', 1247, 30);
+    });
+
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById('progressBar').style.width = scrolled + '%';
+    });
+
+    function animateCounter(elementId, target, speed) {
+      let current = 0;
+      const element = document.getElementById(elementId);
+      const inc = Math.ceil(target / 40);
+      const timer = setInterval(() => {
+        current += inc;
+        if (current >= target) {
+          element.textContent = target.toLocaleString();
+          clearInterval(timer);
+        } else element.textContent = current;
+      }, speed);
+    }
+
+    let selectedAmount = 7000;
+    function selectAmount(amt) {
+      selectedAmount = amt;
+      document.getElementById('customAmount').value = amt;
+      document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
+      if (event) event.currentTarget.classList.add('selected');
+    }
+
+    function processDonation() {
+      let custom = parseInt(document.getElementById('customAmount').value) || selectedAmount;
+      document.getElementById('popupMessage').innerText = `You are donating ₨ ${custom.toLocaleString()}. You'll receive payment instructions.`;
+      openDonationPopup();
+    }
+
+    function openDonationPopup() {
+      document.getElementById('donationPopup').style.display = 'flex';
+    }
+    function closeDonationPopup() {
+      document.getElementById('donationPopup').style.display = 'none';
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeDonationPopup(); });
+  </script>
+</body>
+</html>
