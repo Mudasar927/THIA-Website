@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THIA Academy - Smart Fee Calculator</title>
+  
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- noUiSlider for range sliders -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.css">
+  
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    :root {
+      /* Cyan - Blue Theme (Fresh & Professional) */
+      --cyan-dark: #0891b2;
+      --cyan: #06b6d4;
+      --cyan-light: #cffafe;
+      --blue-dark: #0284c7;
+      --blue: #0ea5e9;
+      --blue-light: #e0f2fe;
+      --white: #ffffff;
+      --off-white: #f8fafc;
+      --gray-light: #f1f5f9;
+      --gray: #e2e8f0;
+      --gray-dark: #64748b;
+      --text-dark: #0f172a;
+      --text-light: #334155;
+      --success-green: #10b981;
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, var(--cyan), var(--blue));
+      --gradient-dark: linear-gradient(135deg, var(--cyan-dark), var(--blue-dark));
+      --gradient-light: linear-gradient(135deg, var(--cyan-light), var(--blue-light));
+      
+      /* Effects */
+      --shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.2);
+      --shadow-strong: 0 20px 40px -10px rgba(6, 182, 212, 0.3);
+      --shadow-light: 0 5px 15px -5px rgba(6, 182, 212, 0.1);
+      --border-cyan: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--off-white);
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--cyan-light);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+      box-shadow: var(--shadow);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--cyan-dark), var(--blue-dark), var(--cyan));
+      background-size: 300% 100%;
+      animation: gradientShift 8s ease infinite;
+      z-index: 1000;
+      transition: width 0.1s;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      box-shadow: var(--shadow-strong);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Floating Icons */
+    .floating-icons {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .float-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-strong);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .float-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .float-icon i {
+      font-size: 1.8rem;
+    }
+
+    .float-icon.whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .float-icon.inquiry {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .float-icon .tooltip {
+      position: absolute;
+      right: 65px;
+      background: var(--text-dark);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      border: 1px solid var(--cyan);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .float-icon:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      right: 70px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      overflow: hidden;
+      border-bottom: 2px solid var(--cyan);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      background: var(--gradient-dark);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: 0.3s;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--cyan-dark);
+    }
+
+    .enroll-nav {
+      background: var(--gradient-primary);
+      border: none;
+      color: white !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      animation: pulse 2s infinite;
+    }
+
+    .enroll-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .enroll-nav::after {
+      display: none;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Header */
+    .calculator-header {
+      text-align: center;
+      margin: 3rem 0;
+      position: relative;
+    }
+
+    .calculator-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: var(--gradient-dark);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .calculator-header p {
+      color: var(--text-light);
+      font-size: 1.2rem;
+    }
+
+    /* Main Grid */
+    .calculator-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 0.7fr;
+      gap: 2rem;
+      background: var(--white);
+      border: 1px solid var(--gray);
+      border-radius: 3rem;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-strong);
+      margin-bottom: 3rem;
+    }
+
+    /* Left Panel */
+    .controls-panel {
+      padding-right: 2rem;
+      border-right: 1px solid var(--gray);
+    }
+
+    .panel-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-dark);
+    }
+
+    .panel-title i {
+      color: var(--cyan);
+    }
+
+    /* Section Labels */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      color: var(--text-light);
+      font-weight: 500;
+    }
+
+    .section-label i {
+      color: var(--cyan);
+    }
+
+    /* Program Selector */
+    .program-selector {
+      margin-bottom: 2rem;
+    }
+
+    .program-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .program-option {
+      background: var(--off-white);
+      border: 1px solid var(--gray);
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .program-option:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow);
+    }
+
+    .program-option.active {
+      background: var(--cyan-light);
+      border-color: var(--cyan);
+    }
+
+    .program-name {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+      color: var(--text-dark);
+    }
+
+    .program-price {
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .program-price span {
+      color: var(--cyan-dark);
+      font-weight: 600;
+    }
+
+    /* Teacher Toggle */
+    .teacher-section {
+      margin-bottom: 2rem;
+    }
+
+    .teacher-toggle {
+      display: flex;
+      gap: 1rem;
+      background: var(--off-white);
+      border: 1px solid var(--gray);
+      border-radius: 3rem;
+      padding: 0.5rem;
+    }
+
+    .toggle-option {
+      flex: 1;
+      text-align: center;
+      padding: 1rem;
+      border-radius: 2.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .toggle-option:hover {
+      background: rgba(6, 182, 212, 0.1);
+    }
+
+    .toggle-option.active {
+      background: var(--gradient-primary);
+    }
+
+    .toggle-option.active .option-title,
+    .toggle-option.active .option-price {
+      color: white;
+    }
+
+    .option-title {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      color: var(--text-dark);
+    }
+
+    .option-price {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .savings-badge {
+      position: absolute;
+      top: -0.5rem;
+      right: 0;
+      background: var(--success-green);
+      color: white;
+      font-size: 0.7rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
+      font-weight: 600;
+    }
+
+    /* Subjects Grid */
+    .subjects-section {
+      margin-bottom: 2rem;
+    }
+
+    .subjects-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .subjects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.8rem;
+      max-height: 300px;
+      overflow-y: auto;
+      padding-right: 0.5rem;
+    }
+
+    .subject-checkbox {
+      background: var(--off-white);
+      border: 1px solid var(--gray);
+      border-radius: 1.5rem;
+      padding: 0.8rem 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .subject-checkbox:hover {
+      border-color: var(--cyan);
+    }
+
+    .subject-checkbox.selected {
+      background: var(--cyan-light);
+      border-color: var(--cyan);
+    }
+
+    .subject-checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--cyan);
+    }
+
+    /* Dynamic Hours Sliders Container */
+    .hours-sliders-container {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      background: var(--off-white);
+      border-radius: 2rem;
+      border: 1px solid var(--gray);
+    }
+
+    .hours-sliders-title {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: var(--cyan-dark);
+    }
+
+    .subject-slider-item {
+      margin-bottom: 1.8rem;
+      animation: slideIn 0.3s ease;
+    }
+
+    .subject-slider-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .subject-slider-header span {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .subject-slider-value {
+      background: rgba(6, 182, 212, 0.1);
+      padding: 0.2rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+    }
+
+    .subject-slider-value span {
+      color: var(--cyan-dark);
+      font-weight: 700;
+    }
+
+    .subject-slider {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--gray);
+    }
+
+    .noUi-connect {
+      background: var(--gradient-primary);
+    }
+
+    .noUi-handle {
+      border: 2px solid var(--cyan);
+      background: white;
+      border-radius: 50%;
+      width: 20px !important;
+      height: 20px !important;
+      top: -7px !important;
+      right: -10px !important;
+      cursor: pointer;
+    }
+
+    .noUi-handle:before,
+    .noUi-handle:after {
+      display: none;
+    }
+
+    .total-hours-display {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--gray);
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+    }
+
+    .total-hours-display span:last-child {
+      color: var(--cyan-dark);
+      font-weight: 700;
+    }
+
+    /* Additional Discounts */
+    .additional-discounts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .discount-card {
+      background: var(--off-white);
+      border: 1px solid var(--gray);
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .discount-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow);
+    }
+
+    .discount-card.active {
+      background: var(--cyan-light);
+      border-color: var(--cyan);
+    }
+
+    .discount-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+    }
+
+    .discount-card-header i {
+      color: var(--cyan);
+    }
+
+    .discount-percent {
+      background: rgba(6, 182, 212, 0.1);
+      color: var(--cyan-dark);
+      padding: 0.2rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+    }
+
+    .discount-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: var(--text-dark);
+    }
+
+    .discount-card p {
+      font-size: 0.8rem;
+      color: var(--text-light);
+    }
+
+    /* Right Panel - Results */
+    .results-panel {
+      position: relative;
+    }
+
+    .price-card {
+      background: var(--off-white);
+      border: 1px solid var(--gray);
+      border-radius: 2.5rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .price-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .price-header h3 {
+      color: var(--text-light);
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .main-price {
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--cyan-dark);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .main-price small {
+      font-size: 1rem;
+      color: var(--text-light);
+    }
+
+    .savings-badge {
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid var(--success-green);
+      color: var(--success-green);
+      padding: 0.5rem 1.5rem;
+      border-radius: 30px;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+
+    .breakdown-list {
+      margin: 2rem 0;
+    }
+
+    .breakdown-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid var(--gray);
+    }
+
+    .breakdown-item.total-row {
+      border-top: 2px solid var(--cyan);
+      border-bottom: none;
+      padding-top: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .breakdown-label i {
+      color: var(--cyan);
+      width: 20px;
+      margin-right: 0.5rem;
+    }
+
+    .breakdown-value {
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    .breakdown-value.discount {
+      color: var(--success-green);
+    }
+
+    .summary-section {
+      background: var(--off-white);
+      border: 1px solid var(--gray);
+      border-radius: 2rem;
+      padding: 1.5rem;
+    }
+
+    .summary-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+      color: var(--text-light);
+    }
+
+    .summary-row i {
+      color: var(--cyan);
+      width: 20px;
+    }
+
+    .summary-row strong {
+      color: var(--text-dark);
+      margin-left: auto;
+    }
+
+    .action-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .btn {
+      padding: 1rem;
+      border-radius: 3rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--cyan);
+      color: var(--cyan-dark);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(6, 182, 212, 0.1);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-dark);
+      color: var(--gray);
+      padding: 3rem 5% 1.5rem;
+      border-top: 3px solid var(--cyan);
+      margin-top: 3rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer h3 {
+      color: var(--cyan);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer h4 {
+      color: var(--cyan-light);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .footer a {
+      color: var(--gray);
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+      transition: 0.3s;
+      font-size: 0.85rem;
+    }
+
+    .footer a:hover {
+      color: var(--cyan);
+      transform: translateX(5px);
+    }
+
+    .footer p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+      color: var(--gray);
+    }
+
+    .socials {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .socials i {
+      font-size: 1.3rem;
+      color: var(--gray);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .socials i:hover {
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+      color: var(--gray-dark);
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 1000px) {
+      .calculator-grid {
+        grid-template-columns: 1fr;
+      }
+      .controls-panel {
+        border-right: none;
+        padding-right: 0;
+      }
+      .program-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+      .program-grid {
+        grid-template-columns: 1fr;
+      }
+      .subjects-grid,
+      .additional-discounts {
+        grid-template-columns: 1fr;
+      }
+      .teacher-toggle {
+        flex-direction: column;
+      }
+      .calculator-header h1 {
+        font-size: 2rem;
+      }
+      .floating-icons {
+        right: 10px;
+        bottom: 10px;
+      }
+      .float-icon {
+        width: 45px;
+        height: 45px;
+      }
+      .float-icon i {
+        font-size: 1.3rem;
+      }
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 80px;
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Back to Top -->
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Floating Icons -->
+  <div class="floating-icons">
+    <div class="float-icon whatsapp" onclick="window.open('https://wa.me/923135198927?text=Hi%20THIA%20-%20I%20need%20help%20with%20fee%20calculator', '_blank')">
+      <i class="fab fa-whatsapp"></i>
+      <span class="tooltip">WhatsApp</span>
+    </div>
+    <div class="float-icon inquiry" onclick="openInquiryForm()">
+      <i class="fas fa-paper-plane"></i>
+      <span class="tooltip">Quick Inquiry</span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <span class="logo"><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i>THIA</span>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="professional.html">Professional Course</a>
+      <a href="Academics.html">Academic Course</a>
+      <a href="donations.html">Donations</a>
+      <a href="Services.html">Tech Services</a>
+      <a href="#" class="enroll-nav" onclick="openInquiryForm(); return false;">Get Inquiry</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="calculator-header" data-aos="fade-up">
+      <h1>🎓 THIA Smart Fee Calculator</h1>
+      <p>Set hours for each subject individually • Max 5 hours per subject</p>
+    </div>
+
+    <!-- Main Calculator Grid -->
+    <div class="calculator-grid" id="calculatorGrid" data-aos="fade-up" data-aos-delay="100">
+      
+      <!-- LEFT PANEL -->
+      <div class="controls-panel">
+        <div class="panel-title">
+          <i class="fas fa-sliders-h"></i>
+          <span>Customize Your Package</span>
+        </div>
+
+        <!-- Program Selection -->
+        <div class="program-selector">
+          <div class="section-label">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Select Program</span>
+          </div>
+          <div class="program-grid" id="programGrid">
+            <div class="program-option active" data-program="gcse" data-rate="30">
+              <div class="program-name">GCSE / IGCSE</div>
+              <div class="program-price"><span>£30</span>/hr</div>
+            </div>
+            <div class="program-option" data-program="alevel" data-rate="50">
+              <div class="program-name">AS/A-Level</div>
+              <div class="program-price"><span>£50</span>/hr</div>
+            </div>
+            <div class="program-option" data-program="ib" data-rate="75">
+              <div class="program-name">IB Diploma</div>
+              <div class="program-price"><span>£75</span>/hr</div>
+            </div>
+            <div class="program-option" data-program="uni" data-rate="80">
+              <div class="program-name">University Level</div>
+              <div class="program-price"><span>£80</span>/hr</div>
+            </div>
+            <div class="program-option" data-program="k12" data-rate="20">
+              <div class="program-name">K5 - K12</div>
+              <div class="program-price"><span>£20</span>/hr</div>
+            </div>
+            <div class="program-option" data-program="norwegian" data-rate="45">
+              <div class="program-name">Norwegian VG/UG</div>
+              <div class="program-price"><span>£45</span>/hr</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teacher Type -->
+        <div class="teacher-section">
+          <div class="section-label">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Teacher Type</span>
+          </div>
+          <div class="teacher-toggle" id="teacherToggle">
+            <div class="toggle-option active" data-teacher="pakistani">
+              <div class="option-title">🇵🇰 Pakistani Tutor</div>
+              <div class="option-price">30% discount</div>
+              <span class="savings-badge">SAVE 30%</span>
+            </div>
+            <div class="toggle-option" data-teacher="international">
+              <div class="option-title">🌍 International Tutor</div>
+              <div class="option-price">Standard rate</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subjects Selection -->
+        <div class="subjects-section">
+          <div class="subjects-header">
+            <div class="section-label">
+              <i class="fas fa-book"></i>
+              <span>Select Subjects</span>
+            </div>
+            <span class="discount-percent" id="subjectCount">0 selected</span>
+          </div>
+          <div class="subjects-grid" id="subjectsGrid">
+            <!-- Subjects will be populated by JavaScript -->
+          </div>
+        </div>
+
+        <!-- Dynamic Hours Sliders Container -->
+        <div class="hours-sliders-container" id="hoursSlidersContainer" style="display: none;">
+          <div class="hours-sliders-title">
+            <i class="fas fa-clock"></i>
+            <span>Set Hours Per Subject (Max 5 each)</span>
+          </div>
+          <div id="slidersList"></div>
+          <div class="total-hours-display">
+            <span>Total Weekly Hours:</span>
+            <span id="totalHours">0</span>
+          </div>
+        </div>
+
+        <!-- Additional Discounts -->
+        <div class="additional-discounts">
+          <div class="discount-card" id="siblingDiscount">
+            <div class="discount-card-header">
+              <i class="fas fa-users"></i>
+              <span class="discount-percent">5%</span>
+            </div>
+            <h4>Sibling Discount</h4>
+            <p>For 2+ siblings</p>
+          </div>
+          <div class="discount-card" id="referralDiscount">
+            <div class="discount-card-header">
+              <i class="fas fa-user-plus"></i>
+              <span class="discount-percent">5%</span>
+            </div>
+            <h4>Referral Discount</h4>
+            <p>Refer another student</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT PANEL - RESULTS -->
+      <div class="results-panel">
+        <div class="price-card">
+          <div class="price-header">
+            <h3>Your Estimated Fee</h3>
+            <div class="main-price" id="totalPrice">£0</div>
+            <div class="savings-badge" id="savingsBadge">No discounts applied</div>
+          </div>
+
+          <div class="breakdown-list">
+            <div class="breakdown-item">
+              <span class="breakdown-label"><i class="fas fa-calculator"></i> Base Weekly</span>
+              <span class="breakdown-value" id="baseWeekly">£0</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label"><i class="fas fa-tag"></i> Pakistani Discount</span>
+              <span class="breakdown-value discount" id="pakistaniDiscount">-£0</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label"><i class="fas fa-layer-group"></i> Multi-Subject</span>
+              <span class="breakdown-value discount" id="multiDiscount">-£0 (0%)</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label"><i class="fas fa-users"></i> Sibling</span>
+              <span class="breakdown-value discount" id="siblingDisc">-£0</span>
+            </div>
+            <div class="breakdown-item">
+              <span class="breakdown-label"><i class="fas fa-user-plus"></i> Referral</span>
+              <span class="breakdown-value discount" id="referralDisc">-£0</span>
+            </div>
+            <div class="breakdown-item total-row">
+              <span class="breakdown-label"><i class="fas fa-percent"></i> Total Discount</span>
+              <span class="breakdown-value" id="totalDiscountPercent">0%</span>
+            </div>
+          </div>
+
+          <div class="breakdown-item" style="background: var(--cyan-light); padding: 1rem; border-radius: 1rem;">
+            <span class="breakdown-label"><i class="fas fa-calendar-week"></i> Weekly Fee</span>
+            <span class="breakdown-value" style="color: var(--cyan-dark); font-size: 1.5rem;" id="weeklyFee">£0</span>
+          </div>
+          <div class="breakdown-item" style="margin-top: 0.5rem;">
+            <span class="breakdown-label"><i class="fas fa-calendar-alt"></i> Monthly (4 weeks)</span>
+            <span class="breakdown-value" style="color: var(--cyan-dark);" id="monthlyFee">£0</span>
+          </div>
+        </div>
+
+        <!-- Summary -->
+        <div class="summary-section">
+          <div class="summary-row">
+            <i class="fas fa-graduation-cap"></i>
+            <span>Program:</span>
+            <strong id="summaryProgram">GCSE</strong>
+          </div>
+          <div class="summary-row">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span>Teacher:</span>
+            <strong id="summaryTeacher">Pakistani (30% off)</strong>
+          </div>
+          <div class="summary-row">
+            <i class="fas fa-clock"></i>
+            <span>Total Hours:</span>
+            <strong id="summaryHours">0</strong>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button class="btn btn-primary" onclick="proceedToEnrollment()">
+            <i class="fas fa-check-circle"></i> Proceed
+          </button>
+          <button class="btn btn-secondary" onclick="resetCalculator()">
+            <i class="fas fa-redo-alt"></i> Reset
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Inquiry Popup Form -->
+  <div class="popup-overlay" id="popupOverlay" onclick="if(event.target===this) closeInquiryForm()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 2000; align-items: center; justify-content: center;">
+    <div class="popup-content" style="background: white; border-radius: 1.5rem; padding: 1.8rem; max-width: 450px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; border: 2px solid var(--cyan);">
+      <span class="close-popup" onclick="closeInquiryForm()" style="position: absolute; top: 1rem; right: 1.2rem; font-size: 1.5rem; cursor: pointer; color: var(--text-light);">&times;</span>
+      <h3 style="font-size: 1.5rem; text-align: center; margin-bottom: 1.2rem; background: var(--gradient-dark); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"><i class="fas fa-paper-plane"></i> Quick Inquiry</h3>
+      
+      <form id="inquiryForm" onsubmit="submitInquiry(event)">
+        <div class="form-group" style="margin-bottom: 0.8rem;">
+          <label style="display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem; font-size: 0.8rem;">Full Name *</label>
+          <input type="text" name="name" required placeholder="Enter your full name" style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--gray); border-radius: 30px; font-size: 0.85rem;">
+        </div>
+        
+        <div class="form-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem;">
+          <div class="form-group" style="margin-bottom: 0.8rem;">
+            <label style="display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem; font-size: 0.8rem;">Email *</label>
+            <input type="email" name="email" required placeholder="your@email.com" style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--gray); border-radius: 30px; font-size: 0.85rem;">
+          </div>
+          <div class="form-group" style="margin-bottom: 0.8rem;">
+            <label style="display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem; font-size: 0.8rem;">Phone *</label>
+            <input type="tel" name="phone" required placeholder="+44..." style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--gray); border-radius: 30px; font-size: 0.85rem;">
+          </div>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 0.8rem;">
+          <label style="display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem; font-size: 0.8rem;">Program Interest *</label>
+          <select name="program" required style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--gray); border-radius: 30px; font-size: 0.85rem;">
+            <option value="">Select</option>
+            <option>GCSE / IGCSE</option>
+            <option>A-Level</option>
+            <option>IB Diploma</option>
+            <option>Norwegian VG/UG</option>
+            <option>University</option>
+          </select>
+        </div>
+        
+        <div class="form-group" style="margin-bottom: 0.8rem;">
+          <label style="display: block; font-weight: 600; color: var(--text-dark); margin-bottom: 0.2rem; font-size: 0.8rem;">Message</label>
+          <textarea name="message" rows="3" placeholder="Tell us about your requirements..." style="width: 100%; padding: 0.6rem 1rem; border: 1px solid var(--gray); border-radius: 30px; font-size: 0.85rem;"></textarea>
+        </div>
+        
+        <button type="submit" class="cta-button" style="background: var(--gradient-primary); border: none; color: white; font-size: 0.9rem; font-weight: 600; padding: 0.8rem; border-radius: 30px; width: 100%; cursor: pointer; margin-top: 1rem;">Submit Inquiry</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3><i class="fas fa-graduation-cap"></i> THIA</h3>
+        <p>The Hope International Academy</p>
+        <p>Empowering students worldwide since 2020</p>
+        <p><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</p>
+        <p><i class="fab fa-whatsapp"></i> +92 313 5198927</p>
+        <p><i class="fas fa-envelope"></i> info@thia.edu.pk</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="professional.html">Professional Courses</a>
+        <a href="academic.html">Academic Courses</a>
+        <a href="#">Tech Services</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <a href="#" onclick="openInquiryForm()">GCSE / IGCSE</a>
+        <a href="#" onclick="openInquiryForm()">A-Level</a>
+        <a href="#" onclick="openInquiryForm()">IB Diploma</a>
+        <a href="#" onclick="openInquiryForm()">Norwegian VG/UG</a>
+        <a href="#" onclick="openInquiryForm()">University</a>
+      </div>
+      <div>
+        <h4>Connect With Us</h4>
+        <div class="socials">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+          <i class="fab fa-whatsapp" onclick="window.open('https://wa.me/923135198927', '_blank')"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+        <p style="margin-top:1rem;"><i class="fas fa-clock"></i> Mon-Fri: 9am - 8pm (GMT+5)</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2024 The Hope International Academy (THIA). All rights reserved. | All prices in GBP (£) for international students</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.7.1/nouislider.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  
+  <script>
+    // ===== INITIALIZE AOS =====
+    AOS.init({
+      duration: 800,
+      once: true
+    });
+
+    // ===== LOADING ANIMATION =====
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading').style.opacity = '0';
+        setTimeout(function() {
+          document.getElementById('loading').style.display = 'none';
+        }, 500);
+      }, 800);
+    });
+
+    // ===== PROGRESS BAR =====
+    window.addEventListener('scroll', function() {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      if (winScroll > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // ===== BACK TO TOP =====
+    document.getElementById('backToTop').addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ===== DATA =====
+    const subjects = [
+      { id: 'math', name: 'Mathematics' },
+      { id: 'physics', name: 'Physics' },
+      { id: 'chemistry', name: 'Chemistry' },
+      { id: 'biology', name: 'Biology' },
+      { id: 'cs', name: 'Computer Science' },
+      { id: 'english', name: 'English' },
+      { id: 'economics', name: 'Economics' },
+      { id: 'business', name: 'Business' },
+      { id: 'accounting', name: 'Accounting' },
+      { id: 'psychology', name: 'Psychology' },
+      { id: 'history', name: 'History' },
+      { id: 'geography', name: 'Geography' }
+    ];
+
+    const programRates = {
+      gcse: 30,
+      alevel: 50,
+      ib: 75,
+      uni: 80,
+      k12: 20,
+      norwegian: 45
+    };
+
+    // ===== STATE =====
+    let state = {
+      program: 'gcse',
+      programRate: 30,
+      teacher: 'pakistani',
+      selectedSubjects: [],
+      subjectHours: {},
+      siblingDiscount: false,
+      referralDiscount: false
+    };
+
+    // ===== INITIALIZE SUBJECTS GRID =====
+    function renderSubjects() {
+      const grid = document.getElementById('subjectsGrid');
+      grid.innerHTML = '';
+      
+      subjects.forEach(subject => {
+        const label = document.createElement('label');
+        label.className = 'subject-checkbox';
+        label.innerHTML = `
+          <input type="checkbox" value="${subject.id}" class="subject-input">
+          <span>${subject.name}</span>
+        `;
+        
+        label.querySelector('input').addEventListener('change', function(e) {
+          if (this.checked) {
+            state.selectedSubjects.push(subject.id);
+            state.subjectHours[subject.id] = 3;
+          } else {
+            state.selectedSubjects = state.selectedSubjects.filter(s => s !== subject.id);
+            delete state.subjectHours[subject.id];
+          }
+          label.classList.toggle('selected', this.checked);
+          updateSliders();
+          updateSubjectCount();
+          calculatePrice();
+        });
+        
+        grid.appendChild(label);
+      });
+    }
+
+    // ===== UPDATE DYNAMIC SLIDERS =====
+    function updateSliders() {
+      const container = document.getElementById('hoursSlidersContainer');
+      const slidersList = document.getElementById('slidersList');
+      
+      if (state.selectedSubjects.length === 0) {
+        container.style.display = 'none';
+        return;
+      }
+      
+      container.style.display = 'block';
+      slidersList.innerHTML = '';
+      
+      state.selectedSubjects.forEach(subjectId => {
+        const subject = subjects.find(s => s.id === subjectId);
+        const hours = state.subjectHours[subjectId] || 3;
+        
+        const sliderDiv = document.createElement('div');
+        sliderDiv.className = 'subject-slider-item';
+        sliderDiv.id = `slider-${subjectId}`;
+        sliderDiv.innerHTML = `
+          <div class="subject-slider-header">
+            <span>${subject.name}</span>
+            <div class="subject-slider-value">
+              <span id="hours-${subjectId}">${hours}</span> hrs
+            </div>
+          </div>
+          <div class="subject-slider" id="slider-${subjectId}-control"></div>
+        `;
+        
+        slidersList.appendChild(sliderDiv);
+        
+        // Initialize noUiSlider
+        const sliderControl = document.getElementById(`slider-${subjectId}-control`);
+        if (sliderControl && !sliderControl.noUiSlider) {
+          noUiSlider.create(sliderControl, {
+            start: hours,
+            connect: true,
+            range: { min: 1, max: 5 },
+            step: 1,
+            format: { to: value => Math.round(value), from: value => Math.round(value) }
+          });
+          
+          sliderControl.noUiSlider.on('update', (values) => {
+            const val = parseInt(values[0]);
+            state.subjectHours[subjectId] = val;
+            document.getElementById(`hours-${subjectId}`).textContent = val;
+            updateTotalHours();
+            calculatePrice();
+          });
+        }
+      });
+      
+      updateTotalHours();
+    }
+
+    // ===== UPDATE TOTAL HOURS =====
+    function updateTotalHours() {
+      let total = 0;
+      state.selectedSubjects.forEach(subjectId => {
+        total += state.subjectHours[subjectId] || 0;
+      });
+      document.getElementById('totalHours').textContent = total;
+      document.getElementById('summaryHours').textContent = total;
+      return total;
+    }
+
+    // ===== UPDATE SUBJECT COUNT =====
+    function updateSubjectCount() {
+      document.getElementById('subjectCount').textContent = 
+        state.selectedSubjects.length + ' selected';
+    }
+
+    // ===== CALCULATION ENGINE =====
+    function calculatePrice() {
+      const rate = state.programRate;
+      const totalHours = updateTotalHours();
+      
+      // Step 1: Base weekly rate
+      const baseWeekly = rate * totalHours;
+      
+      // Step 2: Pakistani discount (30%)
+      let afterPakistani = baseWeekly;
+      let pakistaniDiscount = 0;
+      if (state.teacher === 'pakistani') {
+        pakistaniDiscount = baseWeekly * 0.3;
+        afterPakistani = baseWeekly * 0.7;
+      }
+      
+      // Step 3: Multi-subject discount (5% per extra subject, max 20%)
+      const subjectCount = state.selectedSubjects.length;
+      let multiDiscountPercent = 0;
+      if (subjectCount >= 2) {
+        multiDiscountPercent = Math.min((subjectCount - 1) * 5, 20);
+      }
+      const multiDiscount = afterPakistani * (multiDiscountPercent / 100);
+      let afterMulti = afterPakistani - multiDiscount;
+      
+      // Step 4: Sibling discount (5%)
+      let siblingDiscount = 0;
+      if (state.siblingDiscount) {
+        siblingDiscount = afterMulti * 0.05;
+        afterMulti = afterMulti * 0.95;
+      }
+      
+      // Step 5: Referral discount (5%)
+      let referralDiscount = 0;
+      if (state.referralDiscount) {
+        referralDiscount = afterMulti * 0.05;
+        afterMulti = afterMulti * 0.95;
+      }
+      
+      // Step 6: Calculate total discount percentage
+      let totalDiscountPercent = baseWeekly > 0 ? ((baseWeekly - afterMulti) / baseWeekly) * 100 : 0;
+      
+      // Step 7: Apply 40% cap
+      let finalWeekly = afterMulti;
+      if (totalDiscountPercent > 40) {
+        finalWeekly = baseWeekly * 0.6;
+        totalDiscountPercent = 40;
+      }
+      
+      const monthlyFee = finalWeekly * 4;
+      
+      // Update UI
+      document.getElementById('totalPrice').textContent = `£${Math.round(finalWeekly)}`;
+      document.getElementById('baseWeekly').textContent = `£${baseWeekly}`;
+      document.getElementById('pakistaniDiscount').textContent = 
+        state.teacher === 'pakistani' ? `-£${Math.round(pakistaniDiscount)}` : '-£0';
+      document.getElementById('multiDiscount').textContent = 
+        `-£${Math.round(multiDiscount)} (${multiDiscountPercent}%)`;
+      document.getElementById('siblingDisc').textContent = 
+        state.siblingDiscount ? `-£${Math.round(siblingDiscount)}` : '-£0';
+      document.getElementById('referralDisc').textContent = 
+        state.referralDiscount ? `-£${Math.round(referralDiscount)}` : '-£0';
+      document.getElementById('totalDiscountPercent').textContent = 
+        `${Math.round(totalDiscountPercent)}%`;
+      document.getElementById('weeklyFee').textContent = `£${Math.round(finalWeekly)}`;
+      document.getElementById('monthlyFee').textContent = `£${Math.round(monthlyFee)}`;
+      
+      if (totalDiscountPercent > 0) {
+        document.getElementById('savingsBadge').textContent = 
+          `You save ${Math.round(totalDiscountPercent)}%!`;
+      } else {
+        document.getElementById('savingsBadge').textContent = 'No discounts applied';
+      }
+      
+      // Update summary
+      const programName = {
+        gcse: 'GCSE', alevel: 'A-Level', ib: 'IB', uni: 'University', k12: 'K5-K12', norwegian: 'Norwegian'
+      }[state.program];
+      document.getElementById('summaryProgram').textContent = programName;
+      document.getElementById('summaryTeacher').textContent = 
+        state.teacher === 'pakistani' ? 'Pakistani (30% off)' : 'International';
+    }
+
+    // ===== EVENT LISTENERS =====
+    document.querySelectorAll('.program-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.program-option').forEach(o => o.classList.remove('active'));
+        this.classList.add('active');
+        state.program = this.dataset.program;
+        state.programRate = parseFloat(this.dataset.rate);
+        calculatePrice();
+      });
+    });
+
+    document.querySelectorAll('.toggle-option').forEach(opt => {
+      opt.addEventListener('click', function() {
+        document.querySelectorAll('.toggle-option').forEach(o => o.classList.remove('active'));
+        this.classList.add('active');
+        state.teacher = this.dataset.teacher;
+        calculatePrice();
+      });
+    });
+
+    document.getElementById('siblingDiscount').addEventListener('click', function() {
+      this.classList.toggle('active');
+      state.siblingDiscount = this.classList.contains('active');
+      calculatePrice();
+    });
+
+    document.getElementById('referralDiscount').addEventListener('click', function() {
+      this.classList.toggle('active');
+      state.referralDiscount = this.classList.contains('active');
+      calculatePrice();
+    });
+
+    // ===== RESET =====
+    function resetCalculator() {
+      // Reset program
+      document.querySelectorAll('.program-option').forEach(o => o.classList.remove('active'));
+      document.querySelector('[data-program="gcse"]').classList.add('active');
+      
+      // Reset teacher
+      document.querySelectorAll('.toggle-option').forEach(o => o.classList.remove('active'));
+      document.querySelector('[data-teacher="pakistani"]').classList.add('active');
+      
+      // Reset subjects
+      document.querySelectorAll('.subject-input').forEach(cb => {
+        cb.checked = false;
+        cb.closest('.subject-checkbox').classList.remove('selected');
+      });
+      
+      // Reset discounts
+      document.getElementById('siblingDiscount').classList.remove('active');
+      document.getElementById('referralDiscount').classList.remove('active');
+      
+      // Reset state
+      state = {
+        program: 'gcse',
+        programRate: 30,
+        teacher: 'pakistani',
+        selectedSubjects: [],
+        subjectHours: {},
+        siblingDiscount: false,
+        referralDiscount: false
+      };
+      
+      updateSubjectCount();
+      updateSliders();
+      calculatePrice();
+    }
+
+    // ===== PROCEED =====
+    function proceedToEnrollment() {
+      const totalHours = updateTotalHours();
+      const weekly = Math.round(parseFloat(document.getElementById('weeklyFee').textContent.replace('£', '')));
+      alert(`✅ Proceeding to enrollment with:\n\nProgram: ${document.getElementById('summaryProgram').textContent}\nTeacher: ${document.getElementById('summaryTeacher').textContent}\nSubjects: ${state.selectedSubjects.length}\nTotal Hours: ${totalHours}/week\nWeekly Fee: £${weekly}\nMonthly Fee: ${document.getElementById('monthlyFee').textContent}`);
+    }
+
+    // ===== POPUP FUNCTIONS =====
+    function openInquiryForm() {
+      document.getElementById('popupOverlay').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeInquiryForm() {
+      document.getElementById('popupOverlay').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function submitInquiry(event) {
+      event.preventDefault();
+      alert('Thank you for your inquiry! Our team will contact you within 24 hours.');
+      closeInquiryForm();
+      event.target.reset();
+    }
+
+    // Escape key closes popup
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeInquiryForm();
+    });
+
+    // ===== INIT =====
+    renderSubjects();
+    calculatePrice();
+
+    // Make functions global
+    window.proceedToEnrollment = proceedToEnrollment;
+    window.resetCalculator = resetCalculator;
+    window.openInquiryForm = openInquiryForm;
+    window.closeInquiryForm = closeInquiryForm;
+    window.submitInquiry = submitInquiry;
+  </script>
+</body>
+</html>

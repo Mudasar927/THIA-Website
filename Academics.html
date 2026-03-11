@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THIA · Academic Courses | The Hope International Academy</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Swiper JS for carousels -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    :root {
+      /* Cyan - Blue - White Theme (Premium Fresh) */
+      --cyan-dark: #0891b2;    /* Deep ocean cyan - headings, important elements */
+      --cyan: #06b6d4;         /* Bright cyan - primary interactive elements */
+      --cyan-light: #cffafe;   /* Soft cyan - backgrounds, hover states */
+      --blue-dark: #0284c7;    /* Deep sky blue - accents, borders */
+      --blue: #0ea5e9;         /* Medium blue - buttons, links */
+      --blue-light: #e0f2fe;   /* Light blue - section backgrounds */
+      
+      /* Neutrals */
+      --white: #ffffff;
+      --off-white: #f8fafc;    /* Blue-tinted white - page background */
+      --gray-light: #f1f5f9;   /* Very light blue-gray - card backgrounds */
+      --gray: #e2e8f0;         /* Light blue-gray - borders, dividers */
+      --gray-dark: #64748b;    /* Medium gray - secondary text */
+      --text-dark: #0f172a;    /* Navy/slate - main text */
+      --text-light: #334155;   /* Soft navy - secondary text */
+      
+      /* Gradients */
+      --gradient-primary: linear-gradient(135deg, var(--cyan), var(--blue));
+      --gradient-dark: linear-gradient(135deg, var(--cyan-dark), var(--blue-dark));
+      --gradient-light: linear-gradient(135deg, var(--cyan-light), var(--blue-light));
+      
+      /* Effects */
+      --shadow: 0 10px 30px -10px rgba(6, 182, 212, 0.2);
+      --shadow-strong: 0 20px 40px -10px rgba(6, 182, 212, 0.3);
+      --shadow-light: 0 5px 15px -5px rgba(6, 182, 212, 0.1);
+      --border-cyan: 1px solid rgba(6, 182, 212, 0.3);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--off-white);
+      color: var(--text-dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s;
+    }
+
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 3px solid var(--cyan-light);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+      box-shadow: var(--shadow);
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--cyan-dark), var(--blue-dark), var(--cyan));
+      background-size: 300% 100%;
+      animation: gradientShift 8s ease infinite;
+      z-index: 1000;
+      transition: width 0.1s;
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Animated Gradient Background */
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--cyan-dark), var(--blue-dark), var(--cyan), var(--cyan-light), var(--blue-light), var(--cyan));
+      background-size: 50% 100%;
+      animation: slideBackground 20s linear infinite;
+      z-index: -1;
+      opacity: 0.5;
+    }
+
+    @keyframes slideBackground {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      box-shadow: var(--shadow-strong);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 999;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+    }
+
+    /* Floating Icons */
+    .floating-icons {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .float-icon {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: var(--shadow-strong);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+    }
+
+    .float-icon:hover {
+      transform: scale(1.1);
+    }
+
+    .float-icon i {
+      font-size: 1.8rem;
+    }
+
+    .float-icon.whatsapp {
+      background: #25D366;
+      color: white;
+    }
+
+    .float-icon.inquiry {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .float-icon.calculator {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .float-icon .tooltip {
+      position: absolute;
+      right: 65px;
+      background: var(--text-dark);
+      color: white;
+      padding: 0.4rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      border: 1px solid var(--cyan);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .float-icon:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      right: 70px;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      overflow: hidden;
+      border-bottom: 2px solid var(--cyan);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.8rem;
+      background: var(--gradient-dark);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: var(--text-dark);
+      transition: 0.3s;
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-links a.active {
+      color: var(--cyan-dark);
+    }
+
+    .enroll-nav {
+      background: var(--gradient-primary);
+      border: none;
+      color: white !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      animation: pulse 2s infinite;
+    }
+
+    .enroll-nav:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .enroll-nav::after {
+      display: none;
+    }
+
+    /* Page Header */
+    .page-header {
+      position: relative;
+      padding: 3rem 5% 2rem;
+      background: linear-gradient(135deg, var(--cyan-light), var(--blue-light), white);
+      text-align: center;
+      border-bottom-left-radius: 3rem;
+      border-bottom-right-radius: 3rem;
+      overflow: hidden;
+    }
+
+    .page-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.8rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page-header h1 span {
+      background: var(--gradient-dark);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .page-header p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+      max-width: 600px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .header-badges {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1.5rem;
+      position: relative;
+      z-index: 2;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--white);
+      backdrop-filter: blur(5px);
+      border: var(--border-cyan);
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      color: var(--cyan-dark);
+      font-size: 0.85rem;
+      box-shadow: var(--shadow-light);
+    }
+
+    .badge i {
+      color: var(--cyan);
+      margin-right: 0.3rem;
+    }
+
+    /* Stats Section - In Hero */
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      max-width: 1000px;
+      margin: 2rem auto 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-stat-card {
+      background: var(--white);
+      backdrop-filter: blur(10px);
+      border: var(--border-cyan);
+      border-radius: 1.5rem;
+      padding: 1.2rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-stat-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .hero-stat-card i {
+      font-size: 1.8rem;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-stat-card h3 {
+      font-size: 1.8rem;
+      color: var(--cyan-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .hero-stat-card p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* Section Titles */
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 3rem 0 1rem;
+      background: var(--gradient-dark);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% 200%;
+      animation: gradientText 5s ease infinite;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--cyan), var(--blue), var(--cyan-dark), transparent);
+    }
+
+    @keyframes gradientText {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .section-sub {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+
+    /* Norwegian Section */
+    .norwegian-section {
+      padding: 3rem 5%;
+      background: linear-gradient(135deg, var(--white), var(--off-white));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .norwegian-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 2rem;
+      padding: 2.5rem;
+      border: var(--border-cyan);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .norwegian-container::before {
+      content: '🇳🇴';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      font-size: 8rem;
+      opacity: 0.05;
+      transform: rotate(15deg);
+    }
+
+    .norwegian-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .norwegian-header h2 {
+      font-size: 2rem;
+      color: var(--text-dark);
+    }
+
+    .norwegian-header i {
+      font-size: 2.5rem;
+      color: var(--cyan);
+    }
+
+    .norwegian-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .norwegian-level {
+      background: var(--off-white);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      border-left: 3px solid var(--cyan);
+    }
+
+    .norwegian-level h3 {
+      color: var(--cyan-dark);
+      margin-bottom: 1rem;
+    }
+
+    .norwegian-level ul {
+      list-style: none;
+    }
+
+    .norwegian-level li {
+      margin: 0.5rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .norwegian-level li i {
+      color: var(--cyan);
+      width: 20px;
+    }
+
+    .norwegian-btn {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      border: 1px solid var(--border-cyan);
+    }
+
+    .norwegian-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    /* Exam Boards Grid */
+    .boards-section {
+      padding: 3rem 5%;
+      background: var(--off-white);
+    }
+
+    .boards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 2rem auto 0;
+    }
+
+    .board-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray);
+      transition: all 0.3s ease;
+    }
+
+    .board-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .board-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .board-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .board-desc {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .board-subjects {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subject-tag {
+      background: var(--cyan-light);
+      color: var(--cyan-dark);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .board-btn {
+      background: transparent;
+      border: 1px solid var(--cyan);
+      color: var(--cyan-dark);
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .board-btn:hover {
+      background: var(--gradient-primary);
+      color: white;
+      border-color: transparent;
+    }
+
+    /* University Section with Math Branches */
+    .university-section {
+      padding: 2rem 0 3rem;
+      overflow: hidden;
+      background: white;
+    }
+
+    .university-drift {
+      display: flex;
+      gap: 1.5rem;
+      width: max-content;
+      padding: 1rem 2rem;
+      animation: driftLeft 45s linear infinite;
+    }
+
+    .university-drift:hover {
+      animation-play-state: paused;
+    }
+
+    @keyframes driftLeft {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .university-card {
+      width: 320px;
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .university-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .uni-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .university-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .math-branch-tag {
+      display: inline-block;
+      background: var(--cyan-light);
+      color: var(--cyan-dark);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin: 0.2rem;
+    }
+
+    .difficulty-list {
+      margin: 1rem 0;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .difficulty-list li {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin: 0.4rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .difficulty-list li i {
+      color: var(--cyan);
+      font-size: 0.7rem;
+    }
+
+    .uni-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .stars {
+      color: #fbbf24;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+    }
+
+    .uni-price {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin: 1rem 0;
+      padding: 0.5rem 0;
+      border-top: 1px dashed var(--gray);
+      border-bottom: 1px dashed var(--gray);
+    }
+
+    .price-pk {
+      color: var(--text-light);
+    }
+
+    .price-int {
+      color: var(--cyan-dark);
+      font-weight: 600;
+    }
+
+    .uni-btn {
+      width: 100%;
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      padding: 0.7rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .uni-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    /* Why Choose Us Section */
+    .why-choose-section {
+      padding: 3rem 5%;
+      background: var(--off-white);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 2rem auto 0;
+    }
+
+    .why-card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray);
+      transition: all 0.3s ease;
+    }
+
+    .why-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .why-icon {
+      width: 50px;
+      height: 50px;
+      background: var(--cyan-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .why-icon i {
+      font-size: 1.5rem;
+      color: var(--cyan-dark);
+    }
+
+    .why-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .short-text {
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .full-text {
+      display: none;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .read-more {
+      color: var(--cyan-dark);
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      display: inline-block;
+      margin-top: 0.5rem;
+    }
+
+    /* Team Section */
+    .team-section {
+      background: white;
+      padding: 1rem 0 3rem;
+      overflow: hidden;
+    }
+
+    .team-drift-row {
+      display: flex;
+      gap: 1rem;
+      width: max-content;
+      padding: 1rem 1.5rem;
+    }
+
+    .team-row1 .team-drift-row {
+      animation: driftLeft 40s linear infinite;
+    }
+
+    .team-row2 .team-drift-row {
+      animation: driftRight 40s linear infinite;
+    }
+
+    @keyframes driftRight {
+      0% { transform: translateX(-50%); }
+      100% { transform: translateX(0%); }
+    }
+
+    .team-card {
+      width: 200px;
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.2rem 1rem;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray);
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .team-avatar {
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      margin: 0 auto 0.8rem;
+      overflow: hidden;
+      border: 2px solid var(--cyan);
+    }
+
+    .team-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .tutor-badge {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge-pk {
+      background: var(--cyan-light);
+      color: var(--cyan-dark);
+    }
+
+    .badge-int {
+      background: var(--blue-light);
+      color: var(--blue-dark);
+    }
+
+    .badge-no {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .team-card h4 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: var(--text-dark);
+    }
+
+    .team-subject {
+      color: var(--cyan-dark);
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .team-qual {
+      color: var(--text-light);
+      font-size: 0.7rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .team-level {
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+    }
+
+    .team-rating {
+      color: #fbbf24;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* Sample Lessons Section */
+    .sample-lessons-section {
+      padding: 3rem 5%;
+      background: var(--off-white);
+      overflow: hidden;
+    }
+
+    .lessons-swiper {
+      padding: 1.5rem 0 3rem;
+    }
+
+    .lesson-slide {
+      height: auto;
+    }
+
+    .lesson-card {
+      background: white;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--gray);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-strong);
+    }
+
+    .lesson-thumbnail {
+      position: relative;
+      height: 140px;
+      overflow: hidden;
+    }
+
+    .lesson-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lesson-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(6, 182, 212, 0.8), transparent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .lesson-card:hover .lesson-overlay {
+      opacity: 1;
+    }
+
+    .play-button {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--cyan);
+      cursor: pointer;
+      box-shadow: var(--shadow);
+    }
+
+    .lesson-info {
+      padding: 1rem;
+    }
+
+    .lesson-info h4 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: var(--text-dark);
+    }
+
+    .lesson-teacher {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-bottom: 0.3rem;
+    }
+
+    .lesson-teacher i {
+      color: var(--cyan);
+    }
+
+    .lesson-meta {
+      display: flex;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      color: var(--text-light);
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .lesson-stars {
+      color: #fbbf24;
+      font-size: 0.8rem;
+    }
+
+    /* Calculator Button */
+    .calculator-section {
+      padding: 2rem 5% 3rem;
+      text-align: center;
+      background: white;
+    }
+
+    .calculator-btn {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      font-size: 1.3rem;
+      font-weight: 700;
+      padding: 1.2rem 3rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: var(--shadow);
+      animation: pulse 2s infinite;
+      text-decoration: none;
+    }
+
+    .calculator-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--text-dark);
+      color: var(--gray);
+      padding: 3rem 5% 1.5rem;
+      border-top: 3px solid var(--cyan);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer h3 {
+      color: var(--cyan);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer h4 {
+      color: var(--cyan-light);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .footer a {
+      color: var(--gray);
+      text-decoration: none;
+      display: block;
+      margin: 0.5rem 0;
+      transition: 0.3s;
+      font-size: 0.85rem;
+    }
+
+    .footer a:hover {
+      color: var(--cyan);
+      transform: translateX(5px);
+    }
+
+    .footer p {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      margin-bottom: 0.5rem;
+      color: var(--gray);
+    }
+
+    .socials {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .socials i {
+      font-size: 1.3rem;
+      color: var(--gray);
+      transition: 0.3s;
+      cursor: pointer;
+    }
+
+    .socials i:hover {
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.8rem;
+      color: var(--gray-dark);
+    }
+
+    /* Popup Form */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(5px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .popup-content {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.8rem;
+      max-width: 450px;
+      width: 90%;
+      max-height: 85vh;
+      overflow-y: auto;
+      position: relative;
+      border: 2px solid var(--cyan);
+    }
+
+    .close-popup {
+      position: absolute;
+      top: 1rem;
+      right: 1.2rem;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-light);
+    }
+
+    .popup-content h3 {
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 1.2rem;
+      background: var(--gradient-dark);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .popup-content .form-group {
+      margin-bottom: 0.8rem;
+    }
+
+    .popup-content label {
+      display: block;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.2rem;
+      font-size: 0.8rem;
+    }
+
+    .popup-content input,
+    .popup-content select,
+    .popup-content textarea {
+      width: 100%;
+      padding: 0.6rem 1rem;
+      border: 1px solid var(--gray);
+      border-radius: 30px;
+      font-size: 0.85rem;
+    }
+
+    .popup-content input:focus,
+    .popup-content select:focus {
+      outline: none;
+      border-color: var(--cyan);
+    }
+
+    .popup-content .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .popup-content .cta-button {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.8rem;
+      border-radius: 30px;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .popup-content .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-strong);
+    }
+
+    /* Responsive Breakpoints */
+    @media (max-width: 1200px) {
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 992px) {
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .page-header h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .nav-links {
+        justify-content: center;
+      }
+      .page-header h1 {
+        font-size: 2rem;
+      }
+      .norwegian-grid {
+        grid-template-columns: 1fr;
+      }
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+      .floating-icons {
+        right: 10px;
+        bottom: 10px;
+      }
+      .float-icon {
+        width: 45px;
+        height: 45px;
+      }
+      .float-icon i {
+        font-size: 1.3rem;
+      }
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        bottom: 80px;
+        right: 10px;
+      }
+      .swiper-button-next,
+      .swiper-button-prev {
+        display: none;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+      .section-title {
+        font-size: 1.8rem;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .calculator-btn {
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+      }
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0.4); }
+      70% { box-shadow: 0 0 0 10px rgba(6, 182, 212, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(6, 182, 212, 0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Animation -->
+  <div class="loading" id="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
+
+  <!-- Back to Top -->
+  <div class="back-to-top" id="backToTop">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
+  <!-- Floating Icons -->
+  <div class="floating-icons">
+    <div class="float-icon whatsapp" onclick="window.open('https://wa.me/923135198927?text=Hi%20THIA%20-%20I%27m%20interested%20in%20academic%20courses', '_blank')">
+      <i class="fab fa-whatsapp"></i>
+      <span class="tooltip">WhatsApp</span>
+    </div>
+    <div class="float-icon inquiry" onclick="openInquiryForm()">
+      <i class="fas fa-paper-plane"></i>
+      <span class="tooltip">Quick Inquiry</span>
+    </div>
+    <div class="float-icon calculator" onclick="window.location.href='calculator.html'">
+      <i class="fas fa-calculator"></i>
+      <span class="tooltip">Fee Calculator</span>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <span class="logo"><i class="fas fa-graduation-cap" style="margin-right: 8px;"></i>THIA</span>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="professional.html">Professional Course</a>
+      <a href="Academics.html" class="active">Academic Course</a>
+      <a href="donations.html">Donations</a>
+      <a href="Services.html">Tech Services</a>
+      <a href="#" class="enroll-nav" onclick="openInquiryForm(); return false;">Get Inquiry</a>
+    </div>
+  </nav>
+
+  <!-- Page Header with Stats in Hero -->
+  <section class="page-header">
+    <div class="animated-bg"></div>
+    <h1 data-aos="fade-up">Academic <span>Courses</span></h1>
+    <p data-aos="fade-up" data-aos-delay="50">World-class GCSE, A-Level, IB, Norwegian & University-level tutoring with personalized attention</p>
+    <div class="header-badges" data-aos="fade-up" data-aos-delay="100">
+      <span class="badge"><i class="fas fa-check-circle"></i> 7+ Exam Boards</span>
+      <span class="badge"><i class="fas fa-users"></i> 40+ Expert Tutors</span>
+      <span class="badge"><i class="fas fa-globe"></i> 15+ Countries</span>
+    </div>
+    
+    <!-- Stats in Hero -->
+    <div class="hero-stats">
+      <div class="hero-stat-card" data-aos="fade-up" data-aos-delay="150">
+        <i class="fas fa-user-graduate"></i>
+        <h3 class="stat-counter" data-target="2500">0</h3>
+        <p>Students Tutored</p>
+      </div>
+      <div class="hero-stat-card" data-aos="fade-up" data-aos-delay="200">
+        <i class="fas fa-chalkboard-teacher"></i>
+        <h3 class="stat-counter" data-target="40">0</h3>
+        <p>Expert Tutors</p>
+      </div>
+      <div class="hero-stat-card" data-aos="fade-up" data-aos-delay="250">
+        <i class="fas fa-book"></i>
+        <h3 class="stat-counter" data-target="7">0</h3>
+        <p>Exam Boards</p>
+      </div>
+      <div class="hero-stat-card" data-aos="fade-up" data-aos-delay="300">
+        <i class="fas fa-trophy"></i>
+        <h3 class="stat-counter" data-target="92">0</h3>
+        <p>Success Rate (%)</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NORWEGIAN CURRICULUM SECTION -->
+  <section class="norwegian-section">
+    <div class="norwegian-container" data-aos="fade-up">
+      <div class="norwegian-header">
+        <i class="fas fa-flag"></i>
+        <h2>🇳🇴 Norwegian Curriculum (VG/UG)</h2>
+      </div>
+      <p style="margin-bottom: 1.5rem;">Specialized tutoring for Norwegian students following the local curriculum</p>
+      
+      <div class="norwegian-grid">
+        <div class="norwegian-level" data-aos="fade-right">
+          <h3>📘 VG Levels (Videregående skole)</h3>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> VG1, VG2, VG3</li>
+            <li><i class="fas fa-check-circle"></i> Mathematics (R1, S1, T1, R2, S2)</li>
+            <li><i class="fas fa-check-circle"></i> Physics (Fysikk 1, Fysikk 2)</li>
+            <li><i class="fas fa-check-circle"></i> Chemistry (Kjemi 1, Kjemi 2)</li>
+          </ul>
+        </div>
+        <div class="norwegian-level" data-aos="fade-left">
+          <h3>📗 UG Level (University Preparatory)</h3>
+          <ul>
+            <li><i class="fas fa-check-circle"></i> Universitets- og høgskoleforberedende</li>
+            <li><i class="fas fa-check-circle"></i> Advanced Mathematics</li>
+            <li><i class="fas fa-check-circle"></i> Physics & Chemistry</li>
+            <li><i class="fas fa-check-circle"></i> Norwegian-speaking tutors available</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem;">
+        <span style="background: var(--cyan-light); padding: 0.3rem 1rem; border-radius: 30px; color: var(--cyan-dark);"><i class="fas fa-user-check"></i> 🇳🇴 Norwegian tutors</span>
+        <span style="background: var(--blue-light); padding: 0.3rem 1rem; border-radius: 30px; color: var(--blue-dark);"><i class="fas fa-globe"></i> English-speaking tutors also</span>
+      </div>
+      
+      <button class="norwegian-btn" onclick="openInquiryWithBoard('Norwegian')">
+        <i class="fas fa-arrow-right"></i> Explore Norwegian Courses
+      </button>
+    </div>
+  </section>
+
+  <!-- EXAM BOARDS SECTION -->
+  <section class="boards-section">
+    <h2 class="section-title" data-aos="fade-up">Exam Boards We Cover</h2>
+    <p class="section-sub" data-aos="fade-up" data-aos-delay="50">7+ international and Norwegian exam boards</p>
+    
+    <div class="boards-grid">
+      <!-- Card 1: Cambridge -->
+      <div class="board-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="board-icon">📘</div>
+        <h3>Cambridge International</h3>
+        <div class="board-desc">IGCSE, O-Level, AS/A-Level</div>
+        <div class="board-subjects">
+          <span class="subject-tag">All subjects</span>
+        </div>
+        <button class="board-btn" onclick="openInquiryWithBoard('Cambridge')">Inquire</button>
+      </div>
+      
+      <!-- Card 2: Pearson Edexcel -->
+      <div class="board-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="board-icon">📙</div>
+        <h3>Pearson Edexcel</h3>
+        <div class="board-desc">IGCSE, A-Level</div>
+        <div class="board-subjects">
+          <span class="subject-tag">Maths</span>
+          <span class="subject-tag">Sciences</span>
+        </div>
+        <button class="board-btn" onclick="openInquiryWithBoard('Edexcel')">Inquire</button>
+      </div>
+      
+      <!-- Card 3: Oxford AQA -->
+      <div class="board-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="board-icon">📕</div>
+        <h3>Oxford AQA</h3>
+        <div class="board-desc">IGCSE, A-Level</div>
+        <div class="board-subjects">
+          <span class="subject-tag">English</span>
+          <span class="subject-tag">Sciences</span>
+        </div>
+        <button class="board-btn" onclick="openInquiryWithBoard('AQA')">Inquire</button>
+      </div>
+      
+      <!-- Card 4: IB -->
+      <div class="board-card" data-aos="fade-up" data-aos-delay="250">
+        <div class="board-icon">🌍</div>
+        <h3>International Baccalaureate</h3>
+        <div class="board-desc">IB Diploma, IB Courses</div>
+        <div class="board-subjects">
+          <span class="subject-tag">HL Mathematics</span>
+          <span class="subject-tag">Sciences</span>
+        </div>
+        <button class="board-btn" onclick="openInquiryWithBoard('IB')">Inquire</button>
+      </div>
+      
+      <!-- Card 5: WJEC -->
+      <div class="board-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="board-icon">📗</div>
+        <h3>WJEC</h3>
+        <div class="board-desc">GCSE, A-Level (Wales)</div>
+        <div class="board-subjects">
+          <span class="subject-tag">English</span>
+          <span class="subject-tag">Welsh</span>
+        </div>
+        <button class="board-btn" onclick="openInquiryWithBoard('WJEC')">Inquire</button>
+      </div>
+      
+      <!-- Card 6: CCEA -->
+      <div class="board-card" data-aos="fade-up" data-aos-delay="350">
+        <div class="board-icon">📘</div>
+        <h3>CCEA</h3>
+        <div class="board-desc">GCSE, A-Level (NI)</div>
+        <div class="board-subjects">
+          <span class="subject-tag">All subjects</span>
+        </div>
+        <button class="board-btn" onclick="openInquiryWithBoard('CCEA')">Inquire</button>
+      </div>
+      
+      <!-- Card 7: Norwegian Curriculum -->
+      <div class="board-card" data-aos="fade-up" data-aos-delay="400">
+        <div class="board-icon">🏔️</div>
+        <h3>🇳🇴 Norwegian Curriculum</h3>
+        <div class="board-desc">VG, UG levels</div>
+        <div class="board-subjects">
+          <span class="subject-tag">R1/S1/T1 Math</span>
+          <span class="subject-tag">Physics</span>
+          <span class="subject-tag">Chemistry</span>
+        </div>
+        <button class="board-btn" onclick="openInquiryWithBoard('Norwegian')">Inquire</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIVERSITY LEVEL COURSES with Mathematics Branches -->
+  <section class="university-section">
+    <h2 class="section-title" data-aos="fade-up">🎓 University Level Tutoring (BS Programs)</h2>
+    <p class="section-sub" data-aos="fade-up" data-aos-delay="50">Subjects where BS students face difficulty - Get expert help</p>
+    
+    <div class="university-drift">
+      <!-- Card 1: Mathematics with all branches -->
+      <div class="university-card" data-aos="fade-up">
+        <div class="uni-icon">🧮</div>
+        <h3>Mathematics (BS)</h3>
+        <div style="margin: 0.5rem 0;">
+          <span class="math-branch-tag">Pure Math</span>
+          <span class="math-branch-tag">Applied Math</span>
+          <span class="math-branch-tag">Statistics</span>
+          <span class="math-branch-tag">Mechanics</span>
+          <span class="math-branch-tag">Decision Math</span>
+          <span class="math-branch-tag">Further Math</span>
+        </div>
+        <ul class="difficulty-list">
+          <li><i class="fas fa-circle"></i> Calculus I, II, III</li>
+          <li><i class="fas fa-circle"></i> Linear Algebra</li>
+          <li><i class="fas fa-circle"></i> Differential Equations</li>
+          <li><i class="fas fa-circle"></i> Real Analysis</li>
+          <li><i class="fas fa-circle"></i> Abstract Algebra</li>
+          <li><i class="fas fa-circle"></i> Complex Analysis</li>
+        </ul>
+        <div class="uni-rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:0.8rem;">(320+ reviews)</span>
+        </div>
+        <div class="uni-price">
+          <span class="price-pk">🇵🇰 £18/hr</span>
+          <span class="price-int">🌍 £32/hr</span>
+        </div>
+        <button class="uni-btn" onclick="openInquiryWithSubject('University Mathematics')">Get Inquiry</button>
+      </div>
+      
+      <!-- Card 2: Computer Science -->
+      <div class="university-card" data-aos="fade-up">
+        <div class="uni-icon">💻</div>
+        <h3>Computer Science (BS)</h3>
+        <ul class="difficulty-list">
+          <li><i class="fas fa-circle"></i> Data Structures & Algorithms</li>
+          <li><i class="fas fa-circle"></i> Object-Oriented Programming</li>
+          <li><i class="fas fa-circle"></i> Database Management Systems</li>
+          <li><i class="fas fa-circle"></i> Operating Systems</li>
+          <li><i class="fas fa-circle"></i> Computer Networks</li>
+          <li><i class="fas fa-circle"></i> Theory of Computation</li>
+        </ul>
+        <div class="uni-rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:0.8rem;">(290+ reviews)</span>
+        </div>
+        <div class="uni-price">
+          <span class="price-pk">🇵🇰 £20/hr</span>
+          <span class="price-int">🌍 £35/hr</span>
+        </div>
+        <button class="uni-btn" onclick="openInquiryWithSubject('University Computer Science')">Get Inquiry</button>
+      </div>
+      
+      <!-- Card 3: Medicine -->
+      <div class="university-card" data-aos="fade-up">
+        <div class="uni-icon">🏥</div>
+        <h3>Medicine (MBBS/BS)</h3>
+        <ul class="difficulty-list">
+          <li><i class="fas fa-circle"></i> Anatomy & Physiology</li>
+          <li><i class="fas fa-circle"></i> Biochemistry</li>
+          <li><i class="fas fa-circle"></i> Pharmacology</li>
+          <li><i class="fas fa-circle"></i> Pathology</li>
+          <li><i class="fas fa-circle"></i> Microbiology</li>
+          <li><i class="fas fa-circle"></i> Clinical Medicine</li>
+        </ul>
+        <div class="uni-rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:0.8rem;">(210+ reviews)</span>
+        </div>
+        <div class="uni-price">
+          <span class="price-pk">🇵🇰 £22/hr</span>
+          <span class="price-int">🌍 £38/hr</span>
+        </div>
+        <button class="uni-btn" onclick="openInquiryWithSubject('University Medicine')">Get Inquiry</button>
+      </div>
+      
+      <!-- Card 4: Chemistry -->
+      <div class="university-card" data-aos="fade-up">
+        <div class="uni-icon">🧪</div>
+        <h3>Chemistry (BS)</h3>
+        <ul class="difficulty-list">
+          <li><i class="fas fa-circle"></i> Organic Chemistry</li>
+          <li><i class="fas fa-circle"></i> Inorganic Chemistry</li>
+          <li><i class="fas fa-circle"></i> Physical Chemistry</li>
+          <li><i class="fas fa-circle"></i> Analytical Chemistry</li>
+          <li><i class="fas fa-circle"></i> Quantum Chemistry</li>
+          <li><i class="fas fa-circle"></i> Spectroscopy</li>
+        </ul>
+        <div class="uni-rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:0.8rem;">(180+ reviews)</span>
+        </div>
+        <div class="uni-price">
+          <span class="price-pk">🇵🇰 £18/hr</span>
+          <span class="price-int">🌍 £32/hr</span>
+        </div>
+        <button class="uni-btn" onclick="openInquiryWithSubject('University Chemistry')">Get Inquiry</button>
+      </div>
+      
+      <!-- Card 5: Physics -->
+      <div class="university-card" data-aos="fade-up">
+        <div class="uni-icon">⚛️</div>
+        <h3>Physics (BS)</h3>
+        <ul class="difficulty-list">
+          <li><i class="fas fa-circle"></i> Classical Mechanics</li>
+          <li><i class="fas fa-circle"></i> Quantum Mechanics</li>
+          <li><i class="fas fa-circle"></i> Electrodynamics</li>
+          <li><i class="fas fa-circle"></i> Thermodynamics</li>
+          <li><i class="fas fa-circle"></i> Statistical Mechanics</li>
+          <li><i class="fas fa-circle"></i> Nuclear Physics</li>
+        </ul>
+        <div class="uni-rating">
+          <span class="stars">★★★★★</span>
+          <span style="font-size:0.8rem;">(240+ reviews)</span>
+        </div>
+        <div class="uni-price">
+          <span class="price-pk">🇵🇰 £18/hr</span>
+          <span class="price-int">🌍 £32/hr</span>
+        </div>
+        <button class="uni-btn" onclick="openInquiryWithSubject('University Physics')">Get Inquiry</button>
+      </div>
+      
+      <!-- Duplicates for seamless loop -->
+      <div class="university-card">
+        <div class="uni-icon">🧮</div>
+        <h3>Mathematics (BS)</h3>
+        <div style="margin: 0.5rem 0;">
+          <span class="math-branch-tag">Pure Math</span>
+          <span class="math-branch-tag">Statistics</span>
+        </div>
+        <ul class="difficulty-list">
+          <li><i class="fas fa-circle"></i> Calculus I, II, III</li>
+          <li><i class="fas fa-circle"></i> Linear Algebra</li>
+        </ul>
+        <div class="uni-rating">
+          <span class="stars">★★★★★</span>
+        </div>
+        <div class="uni-price">
+          <span class="price-pk">🇵🇰 £18/hr</span>
+          <span class="price-int">🌍 £32/hr</span>
+        </div>
+        <button class="uni-btn" onclick="openInquiryWithSubject('University Mathematics')">Get Inquiry</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US SECTION -->
+  <section class="why-choose-section">
+    <h2 class="section-title" data-aos="fade-up">Why Choose THIA for Academics?</h2>
+    <p class="section-sub" data-aos="fade-up" data-aos-delay="50">What makes our academic programs different</p>
+    
+    <div class="why-grid">
+      <!-- Card 1 -->
+      <div class="why-card" data-aos="fade-up" data-aos-delay="100">
+        <div class="why-icon"><i class="fas fa-user-graduate"></i></div>
+        <h3>Expert Subject Specialists</h3>
+        <p class="short-text">Learn from teachers with 10+ years of experience. Many are former examiners who know exactly what examiners look for...</p>
+        <p class="full-text">Learn from teachers with 10+ years of experience. Many are former examiners who know exactly what examiners look for. Our specialists have deep knowledge of CIE, Edexcel, AQA, IB, and Norwegian curricula.</p>
+        <span class="read-more" onclick="toggleReadMore(this)">Read More →</span>
+      </div>
+      
+      <!-- Card 2 -->
+      <div class="why-card" data-aos="fade-up" data-aos-delay="150">
+        <div class="why-icon"><i class="fas fa-pencil-alt"></i></div>
+        <h3>Exam-Focused Preparation</h3>
+        <p class="short-text">100% aligned with latest syllabus requirements. Past paper practice, exam techniques, and time management strategies...</p>
+        <p class="full-text">100% aligned with latest syllabus requirements. Past paper practice, exam techniques, and time management strategies. We provide mock exams with detailed feedback and predicted papers.</p>
+        <span class="read-more" onclick="toggleReadMore(this)">Read More →</span>
+      </div>
+      
+      <!-- Card 3 -->
+      <div class="why-card" data-aos="fade-up" data-aos-delay="200">
+        <div class="why-icon"><i class="fas fa-globe"></i></div>
+        <h3>Choice of Tutors</h3>
+        <p class="short-text">Choose between highly qualified Pakistani tutors (excellent value) or international tutors with UK/European experience...</p>
+        <p class="full-text">Choose between highly qualified Pakistani tutors (excellent value) or international tutors with UK/European experience. Both options deliver outstanding results with personalized attention.</p>
+        <span class="read-more" onclick="toggleReadMore(this)">Read More →</span>
+      </div>
+      
+      <!-- Card 4 -->
+      <div class="why-card" data-aos="fade-up" data-aos-delay="250">
+        <div class="why-icon"><i class="fas fa-book"></i></div>
+        <h3>Comprehensive Materials</h3>
+        <p class="short-text">Extensive digital library of notes, past papers, model answers for all major exam boards and university subjects...</p>
+        <p class="full-text">Extensive digital library of notes, past papers, model answers for all major exam boards and university subjects. Regular updates with the latest syllabus changes.</p>
+        <span class="read-more" onclick="toggleReadMore(this)">Read More →</span>
+      </div>
+      
+      <!-- Card 5 -->
+      <div class="why-card" data-aos="fade-up" data-aos-delay="300">
+        <div class="why-icon"><i class="fas fa-laptop"></i></div>
+        <h3>Flexible Learning</h3>
+        <p class="short-text">1-on-1 personalized attention or small groups. Online from anywhere. Recorded sessions available...</p>
+        <p class="full-text">1-on-1 personalized attention or small groups. Online from anywhere with flexible scheduling across time zones. All sessions recorded for later review.</p>
+        <span class="read-more" onclick="toggleReadMore(this)">Read More →</span>
+      </div>
+      
+      <!-- Card 6 -->
+      <div class="why-card" data-aos="fade-up" data-aos-delay="350">
+        <div class="why-icon"><i class="fas fa-pound-sign"></i></div>
+        <h3>Affordable Excellence</h3>
+        <p class="short-text">Save 40-60% compared to UK/EU tutoring rates without compromising quality...</p>
+        <p class="full-text">Save 40-60% compared to UK/EU tutoring rates without compromising quality. Pakistani tutors offer exceptional value at £12-22/hr, while international tutors are competitively priced at £25-40/hr.</p>
+        <span class="read-more" onclick="toggleReadMore(this)">Read More →</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM SECTION -->
+  <section class="team-section">
+    <h2 class="section-title" data-aos="fade-up">Our Academic Team</h2>
+    <p class="section-sub" data-aos="fade-up" data-aos-delay="50">20+ specialist tutors including Norwegian & University experts</p>
+    
+    <!-- Row 1 - Left to Right -->
+    <div class="team-row1">
+      <div class="team-drift-row">
+        <!-- Teacher 1 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Dr. Khalid"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Khalid Mahmood</h4>
+          <div class="team-subject">Mathematics</div>
+          <div class="team-qual">PhD (UK)</div>
+          <div class="team-level">A-Level, University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 2 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Prof. Saira"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Prof. Saira Tariq</h4>
+          <div class="team-subject">Mathematics</div>
+          <div class="team-qual">MPhil (Pakistan)</div>
+          <div class="team-level">GCSE, A-Level</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 3 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/3.jpg" alt="Dr. Ali Raza"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. M. Ali Raza</h4>
+          <div class="team-subject">Physics</div>
+          <div class="team-qual">PhD (Germany)</div>
+          <div class="team-level">IB, University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 4 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/4.jpg" alt="Ms. Fatima"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Ms. Fatima Khan</h4>
+          <div class="team-subject">Physics</div>
+          <div class="team-qual">MSc (Pakistan)</div>
+          <div class="team-level">GCSE, A-Level</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 5 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/5.jpg" alt="Dr. Ayesha"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Ayesha Siddiqui</h4>
+          <div class="team-subject">Chemistry</div>
+          <div class="team-qual">PhD (USA)</div>
+          <div class="team-level">IB, University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 6 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/6.jpg" alt="Mr. Usman"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Mr. Usman Chaudhry</h4>
+          <div class="team-subject">Chemistry</div>
+          <div class="team-qual">MPhil (Pakistan)</div>
+          <div class="team-level">GCSE, A-Level</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 7 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/7.jpg" alt="Dr. Sana"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Sana Malik</h4>
+          <div class="team-subject">Biology</div>
+          <div class="team-qual">PhD (UK)</div>
+          <div class="team-level">A-Level, University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 8 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/8.jpg" alt="Prof. Huma"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Prof. Huma Javed</h4>
+          <div class="team-subject">Biology</div>
+          <div class="team-qual">MSc (Pakistan)</div>
+          <div class="team-level">GCSE, IB</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 9 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/9.jpg" alt="Dr. Bakhtawar"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Bakhtawar Rana</h4>
+          <div class="team-subject">English</div>
+          <div class="team-qual">PhD (UK)</div>
+          <div class="team-level">A-Level, IB</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 10 -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/10.jpg" alt="Ms. Haleema"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Ms. Haleema Haris</h4>
+          <div class="team-subject">English</div>
+          <div class="team-qual">MA (Pakistan)</div>
+          <div class="team-level">GCSE, A-Level</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Dr. Khalid"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Khalid</h4>
+          <div class="team-subject">Mathematics</div>
+          <div class="team-qual">PhD (UK)</div>
+          <div class="team-level">University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Row 2 - Right to Left (Norwegian & University specialists) -->
+    <div class="team-row2">
+      <div class="team-drift-row">
+        <!-- Teacher 11 - Norwegian -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Lars Eriksen"></div>
+          <span class="tutor-badge badge-no">🇳🇴 Norwegian</span>
+          <h4>Lars Eriksen</h4>
+          <div class="team-subject">Mathematics</div>
+          <div class="team-qual">MSc (Oslo)</div>
+          <div class="team-level">VG, UG</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 12 - Norwegian -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Ingrid Nilsen"></div>
+          <span class="tutor-badge badge-no">🇳🇴 Norwegian</span>
+          <h4>Ingrid Nilsen</h4>
+          <div class="team-subject">Physics</div>
+          <div class="team-qual">PhD (Bergen)</div>
+          <div class="team-level">VG, UG</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 13 - Norwegian -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/13.jpg" alt="Ole Kristiansen"></div>
+          <span class="tutor-badge badge-no">🇳🇴 Norwegian</span>
+          <h4>Ole Kristiansen</h4>
+          <div class="team-subject">Chemistry</div>
+          <div class="team-qual">MSc (Trondheim)</div>
+          <div class="team-level">VG, UG</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 14 - University CS -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/14.jpg" alt="Dr. Imran"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Imran Hassan</h4>
+          <div class="team-subject">Computer Science</div>
+          <div class="team-qual">PhD (Canada)</div>
+          <div class="team-level">University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 15 - University CS -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/15.jpg" alt="Dawood"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Dawood Ibrahim</h4>
+          <div class="team-subject">Computer Science</div>
+          <div class="team-qual">MS (Pakistan)</div>
+          <div class="team-level">University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 16 - Medicine -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/16.jpg" alt="Dr. Farah"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Dr. Farah Naz</h4>
+          <div class="team-subject">Medicine/Anatomy</div>
+          <div class="team-qual">MD (Pakistan)</div>
+          <div class="team-level">University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 17 - Medicine -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/17.jpg" alt="Dr. Ahmed"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Ahmed Raza</h4>
+          <div class="team-subject">Medicine/Pharmacology</div>
+          <div class="team-qual">MBBS, MRCP (UK)</div>
+          <div class="team-level">University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 18 - University Chemistry -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/18.jpg" alt="Dr. Sadaf"></div>
+          <span class="tutor-badge badge-pk">🇵🇰 Pakistani</span>
+          <h4>Dr. Sadaf Malik</h4>
+          <div class="team-subject">Chemistry</div>
+          <div class="team-qual">PhD (Pakistan)</div>
+          <div class="team-level">University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 19 - Economics -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/19.jpg" alt="Dr. Omar"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Omar Farooq</h4>
+          <div class="team-subject">Economics</div>
+          <div class="team-qual">PhD (USA)</div>
+          <div class="team-level">A-Level, University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Teacher 20 - University Physics -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/women/20.jpg" alt="Dr. Zainab"></div>
+          <span class="tutor-badge badge-int">🌍 International</span>
+          <h4>Dr. Zainab Ali</h4>
+          <div class="team-subject">Physics</div>
+          <div class="team-qual">PhD (Germany)</div>
+          <div class="team-level">University</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+        <!-- Duplicate -->
+        <div class="team-card">
+          <div class="team-avatar"><img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Lars"></div>
+          <span class="tutor-badge badge-no">🇳🇴 Norwegian</span>
+          <h4>Lars Eriksen</h4>
+          <div class="team-subject">Mathematics</div>
+          <div class="team-qual">MSc (Oslo)</div>
+          <div class="team-level">VG</div>
+          <div class="team-rating">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAMPLE LESSONS SECTION -->
+  <section class="sample-lessons-section">
+    <h2 class="section-title" data-aos="fade-up">Sample Lesson Snippets</h2>
+    <p class="section-sub" data-aos="fade-up" data-aos-delay="50">Preview real teaching from our academic courses</p>
+    
+    <div class="lessons-swiper">
+      <div class="swiper" id="lessonsSwiper">
+        <div class="swiper-wrapper">
+          <!-- Lesson 1 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Calculus">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>R1 Mathematics: Calculus</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Lars Eriksen (🇳🇴)</div>
+                <div class="lesson-meta"><span>VG Level</span><span>15 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Lesson 2 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Quantum">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>University Physics: Quantum Mechanics</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Dr. Zainab Ali (🌍)</div>
+                <div class="lesson-meta"><span>BS Physics</span><span>18 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Lesson 3 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Data Structures">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>Data Structures: Binary Trees</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Dr. Imran Hassan (🌍)</div>
+                <div class="lesson-meta"><span>BS CS</span><span>16 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Lesson 4 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Organic Chem">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>Organic Chemistry: Mechanisms</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Dr. Ayesha Siddiqui (🌍)</div>
+                <div class="lesson-meta"><span>University</span><span>18 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Lesson 5 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1579165466740-7f0ed2b5b5e1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Anatomy">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>Human Anatomy: Cardiovascular System</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Dr. Farah Naz (🇵🇰)</div>
+                <div class="lesson-meta"><span>MBBS</span><span>14 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Lesson 6 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1509228627152-72ae9ae6848d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Linear Algebra">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>Linear Algebra: Eigenvalues</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Dr. Khalid Mahmood (🌍)</div>
+                <div class="lesson-meta"><span>University</span><span>15 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Lesson 7 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="GCSE Physics">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>GCSE Physics: Electricity</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Ms. Fatima Khan (🇵🇰)</div>
+                <div class="lesson-meta"><span>GCSE</span><span>12 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+          <!-- Lesson 8 -->
+          <div class="swiper-slide lesson-slide">
+            <div class="lesson-card">
+              <div class="lesson-thumbnail">
+                <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Economics">
+                <div class="lesson-overlay"><div class="play-button" onclick="alert('Playing preview...')"><i class="fas fa-play"></i></div></div>
+              </div>
+              <div class="lesson-info">
+                <h4>IB Economics: Market Structures</h4>
+                <div class="lesson-teacher"><i class="fas fa-chalkboard-teacher"></i> Dr. Omar Farooq (🌍)</div>
+                <div class="lesson-meta"><span>IB</span><span>16 min</span></div>
+                <div class="lesson-rating"><span class="lesson-stars">★★★★★</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALCULATOR BUTTON -->
+  <section class="calculator-section">
+    <a href="calculator.html" class="calculator-btn">
+      <i class="fas fa-calculator"></i> Open Smart Fee Calculator
+      <i class="fas fa-arrow-right"></i>
+    </a>
+    <p style="margin-top: 1rem; color: var(--text-light);">Calculate your personalized course fees instantly</p>
+  </section>
+
+  <!-- INQUIRY POPUP FORM -->
+  <div class="popup-overlay" id="popupOverlay" onclick="if(event.target===this) closeInquiryForm()">
+    <div class="popup-content">
+      <span class="close-popup" onclick="closeInquiryForm()">&times;</span>
+      <h3><i class="fas fa-paper-plane"></i> Course Inquiry</h3>
+      
+      <form id="inquiryForm" onsubmit="submitInquiry(event)">
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" name="name" required placeholder="Enter your full name">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Email *</label>
+            <input type="email" name="email" required placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>Phone *</label>
+            <input type="tel" name="phone" required placeholder="+44...">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Country of Residence *</label>
+          <select name="country" required>
+            <option value="">Select</option>
+            <option>UK</option>
+            <option>Norway</option>
+            <option>UAE</option>
+            <option>Pakistan</option>
+            <option>Malaysia</option>
+            <option>Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Student's Level *</label>
+          <select name="level" id="levelSelect" required>
+            <option value="">Select</option>
+            <option>GCSE / IGCSE</option>
+            <option>A-Level / AS Level</option>
+            <option>IB Diploma</option>
+            <option>Norwegian VG (VG1, VG2, VG3)</option>
+            <option>Norwegian UG</option>
+            <option>University (BS / MBBS)</option>
+            <option>Foundation</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Select Exam Board *</label>
+          <select name="board" id="boardSelect" required>
+            <option value="">Select</option>
+            <option>Cambridge</option>
+            <option>Edexcel</option>
+            <option>AQA</option>
+            <option>IB</option>
+            <option>WJEC</option>
+            <option>CCEA</option>
+            <option>Norwegian (VG/UG)</option>
+            <option>University Level</option>
+            <option>Other</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label>Select Subject(s) *</label>
+          <select name="subject" id="subjectSelect" required>
+            <option value="">Select subject</option>
+            <option>Mathematics</option>
+            <option>Physics</option>
+            <option>Chemistry</option>
+            <option>Biology</option>
+            <option>Computer Science</option>
+            <option>Economics</option>
+            <option>English Literature</option>
+            <option>R1 Math</option>
+            <option>S1 Math</option>
+            <option>T1 Math</option>
+            <option>University Mathematics</option>
+            <option>University Physics</option>
+            <option>University Chemistry</option>
+            <option>Medicine</option>
+          </select>
+          <small style="color:var(--text-light);">Multiple selections? Mention in additional questions</small>
+        </div>
+        
+        <div class="form-group">
+          <label>Preferred Tutor Type *</label>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <label><input type="radio" name="tutorType" value="pakistani" checked> 🇵🇰 Pakistani (£12-22/hr)</label>
+            <label><input type="radio" name="tutorType" value="international"> 🌍 International (£25-40/hr)</label>
+            <label><input type="radio" name="tutorType" value="norwegian"> 🇳🇴 Norwegian (£30-45/hr)</label>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>If University, specify problem areas:</label>
+          <textarea name="problemAreas" rows="2" placeholder="e.g., Struggling with Quantum Mechanics"></textarea>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>City/Location</label>
+            <input type="text" name="city" placeholder="e.g., London">
+          </div>
+          <div class="form-group">
+            <label>Hours/Week</label>
+            <select name="hours">
+              <option>2 hrs/week</option>
+              <option>4 hrs/week</option>
+              <option>6 hrs/week</option>
+              <option>8+ hrs/week</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Additional Questions</label>
+          <textarea name="message" rows="2" placeholder="Any specific questions?"></textarea>
+        </div>
+        
+        <button type="submit" class="cta-button">Submit Inquiry</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <h3><i class="fas fa-graduation-cap"></i> THIA</h3>
+        <p>The Hope International Academy</p>
+        <p>Empowering students worldwide since 2020</p>
+        <p><i class="fas fa-map-marker-alt"></i> Islamabad, Pakistan</p>
+        <p><i class="fab fa-whatsapp"></i> +92 313 5198927</p>
+        <p><i class="fas fa-envelope"></i> info@thia.edu.pk</p>
+      </div>
+      <div>
+        <h4>Academic Levels</h4>
+        <a href="#" onclick="openInquiryWithLevel('GCSE')">GCSE / IGCSE</a>
+        <a href="#" onclick="openInquiryWithLevel('A-Level')">A-Level / AS Level</a>
+        <a href="#" onclick="openInquiryWithLevel('IB')">IB Diploma</a>
+        <a href="#" onclick="openInquiryWithLevel('Norwegian')">Norwegian Curriculum</a>
+        <a href="#" onclick="openInquiryWithLevel('University')">University (BS/MBBS)</a>
+        <a href="#" onclick="openInquiryWithLevel('Foundation')">Foundation Programs</a>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="professional.html">Professional Courses</a>
+        <a href="#">Test Preparations</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">FAQs</a>
+      </div>
+      <div>
+        <h4>Connect With Us</h4>
+        <div class="socials">
+          <i class="fab fa-facebook"></i>
+          <i class="fab fa-instagram"></i>
+          <i class="fab fa-linkedin"></i>
+          <i class="fab fa-whatsapp" onclick="window.open('https://wa.me/923135198927', '_blank')"></i>
+          <i class="fab fa-youtube"></i>
+        </div>
+        <p style="margin-top:1rem;"><i class="fas fa-clock"></i> Mon-Fri: 9am - 8pm (GMT+5)</p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>© 2024 The Hope International Academy (THIA). All rights reserved. | All prices in GBP (£) for international students</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Initialize AOS
+    AOS.init({ duration: 800, once: true });
+
+    // Initialize Swiper
+    new Swiper('#lessonsSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 15,
+      loop: true,
+      autoplay: { delay: 3000 },
+      pagination: { el: '.swiper-pagination', clickable: true },
+      navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      breakpoints: {
+        576: { slidesPerView: 2 },
+        992: { slidesPerView: 3 },
+        1200: { slidesPerView: 4 }
+      }
+    });
+
+    // Loading Animation
+    window.addEventListener('load', () => {
+      document.getElementById('loading').style.opacity = '0';
+      setTimeout(() => document.getElementById('loading').style.display = 'none', 1000);
+      startCounters();
+    });
+
+    // Progress Bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      document.getElementById('progressBar').style.width = (winScroll / height) * 100 + '%';
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      if (winScroll > 500) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Back to Top Click
+    document.getElementById('backToTop').addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Animated Counters
+    function startCounters() {
+      const counters = document.querySelectorAll('.stat-counter');
+      counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-target'));
+        let count = 0;
+        const increment = target / 50;
+        const timer = setInterval(() => {
+          count += increment;
+          if (count >= target) {
+            counter.textContent = target + (counter.parentElement.querySelector('p').textContent.includes('%') ? '%' : '+');
+            clearInterval(timer);
+          } else {
+            counter.textContent = Math.floor(count);
+          }
+        }, 30);
+      });
+    }
+
+    // Popup Functions
+    function openInquiryForm() {
+      document.getElementById('popupOverlay').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeInquiryForm() {
+      document.getElementById('popupOverlay').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function openInquiryWithSubject(subject) {
+      openInquiryForm();
+      const subjectSelect = document.getElementById('subjectSelect');
+      if (subjectSelect) {
+        for (let option of subjectSelect.options) {
+          if (option.text.includes(subject)) {
+            subjectSelect.value = option.value;
+            break;
+          }
+        }
+      }
+    }
+
+    function openInquiryWithBoard(board) {
+      openInquiryForm();
+      const boardSelect = document.getElementById('boardSelect');
+      if (boardSelect) {
+        for (let option of boardSelect.options) {
+          if (option.text.includes(board)) {
+            boardSelect.value = option.value;
+            break;
+          }
+        }
+      }
+    }
+
+    function openInquiryWithLevel(level) {
+      openInquiryForm();
+      const levelSelect = document.getElementById('levelSelect');
+      if (levelSelect) {
+        for (let option of levelSelect.options) {
+          if (option.text.includes(level)) {
+            levelSelect.value = option.value;
+            break;
+          }
+        }
+      }
+    }
+
+    function submitInquiry(event) {
+      event.preventDefault();
+      alert('Thank you for your inquiry! Our team will contact you within 24 hours.');
+      closeInquiryForm();
+      event.target.reset();
+    }
+
+    // Read More Toggle
+    function toggleReadMore(element) {
+      const card = element.closest('.why-card');
+      const shortText = card.querySelector('.short-text');
+      const fullText = card.querySelector('.full-text');
+      
+      if (shortText.style.display === 'none') {
+        shortText.style.display = 'block';
+        fullText.style.display = 'none';
+        element.textContent = 'Read More →';
+      } else {
+        shortText.style.display = 'none';
+        fullText.style.display = 'block';
+        element.textContent = 'Read Less ←';
+      }
+    }
+
+    // Escape key closes popup
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeInquiryForm();
+    });
+  </script>
+</body>
+</html>
